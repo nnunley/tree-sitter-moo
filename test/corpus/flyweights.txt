@@ -1,0 +1,68 @@
+===================
+Basic Flyweights
+===================
+
+<#123>;
+<#123, []>;
+<#123, [], {}>;
+
+---
+
+(program
+    (flyweight
+        (objid
+        (INTEGER)))
+    (flyweight
+        (objid
+        (INTEGER))
+        (flyweight_slots))
+    (flyweight
+        (objid
+        (INTEGER))
+        (flyweight_slots)
+        (flyweight_contents)))
+
+===================
+Complex Flyweights
+===================
+
+<#123, [prop -> "value"], {1, 2}>;
+<#456, [name -> "test", flag -> true], {"a", "b"}>;
+<#789, [x -> 1, y -> 2.5], {true, false, #123}>;
+
+---
+
+(programg
+    (flyweight
+        (objid
+            (INTEGER))
+        (flyweight_slots
+            (pair (identifier)
+                  (STRING)))
+        (flyweight_contents
+            (INTEGER)
+            (INTEGER)))
+    (flyweight
+      (objid
+        (INTEGER))
+      (flyweight_slots
+        (pair (identifier)
+          (STRING))
+        (pair (identifier)
+        (boolean)))
+      (flyweight_contents
+          (STRING)
+          (STRING)))
+    (flyweight
+      (objid
+        (INTEGER))
+      (flyweight_slots
+        (pair (identifier)
+          (INTEGER))
+        (pair (identifier)
+          (FLOAT)))
+      (flyweight_contents
+          (boolean)
+          (boolean)
+          (objid
+            (INTEGER)))))

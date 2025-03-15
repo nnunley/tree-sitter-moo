@@ -1,0 +1,12 @@
+========
+Call an arbitrary builtin
+
+========
+
+foo()
+
+---
+
+(program
+  (verb)
+)

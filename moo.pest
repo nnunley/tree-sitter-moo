@@ -1,0 +1,315 @@
+// Copyright (C) 2025 Ryan Daum <ryan.daum@gmail.com> This program is free
+// software: you can redistribute it and/or modify it under the terms of the GNU
+// General Public License as published by the Free Software Foundation, version
+// 3.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along with
+// this program. If not, see <https://www.gnu.org/licenses/>.
+//
+
+program    = { SOI ~ statements ~ EOI }
+statements = { statement* }
+statement  = {
+    if_statement
+  | for_statement
+  | while_statement
+  | labelled_while_statement
+  | fork_statement
+  | labelled_fork_statement
+  | break_statement
+  | continue_statement
+  | empty_return
+  | try_except_statement
+  | try_finally_statement
+  | begin_statement
+  | expr_statement
+  | local_assignment
+  | const_assignment
+  | global_assignment
+  }
+
+if_statement  = { ^"if" ~ "(" ~ expr ~ ")" ~ statements ~ (elseif_clause)* ~ (else_clause)? ~ endif_clause }
+elseif_clause = { ^"elseif" ~ "(" ~ expr ~ ")" ~ statements }
+else_clause   = { ^"else" ~ statements }
+endif_clause  = { ^"endif" }
+
+for_statement    = { ^"for" ~ ident ~ "in" ~ (for_range_clause | for_in_clause) ~ statements ~ ^"endfor" }
+for_range_clause = { "[" ~ expr ~ ".." ~ expr ~ "]" }
+for_in_clause    = { "(" ~ expr ~ ")" }
+
+empty_return = { ^"return" ~ ";"}
+
+labelled_while_statement = { ^"while" ~ ident ~ "(" ~ expr ~ ")" ~ statements ~ ^"endwhile" }
+while_statement          = { ^"while" ~ "(" ~ expr ~ ")" ~ statements ~ ^"endwhile" }
+
+fork_statement          = { ^"fork" ~ "(" ~ expr ~ ")" ~ statements ~ ^"endfork" }
+labelled_fork_statement = { ^"fork" ~ ident ~ "(" ~ expr ~ ")" ~ statements ~ ^"endfork" }
+
+break_statement    = { ^"break" ~ (ident)? ~ ";" }
+continue_statement = { ^"continue" ~ (ident)? ~ ";" }
+
+try_except_statement  = { ^"try" ~ statements ~ (except)+ ~ ^"endtry" }
+try_finally_statement = { ^"try" ~ statements ~ ^"finally" ~ statements ~ ^"endtry" }
+except                = { ^"except" ~ (labelled_except | unlabelled_except) ~ statements }
+labelled_except       = { ident ~ "(" ~ codes ~ ")" }
+unlabelled_except     = { "(" ~ codes ~ ")" }
+
+begin_statement       = { ^"begin" ~ statements ~ ^"end" }
+
+local_assignment = { ^"let" ~ (local_assign_scatter | local_assign_single) ~ ";" }
+local_assign_single = { ident ~ (ASSIGN ~ expr)? }
+local_assign_scatter = { scatter_assign ~ expr }
+
+const_assignment = { ^"const" ~ (const_assign_scatter | const_assign_single) ~ ";" }
+const_assign_single = { ident ~ (ASSIGN ~ expr)? }
+const_assign_scatter = { scatter_assign ~ expr }
+
+// range comprehension expression.   {expr for x in (range)}
+range_comprehension = { "{" ~ expr ~ "for" ~ ident ~ "in" ~ (for_range_clause | for_in_clause) ~ "}" }
+
+// globally scoped (same as default in MOO) adds explicitly to global scope.
+global_assignment = { ^"global" ~ ident ~ (ASSIGN ~ expr)? ~ ";" }
+
+codes   = { anycode | exprlist }
+anycode = { ^"any" }
+
+expr_statement   = { (expr)? ~ ";" }
+
+expr = { (integer | (prefix* ~ primary)) ~ postfix* ~ (infix ~ (integer | (prefix* ~ primary)) ~ postfix*)* }
+
+infix    = _{
+    add
+  | sub
+  | mul
+  | div
+  | pow
+  | modulus
+  | land
+  | lor
+  | eq
+  | neq
+  | lte
+  | gte
+  | lt
+  | gt
+  | in_range
+}
+add      =  { "+" }
+sub      =  { "-" }
+mul      =  { "*" }
+div      =  { "/" }
+pow      =  { "^" }
+modulus  =  { "%" }
+land     =  { "&&" }
+lor      =  { "||" }
+eq       =  { "==" }
+neq      =  { "!=" }
+lt       =  { "<" }
+gt       =  { ">" }
+lte      =  { "<=" }
+gte      =  { ">=" }
+in_range = @{ ^"in" ~ !ident_continue+ }
+
+prefix = _{ neg | not | scatter_assign }
+neg    =  { "-" }
+// 
+not = { "!" }
+
+scatter_assign   =  { "{" ~ scatter ~ "}" ~ ASSIGN }
+scatter          = _{ scatter_item ~ ("," ~ scatter_item)* }
+scatter_item     = _{ scatter_optional | scatter_target | scatter_rest }
+scatter_optional =  { "?" ~ ident ~ (ASSIGN ~ expr)? }
+scatter_target   =  { ident }
+scatter_rest     =  { "@" ~ ident }
+
+postfix        = _{ index_range | index_single | verb_call | verb_expr_call | prop | prop_expr | cond_expr | assign }
+index_range    =  { "[" ~ expr ~ ".." ~ expr ~ "]" }
+index_single   =  { "[" ~ expr ~ "]" }
+pass_expr      =  { ^"pass" ~ "(" ~ (exprlist)? ~ ")" }
+verb_call      =  { ":" ~ ident ~ arglist }
+verb_expr_call =  { ":" ~ expr ~ arglist }
+prop           =  { "." ~ ident }
+prop_expr      =  { "." ~ "(" ~ expr ~ ")" }
+assign         =  { "=" ~ expr }
+cond_expr      =  { "?" ~ expr ~ "|" ~ expr }
+return_expr    =  { "return" ~ (expr)? }
+
+primary    = _{
+    pass_expr
+  | return_expr
+  | builtin_call
+  | paren_expr
+  | sysprop_call
+  | sysprop
+  | try_expr
+  | flyweight
+  | map
+  | list
+  | atom
+  | range_end
+  | range_comprehension
+}
+paren_expr =  { "(" ~ expr ~ ")" }
+
+try_expr     = { "`" ~ expr ~ "!" ~ codes ~ ("=>" ~ expr)? ~ "\'" }
+builtin_call = { (ident ~ !(keyword)) ~ arglist }
+
+sysprop      = { "$" ~ ident }
+sysprop_call = { sysprop ~ arglist }
+
+atom     = { integer | float | string | object | err | boolean | symbol | ident }
+arglist  = { "(" ~ exprlist ~ ")" | "()" }
+list     = { ("{" ~ exprlist ~ "}") | "{}" }
+
+// flyweight is < parent, [ prop -> value, ... ], { contents, ... } >
+flyweight     = { "<" ~ expr ~ ("," ~ flyweight_slots)? ~ ("," ~ flyweight_contents)? ~ ">" }
+flyweight_slots    = { ("[" ~ (ident ~ "->" ~ expr) ~ ("," ~ ident ~ "->" ~ expr)* ~ "]") | ( "[" ~ "]") }
+flyweight_contents = { "{" ~ exprlist?  ~ "}" }
+
+exprlist = { argument ~ ("," ~ argument)* }
+argument = { expr | "@" ~ expr }
+map      = { ("[" ~ (expr ~ "->" ~ expr) ~ ("," ~ expr ~ "->" ~ expr)* ~ "]") | ( "[" ~ "]" ) }
+
+range_end = { "$" }
+
+// An unambiguous assignment operator, for use in scatter assignments where list comparison could be a false match.
+ASSIGN = _{ "=" ~ !("=") }
+
+ERR = @{
+    ^"e_type"
+  | ^"e_div"
+  | ^"e_perm"
+  | ^"e_propnf"
+  | ^"e_verbnf"
+  | ^"e_varnf"
+  | ^"e_invind"
+  | ^"e_recmove"
+  | ^"e_maxrec"
+  | ^"e_range"
+  | ^"e_args"
+  | ^"e_nacc"
+  | ^"e_invarg"
+  | ^"e_quota"
+  | ^"e_float"
+  | ^"e_none"
+}
+
+err = @{ ERR ~ !ident_continue+ }
+
+object  = @{ "#" ~ integer }
+keyword = @{
+    ^"for"
+  | ^"endfor"
+  | ^"if"
+  | ^"else"
+  | ^"return"
+  | ^"endif"
+  | ^"elseif"
+  | ^"while"
+  | ^"endwhile"
+  | ^"continue"
+  | ^"break"
+  | ^"fork"
+  | ^"endfork"
+  | ^"try"
+  | ^"except"
+  | ^"endtry"
+  | ^"finally"
+  | ^"in"
+  | ^"let"
+  | err
+}
+
+symbol = @{ "'" ~ ident }
+
+ident_start    = _{ "_" | ASCII_ALPHA }
+ident_continue = _{ "_" | ASCII_ALPHANUMERIC }
+
+ident = @{
+    ((!keyword ~ ident_start) ~ ident_continue* ~ !ident_continue)
+  | (keyword ~ ident_start ~ ident_continue* ~ !ident_continue)
+}
+
+string    = @{ "\"" ~ str_inner ~ "\"" }
+str_inner = @{ (!("\"" | "\\" | "\u{0000}" | "\u{001F}") ~ ANY)* ~ (escape ~ str_inner)? }
+
+integer = @{ ("+" | "-")? ~ number ~ !("." ~ digits) ~ !("e" | "E") }
+
+float          = ${ exponent_float | point_float }
+point_float    = ${ digit_part? ~ fraction | digit_part ~ "." }
+exponent_float = ${ (point_float | digit_part) ~ (pos_exponent | neg_exponent) }
+digit_part     = ${ number ~ ("_"? ~ number)* }
+fraction       = ${ "." ~ digit_part }
+pos_exponent   = ${ ("e" | "E") ~ "+"? ~ digit_part }
+neg_exponent   = ${ ("e" | "E") ~ "-" ~ digit_part }
+
+number = @{ "0" | (ASCII_NONZERO_DIGIT ~ digits?) }
+digits = @{ (ASCII_DIGIT | ("_" ~ ASCII_DIGIT))+ }
+
+exp = _{ ^"e" ~ ("+" | "-")? ~ ASCII_DIGIT+ }
+
+escape = @{ "\\" ~ ("b" | "t" | "n" | "f" | "r" | "\"" | "\\" | NEWLINE)? }
+
+comment = _{ c_comment | cpp_comment }
+c_comment = @{ "/*" ~ (!"*/" ~ ANY)* ~ "*/" }
+cpp_comment = @{ "//" ~ (!NEWLINE ~ ANY)* }
+
+WHITESPACE = _{ " " | "\t" | NEWLINE | comment }
+
+// And prepositions can't just be IDENT, because that excludes keywords... like "for"
+PREP_CHARACTERS = @{ ASCII_ALPHA+ }
+PROPCHARS = @{ ASCII_ALPHANUMERIC | "_" }
+
+
+// "Objects files" are an alternate import format for reading cores or databases, that is designed to be readable and
+// editable by regular tools.
+objects_file = { SOI ~ (object_definition | constant_decl)* ~ EOI }
+
+constant_decl = { "define" ~ ident ~ "=" ~ literal ~ ";"? }
+
+object_definition = {  ^"object" ~ (object | variable) ~ object_attributes ~ (verb_decl | prop_def | prop_set)* ~ "endobject"  }
+object_attributes = { object_attribute+ }
+object_attribute = { name_attr | parent_attr | owner_attr | location_attr | wizard_attr | prog_attr | player_attr | fertile_attr | read_attr | write_attr }
+name_attr = { "name" ~ ":" ~ (string | variable )}
+owner_attr = { "owner" ~ ":" ~ ( object | variable ) }
+parent_attr = { "parent" ~ ":" ~ ( object | variable ) }
+location_attr = { "location" ~ ":" ~ ( object | variable ) }
+wizard_attr = { "wizard" ~ ":" ~ boolean}
+prog_attr = { "programmer" ~ ":" ~ boolean}
+player_attr = { "player" ~ ":" ~ boolean}
+fertile_attr = { "fertile" ~ ":" ~ boolean}
+read_attr = { "readable" ~ ":" ~ boolean }
+write_attr = { "writeable" ~ ":" ~ boolean }
+
+boolean = { "true" | "false" }
+
+verb_decl = { ^"verb" ~ verb_name ~ "(" ~ verbargspec ~ ")" ~ owner_attr ~ flags_attr ~ verb_statements  }
+verb_statements = { statements ~ "endverb" }
+
+// A verb name for a textdump is actually more permissive than ident, since you can embed them in :("string") style dispatch
+// Beyond wildcards, they also permit special characters like #, %, etc.
+// So we'll accept either a string literal, or a single alphanumeric-ish ident
+verb_name = { string | verbident }
+verbident = { PROPCHARS+ }
+
+verbargspec = {argspec ~ PREP_CHARACTERS ~ argspec }
+argspec = {"this" | "none" | "any"}
+flagchars = @{ ASCII_ALPHA* }
+flags_attr = {"flags" ~ ":" ~ "\"" ~ flagchars ~ "\"" }
+
+literal = { atom | literal_map | literal_list | literal_flyweight | variable }
+variable = { ident }
+literal_map =  { ("[" ~ (literal ~ "->" ~ literal) ~ ("," ~ literal ~ "->" ~ literal)* ~ "]") | ( "[" ~ "]") }
+literal_list     = { ("{" ~ literal ~ ("," ~ literal)* ~ "}") | "{}" }
+literal_flyweight = { "<" ~ literal ~ ("," ~ literal_flyweight_slots)? ~ ("," ~ literal_flyweight_contents)? ~ ">" }
+literal_flyweight_slots = { ("[" ~ (ident ~ "->" ~ literal) ~ ("," ~ ident ~ "->" ~ literal)* ~ "]") | ("[" ~ "]") }
+literal_flyweight_contents = { "{" ~ (literal ~ ("," ~ literal)*)? ~ "}" }
+prop_def = {"property" ~ propname ~ propinfo ~ ("=" ~ literal)? ~ ";" }
+prop_set = {"override" ~ propname ~ propinfo? ~ ("=" ~ literal)? ~ ";" }
+unquoted_propname = { PROPCHARS+ }
+propname = { string | unquoted_propname }
+propinfo = {"(" ~ owner_attr ~ "," ~ flags_attr ~ ")"}

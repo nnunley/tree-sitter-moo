@@ -1,0 +1,222 @@
+===================
+Try-except statements
+===================
+
+try
+  foo();
+except (E_TYPE)
+  return 0;
+endtry
+
+---
+
+(program
+  (try
+    (verb
+        (identifier)
+        (arglist))
+    (catch
+      (except_codes
+        (ERR))
+        (return
+          (INTEGER))
+        )))
+
+===================
+Try-except with any
+===================
+
+try
+  foo();
+except any
+  return "error";
+endtry
+
+---
+
+(program
+  (try
+      (verb
+        (identifier)
+        (arglist))
+    (catch
+      (except_codes
+        "any")
+        (return
+          (STRING))
+        )))
+
+===================
+Try-except with label
+===================
+
+try
+  foo();
+except handler (ANY)
+  return "handled";
+endtry
+
+---
+
+(program
+  (try
+      (verb
+        (identifier)
+        (arglist))
+    (catch
+      (identifier)
+        (return
+          (STRING))
+        )))
+
+===================
+Try-except with multiple handlers
+===================
+
+try
+  foo();
+except (E_TYPE, E_DIV)
+  return 0;
+except (ANY)
+  return -1;
+endtry
+
+---
+
+(program
+  (try
+    (verb
+        (identifier)
+        (arglist))
+    (catch
+      "except"
+      (error_codes)
+        (ERR)
+        (ERR))
+    )
+        (return
+          (INTEGER)))
+    (catch
+      "except"
+      (except_codes
+        "ANY")
+        (return
+          (INTEGER))
+    )
+
+===================
+Try-except with finally
+===================
+
+try
+  foo();
+except (E_TYPE)
+  return 0;
+finally
+  cleanup();
+endtry
+
+---
+
+(program
+  (try
+    (delimited_statement
+      (verb
+        (identifier)
+        (arglist))
+      ";")
+    (catch
+      "except"
+      "("
+      (_except_codes
+        (ERR))
+      ")"
+      (delimited_statement
+        (return
+          (INTEGER))
+        ";"))
+    "finally"
+    (delimited_statement
+      (verb
+        (identifier)
+        (arglist))
+      ";")))
+
+===================
+Try expression simple
+===================
+
+x = `foo() ! ANY => 0';
+
+---
+
+(program
+  (delimited_statement
+    (assign
+      (identifier)
+      "="
+      (try_expr
+        "`"
+        (verb
+          (identifier)
+          (arglist))
+        "!"
+        (_try_expr_codes
+          "ANY")
+        "=>"
+        (INTEGER)
+        "'"))
+    ";"))
+
+===================
+Try expression with error list
+===================
+
+x = `foo() ! E_TYPE, E_DIV => 0';
+
+---
+
+(program
+  (delimited_statement
+    (assign
+      (identifier)
+      "="
+      (try_expr
+        "`"
+        (verb
+          (identifier)
+          (arglist))
+        "!"
+        (_try_expr_codes
+          (_expr_list
+            (ERR)
+            ","
+            (ERR)))
+        "=>"
+        (INTEGER)
+        "'"))
+    ";"))
+
+===================
+Try expression without handler
+===================
+
+x = `foo() ! ANY';
+
+---
+
+(program
+  (delimited_statement
+    (assign
+      (identifier)
+      "="
+      (try_expr
+        "`"
+        (verb
+          (identifier)
+          (arglist))
+        "!"
+        (_try_expr_codes
+          "ANY")
+        "'"))
+    ";"))

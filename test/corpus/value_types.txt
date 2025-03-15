@@ -1,0 +1,126 @@
+===================
+Atomic Values - Numbers
+===================
+
+42;
+-17;
+3.14159;
+.5;
+5.;
+1e10;
+1.5e-3;
+2.718E2;
+2.718E+2;
+-2.718E+2;
+-2.718E2;
+
+---
+
+(program
+    (INTEGER)
+    (INTEGER)
+    (FLOAT)
+    (FLOAT)
+    (FLOAT)
+    (FLOAT)
+    (FLOAT)
+    (FLOAT)
+    (FLOAT)
+    (FLOAT)
+    (FLOAT))
+
+===================
+Atomic Values - Strings and Identifiers
+===================
+
+"hello world";
+'single quoted';
+"escaped \"quotes\"";
+'escaped \'quotes\'';
+my_identifier;
+_underscore123;
+
+---
+
+(program
+    (STRING)
+    (STRING)
+    (STRING)
+    (STRING)
+    (identifier)
+    (identifier))
+
+===================
+Object and System IDs
+===================
+
+#123;
+#-456;
+$system_prop;
+'symbol;
+true;
+false;
+$;
+
+---
+
+(program
+    (objid
+      (INTEGER))
+    (objid
+      (INTEGER))
+    (sysprop
+      (identifier))
+    (symbol
+      (identifier))
+    (boolean)
+    (boolean)
+    (range_end))
+
+===================
+Lists
+===================
+
+{};
+{1, 2, 3};
+{"a", "b", "c"};
+{1, "mixed", #123};
+
+---
+
+(program
+  (list)
+  (list
+      (INTEGER)
+      (INTEGER)
+      (INTEGER))
+  (list
+      (STRING)
+      (STRING)
+      (STRING))
+  (list
+      (INTEGER)
+      (STRING)
+      (objid
+        (INTEGER))))
+
+===================
+Maps
+===================
+
+[];
+[1 -> "one"];
+["key" -> "value", "another" -> 123];
+
+---
+
+(program
+  (map)
+  (map
+      (pair (INTEGER)
+             (STRING)))
+  (map
+      (pair (STRING)
+            (STRING))
+      (pair (STRING)
+            (INTEGER))))

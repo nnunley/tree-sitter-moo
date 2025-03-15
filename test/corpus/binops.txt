@@ -1,0 +1,40 @@
+===================
+Binary operators
+===================
+
+a + b;
+
+---
+
+(program
+  (binary_expr
+    left: (identifier)
+    right: (identifier)))
+
+===================
+Multiplication
+===================
+
+a * b;
+
+---
+
+(program
+  (binary_expr
+    left: (identifier)
+    right: (identifier)))
+
+===================
+Precedence
+===================
+
+a + b * c;
+
+---
+
+(program
+  (binary_expr
+    left: (identifier)
+    right: (binary_expr
+      left: (identifier)
+      right: (identifier))))
