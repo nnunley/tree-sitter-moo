@@ -1,0 +1,34 @@
+==============
+Function calls
+==============
+
+foo(a, b);
+
+---
+
+(program
+    (call
+        (identifier)
+        (arglist
+            (identifier)
+            (identifier)
+        )
+    ))
+
+==============
+Verbs
+==============
+
+$system:foo(a, b);
+
+---
+
+(program
+    (verb
+        (property (identifier))
+        (identifier)
+        (arglist
+            (identifier)
+            (identifier)
+        )
+    ))

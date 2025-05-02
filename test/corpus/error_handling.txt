@@ -13,14 +13,13 @@ endtry
 (program
   (try
     (verb
-        (identifier)
-        (arglist))
+      (identifier)
+      (arglist))
     (catch
       (except_codes
         (ERR))
-        (return
-          (INTEGER))
-        )))
+      (return
+        (INTEGER)))))
 
 ===================
 Try-except with any
@@ -36,15 +35,13 @@ endtry
 
 (program
   (try
-      (verb
-        (identifier)
-        (arglist))
+    (verb
+      (identifier)
+      (arglist))
     (catch
-      (except_codes
-        "any")
-        (return
-          (STRING))
-        )))
+      (except_codes)
+      (return
+        (STRING)))))
 
 ===================
 Try-except with label
@@ -60,14 +57,13 @@ endtry
 
 (program
   (try
-      (verb
-        (identifier)
-        (arglist))
+    (verb
+      (identifier)
+      (arglist))
     (catch
       (identifier)
-        (return
-          (STRING))
-        )))
+      (return
+        (STRING)))))
 
 ===================
 Try-except with multiple handlers
@@ -86,23 +82,17 @@ endtry
 (program
   (try
     (verb
-        (identifier)
-        (arglist))
+      (identifier)
+      (arglist))
     (catch
-      "except"
       (error_codes)
-        (ERR)
-        (ERR))
-    )
-        (return
-          (INTEGER)))
-    (catch
-      "except"
-      (except_codes
-        "ANY")
-        (return
-          (INTEGER))
-    )
+      (ERR)
+      (ERR)))
+  (return
+    (INTEGER)))(catch "except"
+  (except_codes "ANY")
+  (return
+    (INTEGER)))
 
 ===================
 Try-except with finally
@@ -123,24 +113,17 @@ endtry
     (delimited_statement
       (verb
         (identifier)
-        (arglist))
-      ";")
-    (catch
-      "except"
-      "("
+        (arglist)))
+    (catch "except" "("
       (_except_codes
-        (ERR))
-      ")"
-      (delimited_statement
-        (return
-          (INTEGER))
-        ";"))
-    "finally"
-    (delimited_statement
-      (verb
-        (identifier)
-        (arglist))
-      ";")))
+        (ERR)
+        (delimited_statement
+          (return
+            (INTEGER))
+          (delimited_statement
+            (verb
+              (identifier)
+              (arglist))))
 
 ===================
 Try expression simple
@@ -154,19 +137,12 @@ x = `foo() ! ANY => 0';
   (delimited_statement
     (assign
       (identifier)
-      "="
-      (try_expr
-        "`"
+      (try_expr "`"
         (verb
           (identifier)
-          (arglist))
-        "!"
-        (_try_expr_codes
-          "ANY")
-        "=>"
-        (INTEGER)
-        "'"))
-    ";"))
+          (arglist)
+          (_try_expr_codes "ANY"
+            (INTEGER)))
 
 ===================
 Try expression with error list
@@ -180,22 +156,15 @@ x = `foo() ! E_TYPE, E_DIV => 0';
   (delimited_statement
     (assign
       (identifier)
-      "="
-      (try_expr
-        "`"
+      (try_expr "`"
         (verb
           (identifier)
-          (arglist))
-        "!"
-        (_try_expr_codes
-          (_expr_list
-            (ERR)
-            ","
-            (ERR)))
-        "=>"
-        (INTEGER)
-        "'"))
-    ";"))
+          (arglist)
+          (_try_expr_codes
+            (_expr_list
+              (ERR
+                (ERR))
+              (INTEGER)))
 
 ===================
 Try expression without handler
@@ -209,14 +178,8 @@ x = `foo() ! ANY';
   (delimited_statement
     (assign
       (identifier)
-      "="
-      (try_expr
-        "`"
+      (try_expr "`"
         (verb
           (identifier)
-          (arglist))
-        "!"
-        (_try_expr_codes
-          "ANY")
-        "'"))
-    ";"))
+          (arglist)
+          (_try_expr_codes "ANY")))

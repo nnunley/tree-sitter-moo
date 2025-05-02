@@ -29,7 +29,6 @@ module.exports = grammar({
   word: ($) => $.identifier,
 
   conflicts: ($) => [
-    [$.prop, $.verb],
     [$.scatter_target, $._atom],
   ],
 
@@ -49,9 +48,7 @@ module.exports = grammar({
     _delimited_statement: ($) => seq(
       choice(
         $._expr,
-        $.break,
-        $.continue,
-        $.return,
+
         $.local_assignment,
         $.const_assignment,
         $.global_assignment
@@ -59,8 +56,8 @@ module.exports = grammar({
       ";"
     ),
 
-    break: ($) => seq("break", optional($.identifier)),
-    continue: ($) => seq("continue", optional($.identifier)),
+    break: ($) => prec.right(1, seq("break", optional($.identifier))),
+    continue: ($) => prec.right(1, seq("continue", optional($.identifier))),
     return: ($) => prec.right(1, seq(
       "return",
       optional($._expr)
@@ -119,38 +116,29 @@ module.exports = grammar({
     ),
 
     try: ($) => seq(
-      "try",
+      caseInsensitive("try"),
       field("body", repeat1($._statement)),
-      field("excepts", repeat($.except)),
+      field("except", repeat($.except)),
       field("finally", optional(seq(
-        "finally",
-        repeat1($._statement)
+       caseInsensitive( "finally"),
+        repeat($._statement)
       ))),
-      "endtry"
+      caseInsensitive("endtry")
     ),
 
     except: ($) => seq(
-      "except",
-      choice(
+      caseInsensitive("except"),
         // Handler with identifier
-        seq(
-          $.identifier,
-        ),
-        // Handler with error codes
-        seq(
-          "(",
-          choice("ANY", repeat($.error_codes)),
-          ")",
-        ),
-        seq(
-          repeat1($._statement)
-        )
-      )
-    ),
-
-    error_codes: ($) => choice(
-      "any",
-      commaSep1($.ERR)
+      optional(
+        $.identifier,
+      ),
+      // Handler with error codes
+      seq(
+        "(",
+          $. _try_expr_codes,
+         ")",
+      ),
+      repeat($._statement)
     ),
 
     try_expr: ($) => seq(
@@ -163,56 +151,30 @@ module.exports = grammar({
     ),
 
     _try_expr_codes: ($) => choice(
-      "ANY",
-      seq(
-        $._expr_list
-      )
+      caseInsensitive("ANY"),
+      intersperse($.ERR, ",")
     ),
 
     local_assignment: ($) => seq(
-      "let",
-      choice(
-        $.local_assign_scatter,
-        $.local_assign_single
-      )
-    ),
-
-    local_assign_single: ($) => seq(
-      $.identifier,
-      optional(seq("=", $._expr))
-    ),
-
-    local_assign_scatter: ($) => seq(
-      $.scatter_assign,
-      $._expr
+      caseInsensitive("let"),
+      $.assign
     ),
 
     const_assignment: ($) => seq(
-      "const",
-      choice(
-        $.const_assign_scatter,
-        $.const_assign_single
-      )
-    ),
-
-    const_assign_single: ($) => seq(
-      $.identifier,
-      optional(seq("=", $._expr))
-    ),
-
-    const_assign_scatter: ($) => seq(
-      $.scatter_assign,
-      $._expr
+     caseInsensitive( "const"),
+      $.assign
     ),
 
     global_assignment: ($) => seq(
-      "global",
+      caseInsensitive("global"),
       $.identifier,
       optional(seq("=", $._expr))
     ),
 
     _expr: ($) => choice(
-      $._atom,
+      $.break,
+      $.continue,
+      $.return,
       $.binary_expr,
       $.unary,
       $.list,
@@ -221,13 +183,30 @@ module.exports = grammar({
       $.try_expr,
       $.pass,
       $.range_comprehension,
-      $.prop,
+      $.property,
       $.verb,
+      $.call,
       $.index_single,
       $.index_range,
       $.cond,
       $.assign,
+      $.parens,
+      // $.in,
+      $._atom,
     ),
+
+    // in: ($) => prec.left(1,seq(
+    //   $._expr,
+    //   "in",
+    //   $._expr
+    // )),
+
+    parens: ($) => seq(
+      "(",
+      $._expr,
+      ")"
+    ),
+    // range_comprehension: ($) => seq(
 
     range_comprehension: ($) => seq(
       "{",
@@ -240,32 +219,35 @@ module.exports = grammar({
     ),
 
     pass: ($) => seq(
-      "pass",
+      caseInsensitive("pass"),
       "(",
       optional($._expr_list),
       ")"
     ),
 
-    prop: ($) => choice(
-      seq(".", $.identifier),
-      seq(".", "(", $._expr, ")")
-    ),
+    property: ($) => prec.left(11, choice(
+      seq("$", $.identifier),
+      seq($._expr, '.',
+                         choice($.identifier, seq('(', $._expr, ')'))))),
 
     verb: ($) => prec(11, seq(
-      ":",
-      choice(
-        $.identifier,
-        seq("(", $._expr, ")")
-      ),
-      $.arglist
+      $._expr,
+      ':',
+        choice($.identifier, seq('(', $._expr, ')')),
+        $.arglist
     )),
 
-    index_single: ($) => seq("[", $._expr, "]"),
-    index_range: ($) => seq("[", $._expr, "..", $._expr, "]"),
+    call: ($) => prec(12, seq(
+      choice($.identifier, seq('(', $._expr, ')')), $.arglist)),
+
+    _index_expr: ($) => choice("$", $._expr),
+    index_single: ($) => seq("[", $._index_expr, "]"),
+    index_range: ($) => seq("[", field("from",$._index_expr), "..", field("to", $._index_expr), "]"),
+
     cond: ($) => seq("?", $._expr, "|", $._expr),
 
     assign: ($) => prec.right(1, seq(
-      choice($.identifier, $.prop, $.scatter_assign),
+      choice($.identifier, $.property, $.scatter_assign),
       "=",
       $._expr
     )),
@@ -297,10 +279,10 @@ module.exports = grammar({
     scatter_target: ($) => $.identifier,
     scatter_rest: ($) => seq("@", $.identifier),
 
-    unary: ($) => choice(
-      prec(10, seq("!", $._expr)),
-      prec(10, seq("-", $._expr))
-    ),
+    unary: ($) => prec.left(10, choice(
+       seq(field("operator", "!"), $._expr),
+       seq(field("operator", "-"), $._expr)
+    )),
 
     binary_expr: $ => {
       const operators = {
@@ -315,20 +297,22 @@ module.exports = grammar({
         9: [['^', 'right']]
       };
 
-      return choice(
+      const expr = choice(
         ...Object.entries(operators).flatMap(([precedence, ops]) =>
-          ops.map(([op, associativity]) => {
-            const prec_fn = associativity === 'right' ? prec.right : prec.left;
-            return prec_fn(Number(precedence),
+          ops.map(([op, assoc]) => {
+            const prec_fn = assoc === 'right' ? prec.right : prec.left;
+            const binary_expr = prec_fn(Number(precedence),
               seq(
                 field('left', $._expr),
                 field('operator', token(op)),
                 field('right', $._expr)
               )
             );
+            return binary_expr;
           })
         )
       )
+      return expr;
     },
 
     list: ($) => seq(
@@ -349,13 +333,13 @@ module.exports = grammar({
       $._expr
     ),
 
-    flyweight: ($) => seq(
+    flyweight: ($) => prec.left(12,seq(
       "<",
       field("parent", $._expr),
       field("slots", $.map),
       field("contents", $.list),
       ">"
-    ),
+    )),
 
     flyweight_slots: ($) => seq(
       "[",
@@ -374,28 +358,28 @@ module.exports = grammar({
       repeat(seq(",", $._expr))
     ),
 
-    arglist: ($) => seq("(", $._expr_list, ")"),
+    arglist: ($) => seq("(",
+      optional(intersperse(seq(optional("@"), $._expr), ",",)),
+      ")"),
 
     _atom: ($) => prec(0, choice(
-      $.identifier,
       $.INTEGER,
       $.FLOAT,
       $.STRING,
       $.objid,
-      $.sysprop,
       $.symbol,
       $.boolean,
-      $.range_end
+      $.ERR,
+      $.identifier,
     )),
 
     range_end: ($) => "$",
     symbol: ($) => seq("'", $.identifier),
     boolean: ($) => choice("true", "false"),
-    objid: ($) => seq("#", optional("-"), $.INTEGER),
-    sysprop: ($) => seq("$", $.identifier),
+    objid: ($) => seq("#", optional("-"), choice($.INTEGER, $.STRING)),
 
-    identifier: ($) => /[A-Za-z_][A-Za-z0-9_]*/,
-    INTEGER: ($) => /[+-]?[0-9]+/,
+    identifier: ($) => token(/[A-Za-z_][A-Za-z0-9_]*/),
+    INTEGER: ($) => token(/[+-]?[0-9]+/),
     FLOAT: ($) => {
       // Define a regex pattern that can properly handle all floating point formats
       // Including negatives and scientific notation
@@ -406,17 +390,28 @@ module.exports = grammar({
 
     ERR: ($) => {
       const errorCodes = [
-        "E_NONE", "E_TYPE", "E_DIV", "E_PERM", "E_PROPNF", "E_VERBNF",
-        "E_VARNF", "E_INVIND", "E_RECMOVE", "E_MAXREC", "E_RANGE", "E_ARGS",
-        "E_NACC", "E_INVARG", "E_QUOTA", "E_FLOAT"
+        "E_NONE",
+        "E_TYPE",
+        "E_DIV",
+        "E_PERM",
+        "E_PROPNF",
+        "E_VERBNF",
+        "E_VARNF",
+        "E_INVIND",
+        "E_RECMOVE",
+        "E_MAXREC",
+        "E_RANGE",
+        "E_ARGS",
+        "E_NACC",
+        "E_INVARG",
+        "E_QUOTA",
+        "E_FLOAT",
+        "E_ASSERT",
       ];
 
       return choice(...errorCodes.map(err => {
         // Create a case-insensitive regex for each error code
-        const pattern = err.split('').map(c =>
-          c.match(/[a-zA-Z]/) ? `[${c.toLowerCase()}${c.toUpperCase()}]` : c
-        ).join('');
-        return alias(new RegExp(pattern), err);
+        return token(alias(caseInsensitive(err), err));
       }));
     },
 
@@ -431,6 +426,20 @@ module.exports = grammar({
   }
 });
 
+function toCaseInsensitive(a) {
+  const ca = a.charCodeAt(0);
+  if (ca>=97 && ca<=122) return `[${a}${a.toUpperCase()}]`;
+  if (ca>=65 && ca<= 90) return `[${a.toLowerCase()}${a}]`;
+  return a;
+}
+
+function caseInsensitive (keyword) {
+  return new RegExp(keyword
+    .split('')
+    .map(toCaseInsensitive)
+    .join('')
+  )
+}
 function intersperse(rule, separator) {
   return seq(rule, repeat(seq(separator, rule)));
 }

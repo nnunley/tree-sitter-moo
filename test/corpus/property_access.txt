@@ -1,18 +1,13 @@
 =======
 Simple property access
 =======
-a.b.c
+a.b.c;
 
 ---
 
 (program
   (property
-    (identifier)
     (property
-        (identifier)
-        (identifier)
-    )
-  )
-)
-
-
+      (identifier)
+      (identifier))
+    (identifier)))
