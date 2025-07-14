@@ -30,7 +30,6 @@ module.exports = grammar({
 
   conflicts: ($) => [
     [$.scatter_target, $._atom],
-    [$.cond, $.binary_expr],
   ],
 
   rules: {
@@ -168,43 +167,82 @@ module.exports = grammar({
 
     local_assignment: ($) => seq(
       caseInsensitive("let"),
-      $.assign
+      $.identifier,
+      "=",
+      $.assignment_expr
     ),
 
     const_assignment: ($) => seq(
-     caseInsensitive( "const"),
-      $.assign
+      caseInsensitive("const"),
+      $.identifier,
+      "=",
+      $.assignment_expr
     ),
 
     global_assignment: ($) => seq(
       caseInsensitive("global"),
       $.identifier,
-      optional(seq("=", $._expr))
+      optional(seq("=", $.assignment_expr))
     ),
 
     _expr: ($) => choice(
+      $.assignment_expr,
       $.break,
       $.continue,
       $.return,
+    ),
+
+    assignment_expr: ($) => choice(
+      $.conditional_expr,
+      prec.right(1, seq(
+        choice($.identifier, $.scatter_assign),
+        "=",
+        $.assignment_expr
+      ))
+    ),
+
+    conditional_expr: ($) => choice(
       $.binary_expr,
-      $.unary,
+      prec.right(0, seq($.binary_expr, "?", $.assignment_expr, "|", $.conditional_expr))
+    ),
+
+    binary_expr: ($) => choice(
+      $.unary_expr,
+      prec.left(3, seq($.binary_expr, "||", $.binary_expr)),
+      prec.left(3, seq($.binary_expr, "&&", $.binary_expr)),
+      prec.left(4, seq($.binary_expr, choice("==", "!="), $.binary_expr)),
+      prec.left(4, seq($.binary_expr, choice("<", "<=", ">", ">=", "in"), $.binary_expr)),
+      prec.left(5, seq($.binary_expr, choice("|.", "&.", "^."), $.binary_expr)),
+      prec.left(6, seq($.binary_expr, choice("<<", ">>"), $.binary_expr)),
+      prec.left(7, seq($.binary_expr, choice("+", "-"), $.binary_expr)),
+      prec.left(8, seq($.binary_expr, choice("*", "/", "%"), $.binary_expr)),
+      prec.right(9, seq($.unary_expr, "^", $.binary_expr))
+    ),
+
+    unary_expr: ($) => choice(
+      $.postfix_expr,
+      prec.left(10, seq(choice("!", "-"), $.unary_expr))
+    ),
+
+    postfix_expr: ($) => choice(
+      $.primary_expr,
+      prec.left(11, seq($.postfix_expr, ".", choice($.identifier, seq("(", $.assignment_expr, ")")))),
+      prec.left(11, seq($.postfix_expr, ":", choice($.identifier, seq("(", $.assignment_expr, ")")), $.arglist)),
+      prec.left(11, seq($.postfix_expr, "[", $._index_expr, "]")),
+      prec.left(11, seq($.postfix_expr, "[", field("from", $._index_expr), token(prec(1, "..")), field("to", $._index_expr), "]")),
+      prec(12, seq(choice($.identifier, seq("(", $.assignment_expr, ")")), $.arglist))
+    ),
+
+    primary_expr: ($) => choice(
+      $.flyweight,
+      $._atom,
       $.list,
       $.map,
-      $.flyweight,
       $.try_expr,
       $.pass,
       $.range_comprehension,
       $.sysprop,
-      $.property,
-      $.verb,
-      $.call,
-      $.index_single,
-      $.index_range,
-      $.cond,
-      $.assign,
       $.parens,
-      // $.in,
-      $._atom,
     ),
 
     // in: ($) => prec.left(1,seq(
@@ -215,14 +253,14 @@ module.exports = grammar({
 
     parens: ($) => seq(
       "(",
-      $._expr,
+      $.assignment_expr,
       ")"
     ),
     // range_comprehension: ($) => seq(
 
     range_comprehension: ($) => seq(
       "{",
-      $._expr,
+      $.assignment_expr,
       "for",
       $.identifier,
       "in",
@@ -237,33 +275,7 @@ module.exports = grammar({
       ")"
     ),
 
-    property: ($) => prec.left(11, seq(
-      $._expr, 
-      '.', 
-      choice($.identifier, seq('(', $._expr, ')'))
-    )),
-
-    verb: ($) => prec.left(11, seq(
-      $._expr,
-      ':',
-      choice($.identifier, seq('(', $._expr, ')')),
-      $.arglist
-    )),
-
-    call: ($) => prec(12, seq(
-      choice($.identifier, seq('(', $._expr, ')')), $.arglist)),
-
-    _index_expr: ($) => choice("$", $._expr),
-    index_single: ($) => prec.left(11, seq($._expr, "[", $._index_expr, "]")),
-    index_range: ($) => prec.left(11, seq($._expr, "[", field("from", $._index_expr), token(prec(1, "..")), field("to", $._index_expr), "]")),
-
-    cond: ($) => prec.right(2, seq($._expr, "?", $._expr, "|", $._expr)),
-
-    assign: ($) => prec.right(1, seq(
-      choice($.identifier, $.property, $.scatter_assign),
-      "=",
-      $._expr
-    )),
+    _index_expr: ($) => choice("$", $.assignment_expr),
 
     scatter_assign: ($) => seq(
       "{",
@@ -286,50 +298,17 @@ module.exports = grammar({
     scatter_optional: ($) => seq(
       "?",
       $.identifier,
-      optional(seq("=", $._expr))
+      optional(seq("=", $.assignment_expr))
     ),
 
     scatter_target: ($) => $.identifier,
     scatter_rest: ($) => seq("@", $.identifier),
 
-    unary: ($) => prec.left(10, choice(
-       seq(field("operator", "!"), $._expr),
-       seq(field("operator", "-"), $._expr)
-    )),
 
-    binary_expr: $ => {
-      const operators = {
-        1: [['=', 'right']],
-        3: [['||'], ['&&']],
-        4: [['=='], ['!='], ['<'], ['<='], ['>'], ['>='], ['in']],
-        5: [['|.'], ['&.'], ['^.']],
-        6: [['<<'], ['>>']],
-        7: [['+'], ['-']],
-        8: [['*'], ['/'], ['%']],
-        9: [['^', 'right']]
-      };
-
-      const expr = choice(
-        ...Object.entries(operators).flatMap(([precedence, ops]) =>
-          ops.map(([op, assoc]) => {
-            const prec_fn = assoc === 'right' ? prec.right : prec.left;
-            const binary_expr = prec_fn(Number(precedence),
-              seq(
-                field('left', $._expr),
-                field('operator', token(op)),
-                field('right', $._expr)
-              )
-            );
-            return binary_expr;
-          })
-        )
-      )
-      return expr;
-    },
 
     list: ($) => seq(
       "{",
-      optional(intersperse($._expr, ",")),
+      optional(intersperse($.assignment_expr, ",")),
       "}"
     ),
 
@@ -340,27 +319,27 @@ module.exports = grammar({
     ),
 
     pair: ($) => seq(
-      $._expr,
+      $.assignment_expr,
       "->",
-      $._expr
+      $.assignment_expr
     ),
 
-    flyweight: ($) => prec.left(12, seq(
-      "<",
-      field("parent", $._expr),
+    flyweight: ($) => prec(15, seq(
+      token("<"),
+      field("parent", $.unary_expr),
       optional(seq(",", $.map)),
       optional(seq(",", $.list)),
-      ">"
+      token(">")
     )),
 
 
     _expr_list: ($) => seq(
-      $._expr,
-      repeat(seq(",", $._expr))
+      $.assignment_expr,
+      repeat(seq(",", $.assignment_expr))
     ),
 
     arglist: ($) => seq("(",
-      optional(intersperse(seq(optional("@"), $._expr), ",",)),
+      optional(intersperse(seq(optional("@"), $.assignment_expr), ",",)),
       ")"),
 
     _atom: ($) => prec(0, choice(

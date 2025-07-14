@@ -15,15 +15,33 @@ endobj
     (identifier)
     (object_property
       (identifier)
-      (STRING))
+      (assignment_expr
+        (conditional_expr
+          (binary_expr
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (STRING))))))))
     (object_property
       (identifier)
-      (objid
-        (INTEGER)))
+      (assignment_expr
+        (conditional_expr
+          (binary_expr
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (objid
+                    (INTEGER)))))))))
     (object_property
       (identifier)
-      (objid
-        (INTEGER)))))
+      (assignment_expr
+        (conditional_expr
+          (binary_expr
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (objid
+                    (INTEGER)))))))))))
 
 ===================
 Object with properties
@@ -43,20 +61,56 @@ endobj
       (identifier)
       (property_attrs
         (identifier)
-        (objid
-          (INTEGER))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (objid
+                      (INTEGER))))))))
         (identifier)
-        (STRING))
-      (STRING))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (STRING))))))))
+      (assignment_expr
+        (conditional_expr
+          (binary_expr
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (STRING))))))))
     (property_definition
       (identifier)
       (property_attrs
         (identifier)
-        (objid
-          (INTEGER))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (objid
+                      (INTEGER))))))))
         (identifier)
-        (STRING))
-      (INTEGER))))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (STRING))))))))
+      (assignment_expr
+        (conditional_expr
+          (binary_expr
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (INTEGER))))))))))
 
 ===================
 Object with verb
@@ -81,10 +135,28 @@ endobj
         (identifier))
       (verb_attr
         (identifier)
-        (objid
-          (INTEGER)))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (objid
+                      (INTEGER)))))))))
       (verb_attr
         (identifier)
-        (STRING))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (STRING))))))))
       (return
-        (INTEGER))))) 
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (INTEGER)))))))))))

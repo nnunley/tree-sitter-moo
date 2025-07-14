@@ -12,13 +12,23 @@ endtry
 
 (program
   (try
-    (call
-      (identifier)
-      (arglist))
+    (assignment_expr
+      (conditional_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (identifier)
+              (arglist))))))
     (except
       (ERR)
       (return
-        (INTEGER)))))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (INTEGER)))))))))))
 
 ===================
 Try-except with any
@@ -34,12 +44,22 @@ endtry
 
 (program
   (try
-    (call
-      (identifier)
-      (arglist))
+    (assignment_expr
+      (conditional_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (identifier)
+              (arglist))))))
     (except
       (return
-        (STRING)))))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (STRING)))))))))))
 
 ===================
 Try-except with label
@@ -55,14 +75,24 @@ endtry
 
 (program
   (try
-    (call
-      (identifier)
-      (arglist))
+    (assignment_expr
+      (conditional_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (identifier)
+              (arglist))))))
     (except
       (identifier)
       (ERR)
       (return
-        (STRING)))))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (STRING)))))))))))
 
 ===================
 Try-except with multiple handlers
@@ -80,17 +110,33 @@ endtry
 
 (program
   (try
-    (call
-      (identifier)
-      (arglist))
+    (assignment_expr
+      (conditional_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (identifier)
+              (arglist))))))
     (except
       (ERR)
       (ERR)
       (return
-        (INTEGER)))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (INTEGER)))))))))
     (except
       (return
-        (INTEGER)))))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (INTEGER)))))))))))
 
 ===================
 Try-except with finally
@@ -108,16 +154,30 @@ endtry
 
 (program
   (try
-    (call
-      (identifier)
-      (arglist))
+    (assignment_expr
+      (conditional_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (identifier)
+              (arglist))))))
     (except
       (ERR)
       (return
-        (INTEGER)))
-    (call
-      (identifier)
-      (arglist))))
+        (assignment_expr
+          (conditional_expr
+            (binary_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (INTEGER)))))))))
+    (assignment_expr
+      (conditional_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (identifier)
+              (arglist))))))))
 
 ===================
 Try expression simple
@@ -128,13 +188,29 @@ x = `foo() ! ANY => 0';
 ---
 
 (program
-  (assign
+  (assignment_expr
     (identifier)
-    (try_expr
-      (call
-        (identifier)
-        (arglist))
-      (INTEGER))))
+    (assignment_expr
+      (conditional_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (try_expr
+                  (assignment_expr
+                    (conditional_expr
+                      (binary_expr
+                        (unary_expr
+                          (postfix_expr
+                            (identifier)
+                            (arglist))))))
+                  (assignment_expr
+                    (conditional_expr
+                      (binary_expr
+                        (unary_expr
+                          (postfix_expr
+                            (primary_expr
+                              (INTEGER))))))))))))))))
 
 ===================
 Try expression with error list
@@ -145,15 +221,31 @@ x = `foo() ! E_TYPE, E_ARGS => -1';
 ---
 
 (program
-  (assign
+  (assignment_expr
     (identifier)
-    (try_expr
-      (call
-        (identifier)
-        (arglist))
-      (ERR)
-      (ERR)
-      (INTEGER))))
+    (assignment_expr
+      (conditional_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (try_expr
+                  (assignment_expr
+                    (conditional_expr
+                      (binary_expr
+                        (unary_expr
+                          (postfix_expr
+                            (identifier)
+                            (arglist))))))
+                  (ERR)
+                  (ERR)
+                  (assignment_expr
+                    (conditional_expr
+                      (binary_expr
+                        (unary_expr
+                          (postfix_expr
+                            (primary_expr
+                              (INTEGER))))))))))))))))
 
 ===================
 Try expression without handler
@@ -164,9 +256,19 @@ x = `foo() ! ANY';
 ---
 
 (program
-  (assign
+  (assignment_expr
     (identifier)
-    (try_expr
-      (call
-        (identifier)
-        (arglist)))))
+    (assignment_expr
+      (conditional_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (try_expr
+                  (assignment_expr
+                    (conditional_expr
+                      (binary_expr
+                        (unary_expr
+                          (postfix_expr
+                            (identifier)
+                            (arglist)))))))))))))))

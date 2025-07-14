@@ -7,9 +7,19 @@ a + b;
 ---
 
 (program
-  (binary_expr
-    left: (identifier)
-    right: (identifier)))
+  (assignment_expr
+    (conditional_expr
+      (binary_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (identifier)))))
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (identifier)))))))))
 
 ===================
 Multiplication
@@ -20,9 +30,19 @@ a * b;
 ---
 
 (program
-  (binary_expr
-    left: (identifier)
-    right: (identifier)))
+  (assignment_expr
+    (conditional_expr
+      (binary_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (identifier)))))
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (identifier)))))))))
 
 ===================
 Precedence
@@ -33,8 +53,22 @@ a + b * c;
 ---
 
 (program
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier))))
+  (assignment_expr
+    (conditional_expr
+      (binary_expr
+        (binary_expr
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (identifier)))))
+        (binary_expr
+          (binary_expr
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (identifier)))))
+          (binary_expr
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (identifier))))))))))

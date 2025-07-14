@@ -6,8 +6,14 @@ a.b.c;
 ---
 
 (program
-  (property
-    (property
-      (identifier)
-      (identifier))
-    (identifier)))
+  (assignment_expr
+    (conditional_expr
+      (binary_expr
+        (unary_expr
+          (postfix_expr
+            (postfix_expr
+              (postfix_expr
+                (primary_expr
+                  (identifier)))
+              (identifier))
+            (identifier)))))))

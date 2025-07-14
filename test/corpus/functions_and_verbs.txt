@@ -7,13 +7,27 @@ foo(a, b);
 ---
 
 (program
-    (call
-        (identifier)
-        (arglist
+  (assignment_expr
+    (conditional_expr
+      (binary_expr
+        (unary_expr
+          (postfix_expr
             (identifier)
-            (identifier)
-        )
-    ))
+            (arglist
+              (assignment_expr
+                (conditional_expr
+                  (binary_expr
+                    (unary_expr
+                      (postfix_expr
+                        (primary_expr
+                          (identifier)))))))
+              (assignment_expr
+                (conditional_expr
+                  (binary_expr
+                    (unary_expr
+                      (postfix_expr
+                        (primary_expr
+                          (identifier))))))))))))))
 
 ==============
 Verbs
@@ -24,11 +38,28 @@ $system:foo(a, b);
 ---
 
 (program
-    (verb
-        (sysprop (identifier))
-        (identifier)
-        (arglist
+  (assignment_expr
+    (conditional_expr
+      (binary_expr
+        (unary_expr
+          (postfix_expr
+            (postfix_expr
+              (primary_expr
+                (sysprop
+                  (identifier))))
             (identifier)
-            (identifier)
-        )
-    ))
+            (arglist
+              (assignment_expr
+                (conditional_expr
+                  (binary_expr
+                    (unary_expr
+                      (postfix_expr
+                        (primary_expr
+                          (identifier)))))))
+              (assignment_expr
+                (conditional_expr
+                  (binary_expr
+                    (unary_expr
+                      (postfix_expr
+                        (primary_expr
+                          (identifier))))))))))))))
