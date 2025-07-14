@@ -15,12 +15,12 @@ Basic Flyweights
   (flyweight
     (objid
       (INTEGER))
-    (flyweight_slots))
+    (map))
   (flyweight
     (objid
       (INTEGER))
-    (flyweight_slots)
-    (flyweight_contents)))
+    (map)
+    (list)))
 
 ===================
 Complex Flyweights
@@ -32,41 +32,41 @@ Complex Flyweights
 
 ---
 
-(programg
+(program
   (flyweight
     (objid
       (INTEGER))
-    (flyweight_slots
+    (map
       (pair
         (identifier)
         (STRING)))
-    (flyweight_contents
+    (list
       (INTEGER)
       (INTEGER)))
   (flyweight
     (objid
       (INTEGER))
-    (flyweight_slots
+    (map
       (pair
         (identifier)
         (STRING))
       (pair
         (identifier)
         (boolean)))
-    (flyweight_contents
+    (list
       (STRING)
       (STRING)))
   (flyweight
     (objid
       (INTEGER))
-    (flyweight_slots
+    (map
       (pair
         (identifier)
         (INTEGER))
       (pair
         (identifier)
         (FLOAT)))
-    (flyweight_contents
+    (list
       (boolean)
       (boolean)
       (objid

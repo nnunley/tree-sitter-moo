@@ -1,0 +1,197 @@
+===================
+Simple while loop
+===================
+
+while (x < 10)
+  x = x + 1;
+endwhile
+
+---
+
+(program
+  (while
+    (binary_expr
+      (identifier)
+      (INTEGER))
+    (assign
+      (identifier)
+      (binary_expr
+        (identifier)
+        (INTEGER)))))
+
+===================
+Labeled while loop
+===================
+
+while outer (condition)
+  break outer;
+endwhile
+
+---
+
+(program
+  (while
+    label: (identifier)
+    (identifier)
+    (break
+      (identifier))))
+
+===================
+For range loop
+===================
+
+for x in [1..10]
+  print(x);
+endfor
+
+---
+
+(program
+  (for
+    (identifier)
+    (for_range_clause
+      (INTEGER)
+      (INTEGER))
+    (call
+      (identifier)
+      (arglist
+        (identifier)))))
+
+===================
+For in loop
+===================
+
+for item in (mylist)
+  process(item);
+endfor
+
+---
+
+(program
+  (for
+    (identifier)
+    (for_in_clause
+      (identifier))
+    (call
+      (identifier)
+      (arglist
+        (identifier)))))
+
+===================
+Fork statement
+===================
+
+fork (10)
+  do_something();
+endfork
+
+---
+
+(program
+  (fork
+    (INTEGER)
+    (call
+      (identifier)
+      (arglist))))
+
+===================
+Labeled fork
+===================
+
+fork mytask (delay)
+  background_job();
+endfork
+
+---
+
+(program
+  (fork
+    label: (identifier)
+    (identifier)
+    (call
+      (identifier)
+      (arglist))))
+
+===================
+Begin end block
+===================
+
+begin
+  x = 1;
+  y = 2;
+end
+
+---
+
+(program
+  (block
+    (assign
+      (identifier)
+      (INTEGER))
+    (assign
+      (identifier)
+      (INTEGER))))
+
+===================
+Break statement
+===================
+
+while (true)
+  if (done)
+    break;
+  endif
+endwhile
+
+---
+
+(program
+  (while
+    (boolean)
+    (if
+      (identifier)
+      (break))))
+
+===================
+Continue statement
+===================
+
+for x in [1..10]
+  if (x % 2 == 0)
+    continue;
+  endif
+  print(x);
+endfor
+
+---
+
+(program
+  (for
+    (identifier)
+    (for_range_clause
+      (INTEGER)
+      (INTEGER))
+    (if
+      (binary_expr
+        (binary_expr
+          (identifier)
+          (INTEGER))
+        (INTEGER))
+      (continue))
+    (call
+      (identifier)
+      (arglist
+        (identifier)))))
+
+===================
+Return with expression
+===================
+
+return x + 1;
+
+---
+
+(program
+  (return
+    (binary_expr
+      (identifier)
+      (INTEGER))))

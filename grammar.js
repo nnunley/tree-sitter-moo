@@ -30,10 +30,16 @@ module.exports = grammar({
 
   conflicts: ($) => [
     [$.scatter_target, $._atom],
+    [$.cond, $.binary_expr],
   ],
 
   rules: {
-    program: ($) => repeat($._statement),
+    program: ($) => choice(
+      // Object definition file (objdef format)  
+      $.object_definition,
+      // Traditional MOO program (list of statements)
+      repeat($._statement)
+    ),
 
     _statement: ($) => choice(
       $._delimited_statement,
@@ -96,12 +102,12 @@ module.exports = grammar({
       "endfor"
     ),
 
-    for_range_clause: ($) => seq("[", $._expr, "..", $._expr, "]"),
+    for_range_clause: ($) => seq("[", $._expr, token(prec(1, "..")), $._expr, "]"),
     for_in_clause: ($) => seq("(", $._expr, ")"),
 
     while: ($) => seq(
       "while",
-      optional($.identifier),
+      optional(field("label", $.identifier)),
       "(", $._expr, ")",
       repeat($._statement),
       "endwhile"
@@ -109,7 +115,7 @@ module.exports = grammar({
 
     fork: ($) => seq(
       "fork",
-      optional($.identifier),
+      optional(field("label", $.identifier)),
       "(", $._expr, ")",
       repeat($._statement),
       "endfork"
@@ -128,15 +134,20 @@ module.exports = grammar({
 
     except: ($) => seq(
       caseInsensitive("except"),
-        // Handler with identifier
-      optional(
-        $.identifier,
-      ),
-      // Handler with error codes
-      seq(
-        "(",
-          $. _try_expr_codes,
-         ")",
+      choice(
+        // Handler with identifier and codes
+        seq(
+          $.identifier,
+          "(",
+          $._try_expr_codes,
+          ")"
+        ),
+        // Handler with just codes
+        seq(
+          "(",
+          $._try_expr_codes,
+          ")"
+        )
       ),
       repeat($._statement)
     ),
@@ -152,7 +163,7 @@ module.exports = grammar({
 
     _try_expr_codes: ($) => choice(
       caseInsensitive("ANY"),
-      intersperse($.ERR, ",")
+      seq($.ERR, repeat(seq(",", $.ERR)))
     ),
 
     local_assignment: ($) => seq(
@@ -183,6 +194,7 @@ module.exports = grammar({
       $.try_expr,
       $.pass,
       $.range_comprehension,
+      $.sysprop,
       $.property,
       $.verb,
       $.call,
@@ -225,26 +237,27 @@ module.exports = grammar({
       ")"
     ),
 
-    property: ($) => prec.left(11, choice(
-      seq("$", $.identifier),
-      seq($._expr, '.',
-                         choice($.identifier, seq('(', $._expr, ')'))))),
+    property: ($) => prec.left(11, seq(
+      $._expr, 
+      '.', 
+      choice($.identifier, seq('(', $._expr, ')'))
+    )),
 
-    verb: ($) => prec(11, seq(
+    verb: ($) => prec.left(11, seq(
       $._expr,
       ':',
-        choice($.identifier, seq('(', $._expr, ')')),
-        $.arglist
+      choice($.identifier, seq('(', $._expr, ')')),
+      $.arglist
     )),
 
     call: ($) => prec(12, seq(
       choice($.identifier, seq('(', $._expr, ')')), $.arglist)),
 
     _index_expr: ($) => choice("$", $._expr),
-    index_single: ($) => seq("[", $._index_expr, "]"),
-    index_range: ($) => seq("[", field("from",$._index_expr), "..", field("to", $._index_expr), "]"),
+    index_single: ($) => prec.left(11, seq($._expr, "[", $._index_expr, "]")),
+    index_range: ($) => prec.left(11, seq($._expr, "[", field("from", $._index_expr), token(prec(1, "..")), field("to", $._index_expr), "]")),
 
-    cond: ($) => seq("?", $._expr, "|", $._expr),
+    cond: ($) => prec.right(2, seq($._expr, "?", $._expr, "|", $._expr)),
 
     assign: ($) => prec.right(1, seq(
       choice($.identifier, $.property, $.scatter_assign),
@@ -287,7 +300,6 @@ module.exports = grammar({
     binary_expr: $ => {
       const operators = {
         1: [['=', 'right']],
-        2: [['?'], ['|']],
         3: [['||'], ['&&']],
         4: [['=='], ['!='], ['<'], ['<='], ['>'], ['>='], ['in']],
         5: [['|.'], ['&.'], ['^.']],
@@ -333,24 +345,13 @@ module.exports = grammar({
       $._expr
     ),
 
-    flyweight: ($) => prec.left(12,seq(
+    flyweight: ($) => prec.left(12, seq(
       "<",
       field("parent", $._expr),
-      field("slots", $.map),
-      field("contents", $.list),
+      optional(seq(",", $.map)),
+      optional(seq(",", $.list)),
       ">"
     )),
-
-    flyweight_slots: ($) => seq(
-      "[",
-      optional(seq(
-        $.identifier,
-        "->",
-        $._expr,
-        repeat(seq(",", $.identifier, "->", $._expr))
-      )),
-      "]"
-    ),
 
 
     _expr_list: ($) => seq(
@@ -370,21 +371,26 @@ module.exports = grammar({
       $.symbol,
       $.boolean,
       $.ERR,
+      $.range_end,
       $.identifier,
     )),
 
-    range_end: ($) => "$",
+    range_end: ($) => prec(1, "$"),
     symbol: ($) => seq("'", $.identifier),
     boolean: ($) => choice("true", "false"),
     objid: ($) => seq("#", optional("-"), choice($.INTEGER, $.STRING)),
+    sysprop: ($) => seq("$", $.identifier),
 
     identifier: ($) => token(/[A-Za-z_][A-Za-z0-9_]*/),
     INTEGER: ($) => token(/[+-]?[0-9]+/),
-    FLOAT: ($) => {
-      // Define a regex pattern that can properly handle all floating point formats
-      // Including negatives and scientific notation
-      return token(/[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?/);
-    },
+    FLOAT: ($) => token(choice(
+      // Scientific notation without decimal point
+      /[+-]?\d+[eE][+-]?\d+/,
+      // Decimal with digits after point  
+      /[+-]?\d+\.\d+(?:[eE][+-]?\d+)?/,
+      // Leading decimal point
+      /[+-]?\.\d+(?:[eE][+-]?\d+)?/
+    )),
 
     STRING: ($) => /"[^"\\]*(?:\\.[^"\\]*)*"|'[^'\\]*(?:\\.[^'\\]*)*'/,
 
@@ -423,6 +429,72 @@ module.exports = grammar({
         "/"
       )
     ),
+
+    // Object definition syntax extension
+    object_definition: ($) => seq(
+      token(prec(1, caseInsensitive("object"))),
+      field("name", $.identifier),
+      repeat($._object_member),
+      optional(token(prec(1, caseInsensitive("endobj"))))
+    ),
+    
+    _object_member: ($) => choice(
+      $.object_property,
+      $.property_definition,
+      $.verb_definition
+    ),
+
+    object_property: ($) => prec.left(seq(
+      field("name", $.identifier),
+      ":",
+      field("value", $._expr)
+    )),
+
+    property_definition: ($) => seq(
+      token(prec(1, caseInsensitive("property"))),
+      field("name", $.identifier),
+      optional($.property_attrs),
+      "=",
+      field("value", $._expr),
+      ";"
+    ),
+
+    property_attrs: ($) => seq(
+      "(",
+      commaSep1(seq(
+        $.identifier,
+        ":",
+        $._expr
+      )),
+      ")"
+    ),
+
+    verb_definition: ($) => seq(
+      token(prec(1, caseInsensitive("verb"))),
+      field("name", choice(
+        $.identifier,
+        $.STRING
+      )),
+      $.verb_args,
+      repeat($.verb_attr),
+      repeat($._statement),
+      token(prec(1, caseInsensitive("endverb")))
+    ),
+
+    verb_args: ($) => seq(
+      "(",
+      field("dobj", $.identifier),
+      field("prep", $.identifier),
+      field("iobj", $.identifier),
+      ")"
+    ),
+
+    verb_attr: ($) => prec(1, seq(
+      $.identifier,
+      ":",
+      $._expr
+    )),
+
   }
 });
 

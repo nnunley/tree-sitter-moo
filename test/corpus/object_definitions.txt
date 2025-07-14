@@ -1,0 +1,90 @@
+===================
+Simple object definition
+===================
+
+object ROOT
+  name: "Root Object"
+  location: #1
+  owner: #2
+endobj
+
+---
+
+(program
+  (object_definition
+    (identifier)
+    (object_property
+      (identifier)
+      (STRING))
+    (object_property
+      (identifier)
+      (objid
+        (INTEGER)))
+    (object_property
+      (identifier)
+      (objid
+        (INTEGER)))))
+
+===================
+Object with properties
+===================
+
+object TEST
+  property foo (owner: #1, flags: "rc") = "bar";
+  property num (owner: #1, flags: "r") = 42;
+endobj
+
+---
+
+(program
+  (object_definition
+    (identifier)
+    (property_definition
+      (identifier)
+      (property_attrs
+        (identifier)
+        (objid
+          (INTEGER))
+        (identifier)
+        (STRING))
+      (STRING))
+    (property_definition
+      (identifier)
+      (property_attrs
+        (identifier)
+        (objid
+          (INTEGER))
+        (identifier)
+        (STRING))
+      (INTEGER))))
+
+===================
+Object with verb
+===================
+
+object UTILS
+  verb test (this none this) owner: #1 flags: "rxd"
+    return 42;
+  endverb
+endobj
+
+---
+
+(program
+  (object_definition
+    (identifier)
+    (verb_definition
+      (identifier)
+      (verb_args
+        (identifier)
+        (identifier)
+        (identifier))
+      (verb_attr
+        (identifier)
+        (objid
+          (INTEGER)))
+      (verb_attr
+        (identifier)
+        (STRING))
+      (return
+        (INTEGER))))) 

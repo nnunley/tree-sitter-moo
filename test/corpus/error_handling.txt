@@ -12,12 +12,11 @@ endtry
 
 (program
   (try
-    (verb
+    (call
       (identifier)
       (arglist))
-    (catch
-      (except_codes
-        (ERR))
+    (except
+      (ERR)
       (return
         (INTEGER)))))
 
@@ -27,7 +26,7 @@ Try-except with any
 
 try
   foo();
-except any
+except (ANY)
   return "error";
 endtry
 
@@ -35,11 +34,10 @@ endtry
 
 (program
   (try
-    (verb
+    (call
       (identifier)
       (arglist))
-    (catch
-      (except_codes)
+    (except
       (return
         (STRING)))))
 
@@ -49,7 +47,7 @@ Try-except with label
 
 try
   foo();
-except handler (ANY)
+except handler (E_TYPE)
   return "handled";
 endtry
 
@@ -57,11 +55,12 @@ endtry
 
 (program
   (try
-    (verb
+    (call
       (identifier)
       (arglist))
-    (catch
+    (except
       (identifier)
+      (ERR)
       (return
         (STRING)))))
 
@@ -81,18 +80,17 @@ endtry
 
 (program
   (try
-    (verb
+    (call
       (identifier)
       (arglist))
-    (catch
-      (error_codes)
+    (except
       (ERR)
-      (ERR)))
-  (return
-    (INTEGER)))(catch "except"
-  (except_codes "ANY")
-  (return
-    (INTEGER)))
+      (ERR)
+      (return
+        (INTEGER)))
+    (except
+      (return
+        (INTEGER)))))
 
 ===================
 Try-except with finally
@@ -110,20 +108,16 @@ endtry
 
 (program
   (try
-    (delimited_statement
-      (verb
-        (identifier)
-        (arglist)))
-    (catch "except" "("
-      (_except_codes
-        (ERR)
-        (delimited_statement
-          (return
-            (INTEGER))
-          (delimited_statement
-            (verb
-              (identifier)
-              (arglist))))
+    (call
+      (identifier)
+      (arglist))
+    (except
+      (ERR)
+      (return
+        (INTEGER)))
+    (call
+      (identifier)
+      (arglist))))
 
 ===================
 Try expression simple
@@ -134,37 +128,32 @@ x = `foo() ! ANY => 0';
 ---
 
 (program
-  (delimited_statement
-    (assign
-      (identifier)
-      (try_expr "`"
-        (verb
-          (identifier)
-          (arglist)
-          (_try_expr_codes "ANY"
-            (INTEGER)))
+  (assign
+    (identifier)
+    (try_expr
+      (call
+        (identifier)
+        (arglist))
+      (INTEGER))))
 
 ===================
 Try expression with error list
 ===================
 
-x = `foo() ! E_TYPE, E_DIV => 0';
+x = `foo() ! E_TYPE, E_ARGS => -1';
 
 ---
 
 (program
-  (delimited_statement
-    (assign
-      (identifier)
-      (try_expr "`"
-        (verb
-          (identifier)
-          (arglist)
-          (_try_expr_codes
-            (_expr_list
-              (ERR
-                (ERR))
-              (INTEGER)))
+  (assign
+    (identifier)
+    (try_expr
+      (call
+        (identifier)
+        (arglist))
+      (ERR)
+      (ERR)
+      (INTEGER))))
 
 ===================
 Try expression without handler
@@ -175,11 +164,9 @@ x = `foo() ! ANY';
 ---
 
 (program
-  (delimited_statement
-    (assign
-      (identifier)
-      (try_expr "`"
-        (verb
-          (identifier)
-          (arglist)
-          (_try_expr_codes "ANY")))
+  (assign
+    (identifier)
+    (try_expr
+      (call
+        (identifier)
+        (arglist)))))

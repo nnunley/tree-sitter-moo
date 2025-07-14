@@ -10,8 +10,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -37,7 +41,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -69,11 +85,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -82,6 +102,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -116,6 +140,10 @@
       "required": true,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -140,7 +168,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -172,11 +212,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -185,6 +229,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -223,6 +271,10 @@
         "required": true,
         "types": [
           {
+            "type": "ERR",
+            "named": true
+          },
+          {
             "type": "FLOAT",
             "named": true
           },
@@ -247,7 +299,19 @@
             "named": true
           },
           {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
             "type": "cond",
+            "named": true
+          },
+          {
+            "type": "continue",
             "named": true
           },
           {
@@ -279,11 +343,15 @@
             "named": true
           },
           {
+            "type": "parens",
+            "named": true
+          },
+          {
             "type": "pass",
             "named": true
           },
           {
-            "type": "prop",
+            "type": "property",
             "named": true
           },
           {
@@ -292,6 +360,10 @@
           },
           {
             "type": "range_end",
+            "named": true
+          },
+          {
+            "type": "return",
             "named": true
           },
           {
@@ -385,10 +457,6 @@
             "named": false
           },
           {
-            "type": "?",
-            "named": false
-          },
-          {
             "type": "^",
             "named": false
           },
@@ -398,10 +466,6 @@
           },
           {
             "type": "in",
-            "named": false
-          },
-          {
-            "type": "|",
             "named": false
           },
           {
@@ -418,6 +482,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "ERR",
+            "named": true
+          },
           {
             "type": "FLOAT",
             "named": true
@@ -443,7 +511,19 @@
             "named": true
           },
           {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
             "type": "cond",
+            "named": true
+          },
+          {
+            "type": "continue",
             "named": true
           },
           {
@@ -475,11 +555,15 @@
             "named": true
           },
           {
+            "type": "parens",
+            "named": true
+          },
+          {
             "type": "pass",
             "named": true
           },
           {
-            "type": "prop",
+            "type": "property",
             "named": true
           },
           {
@@ -488,6 +572,10 @@
           },
           {
             "type": "range_end",
+            "named": true
+          },
+          {
+            "type": "return",
             "named": true
           },
           {
@@ -523,6 +611,10 @@
       "required": false,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -552,6 +644,10 @@
         },
         {
           "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
           "named": true
         },
         {
@@ -615,11 +711,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -686,6 +786,137 @@
     }
   },
   {
+    "type": "call",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
+        {
+          "type": "FLOAT",
+          "named": true
+        },
+        {
+          "type": "INTEGER",
+          "named": true
+        },
+        {
+          "type": "STRING",
+          "named": true
+        },
+        {
+          "type": "arglist",
+          "named": true
+        },
+        {
+          "type": "assign",
+          "named": true
+        },
+        {
+          "type": "binary_expr",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
+          "named": true
+        },
+        {
+          "type": "flyweight",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_range",
+          "named": true
+        },
+        {
+          "type": "index_single",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "objid",
+          "named": true
+        },
+        {
+          "type": "parens",
+          "named": true
+        },
+        {
+          "type": "pass",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        },
+        {
+          "type": "range_comprehension",
+          "named": true
+        },
+        {
+          "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        },
+        {
+          "type": "sysprop",
+          "named": true
+        },
+        {
+          "type": "try_expr",
+          "named": true
+        },
+        {
+          "type": "unary",
+          "named": true
+        },
+        {
+          "type": "verb",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "comment",
     "named": true,
     "fields": {}
@@ -699,6 +930,10 @@
       "required": true,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -723,7 +958,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -755,11 +1002,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -771,213 +1022,7 @@
           "named": true
         },
         {
-          "type": "symbol",
-          "named": true
-        },
-        {
-          "type": "sysprop",
-          "named": true
-        },
-        {
-          "type": "try_expr",
-          "named": true
-        },
-        {
-          "type": "unary",
-          "named": true
-        },
-        {
-          "type": "verb",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "const_assign_scatter",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "FLOAT",
-          "named": true
-        },
-        {
-          "type": "INTEGER",
-          "named": true
-        },
-        {
-          "type": "STRING",
-          "named": true
-        },
-        {
-          "type": "assign",
-          "named": true
-        },
-        {
-          "type": "binary_expr",
-          "named": true
-        },
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "cond",
-          "named": true
-        },
-        {
-          "type": "flyweight",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "index_range",
-          "named": true
-        },
-        {
-          "type": "index_single",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "map",
-          "named": true
-        },
-        {
-          "type": "objid",
-          "named": true
-        },
-        {
-          "type": "pass",
-          "named": true
-        },
-        {
-          "type": "prop",
-          "named": true
-        },
-        {
-          "type": "range_comprehension",
-          "named": true
-        },
-        {
-          "type": "range_end",
-          "named": true
-        },
-        {
-          "type": "scatter_assign",
-          "named": true
-        },
-        {
-          "type": "symbol",
-          "named": true
-        },
-        {
-          "type": "sysprop",
-          "named": true
-        },
-        {
-          "type": "try_expr",
-          "named": true
-        },
-        {
-          "type": "unary",
-          "named": true
-        },
-        {
-          "type": "verb",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "const_assign_single",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "FLOAT",
-          "named": true
-        },
-        {
-          "type": "INTEGER",
-          "named": true
-        },
-        {
-          "type": "STRING",
-          "named": true
-        },
-        {
-          "type": "assign",
-          "named": true
-        },
-        {
-          "type": "binary_expr",
-          "named": true
-        },
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "cond",
-          "named": true
-        },
-        {
-          "type": "flyweight",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "index_range",
-          "named": true
-        },
-        {
-          "type": "index_single",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "map",
-          "named": true
-        },
-        {
-          "type": "objid",
-          "named": true
-        },
-        {
-          "type": "pass",
-          "named": true
-        },
-        {
-          "type": "prop",
-          "named": true
-        },
-        {
-          "type": "range_comprehension",
-          "named": true
-        },
-        {
-          "type": "range_end",
+          "type": "return",
           "named": true
         },
         {
@@ -1012,11 +1057,7 @@
       "required": true,
       "types": [
         {
-          "type": "const_assign_scatter",
-          "named": true
-        },
-        {
-          "type": "const_assign_single",
+          "type": "assign",
           "named": true
         }
       ]
@@ -1038,7 +1079,7 @@
     }
   },
   {
-    "type": "error_codes",
+    "type": "except",
     "named": true,
     "fields": {},
     "children": {
@@ -1048,18 +1089,7 @@
         {
           "type": "ERR",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "except",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -1093,6 +1123,10 @@
           "named": true
         },
         {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
           "named": true
         },
@@ -1102,10 +1136,6 @@
         },
         {
           "type": "continue",
-          "named": true
-        },
-        {
-          "type": "error_codes",
           "named": true
         },
         {
@@ -1157,11 +1187,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -1211,20 +1245,14 @@
     "type": "flyweight",
     "named": true,
     "fields": {
-      "contents": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "list",
-            "named": true
-          }
-        ]
-      },
       "parent": {
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "ERR",
+            "named": true
+          },
           {
             "type": "FLOAT",
             "named": true
@@ -1250,7 +1278,19 @@
             "named": true
           },
           {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
             "type": "cond",
+            "named": true
+          },
+          {
+            "type": "continue",
             "named": true
           },
           {
@@ -1282,11 +1322,15 @@
             "named": true
           },
           {
+            "type": "parens",
+            "named": true
+          },
+          {
             "type": "pass",
             "named": true
           },
           {
-            "type": "prop",
+            "type": "property",
             "named": true
           },
           {
@@ -1295,6 +1339,10 @@
           },
           {
             "type": "range_end",
+            "named": true
+          },
+          {
+            "type": "return",
             "named": true
           },
           {
@@ -1318,17 +1366,21 @@
             "named": true
           }
         ]
-      },
-      "slots": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "map",
-            "named": true
-          }
-        ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1339,6 +1391,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -1369,6 +1425,10 @@
         },
         {
           "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
           "named": true
         },
         {
@@ -1440,11 +1500,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -1499,6 +1563,10 @@
       "required": true,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -1523,7 +1591,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -1555,11 +1635,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -1568,6 +1652,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -1602,6 +1690,10 @@
       "required": true,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -1626,7 +1718,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -1658,11 +1762,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -1671,6 +1779,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -1699,11 +1811,26 @@
   {
     "type": "fork",
     "named": true,
-    "fields": {},
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -1734,6 +1861,10 @@
         },
         {
           "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
           "named": true
         },
         {
@@ -1797,11 +1928,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -1856,6 +1991,10 @@
       "required": true,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -1880,7 +2019,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -1912,11 +2063,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -1925,6 +2080,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -1959,6 +2118,10 @@
       "required": true,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -1988,6 +2151,10 @@
         },
         {
           "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
           "named": true
         },
         {
@@ -2051,11 +2218,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -2104,11 +2275,268 @@
   {
     "type": "index_range",
     "named": true,
-    "fields": {},
+    "fields": {
+      "from": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "$",
+            "named": false
+          },
+          {
+            "type": "ERR",
+            "named": true
+          },
+          {
+            "type": "FLOAT",
+            "named": true
+          },
+          {
+            "type": "INTEGER",
+            "named": true
+          },
+          {
+            "type": "STRING",
+            "named": true
+          },
+          {
+            "type": "assign",
+            "named": true
+          },
+          {
+            "type": "binary_expr",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "cond",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "flyweight",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index_range",
+            "named": true
+          },
+          {
+            "type": "index_single",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "objid",
+            "named": true
+          },
+          {
+            "type": "parens",
+            "named": true
+          },
+          {
+            "type": "pass",
+            "named": true
+          },
+          {
+            "type": "property",
+            "named": true
+          },
+          {
+            "type": "range_comprehension",
+            "named": true
+          },
+          {
+            "type": "range_end",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "sysprop",
+            "named": true
+          },
+          {
+            "type": "try_expr",
+            "named": true
+          },
+          {
+            "type": "unary",
+            "named": true
+          },
+          {
+            "type": "verb",
+            "named": true
+          }
+        ]
+      },
+      "to": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "$",
+            "named": false
+          },
+          {
+            "type": "ERR",
+            "named": true
+          },
+          {
+            "type": "FLOAT",
+            "named": true
+          },
+          {
+            "type": "INTEGER",
+            "named": true
+          },
+          {
+            "type": "STRING",
+            "named": true
+          },
+          {
+            "type": "assign",
+            "named": true
+          },
+          {
+            "type": "binary_expr",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "cond",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "flyweight",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index_range",
+            "named": true
+          },
+          {
+            "type": "index_single",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "objid",
+            "named": true
+          },
+          {
+            "type": "parens",
+            "named": true
+          },
+          {
+            "type": "pass",
+            "named": true
+          },
+          {
+            "type": "property",
+            "named": true
+          },
+          {
+            "type": "range_comprehension",
+            "named": true
+          },
+          {
+            "type": "range_end",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "sysprop",
+            "named": true
+          },
+          {
+            "type": "try_expr",
+            "named": true
+          },
+          {
+            "type": "unary",
+            "named": true
+          },
+          {
+            "type": "verb",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -2134,7 +2562,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -2166,11 +2606,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -2179,6 +2623,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -2209,9 +2657,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -2237,7 +2689,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -2269,11 +2733,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -2282,6 +2750,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -2316,6 +2788,10 @@
       "required": false,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -2340,7 +2816,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -2372,11 +2860,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -2388,213 +2880,7 @@
           "named": true
         },
         {
-          "type": "symbol",
-          "named": true
-        },
-        {
-          "type": "sysprop",
-          "named": true
-        },
-        {
-          "type": "try_expr",
-          "named": true
-        },
-        {
-          "type": "unary",
-          "named": true
-        },
-        {
-          "type": "verb",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "local_assign_scatter",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "FLOAT",
-          "named": true
-        },
-        {
-          "type": "INTEGER",
-          "named": true
-        },
-        {
-          "type": "STRING",
-          "named": true
-        },
-        {
-          "type": "assign",
-          "named": true
-        },
-        {
-          "type": "binary_expr",
-          "named": true
-        },
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "cond",
-          "named": true
-        },
-        {
-          "type": "flyweight",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "index_range",
-          "named": true
-        },
-        {
-          "type": "index_single",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "map",
-          "named": true
-        },
-        {
-          "type": "objid",
-          "named": true
-        },
-        {
-          "type": "pass",
-          "named": true
-        },
-        {
-          "type": "prop",
-          "named": true
-        },
-        {
-          "type": "range_comprehension",
-          "named": true
-        },
-        {
-          "type": "range_end",
-          "named": true
-        },
-        {
-          "type": "scatter_assign",
-          "named": true
-        },
-        {
-          "type": "symbol",
-          "named": true
-        },
-        {
-          "type": "sysprop",
-          "named": true
-        },
-        {
-          "type": "try_expr",
-          "named": true
-        },
-        {
-          "type": "unary",
-          "named": true
-        },
-        {
-          "type": "verb",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "local_assign_single",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "FLOAT",
-          "named": true
-        },
-        {
-          "type": "INTEGER",
-          "named": true
-        },
-        {
-          "type": "STRING",
-          "named": true
-        },
-        {
-          "type": "assign",
-          "named": true
-        },
-        {
-          "type": "binary_expr",
-          "named": true
-        },
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "cond",
-          "named": true
-        },
-        {
-          "type": "flyweight",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "index_range",
-          "named": true
-        },
-        {
-          "type": "index_single",
-          "named": true
-        },
-        {
-          "type": "list",
-          "named": true
-        },
-        {
-          "type": "map",
-          "named": true
-        },
-        {
-          "type": "objid",
-          "named": true
-        },
-        {
-          "type": "pass",
-          "named": true
-        },
-        {
-          "type": "prop",
-          "named": true
-        },
-        {
-          "type": "range_comprehension",
-          "named": true
-        },
-        {
-          "type": "range_end",
+          "type": "return",
           "named": true
         },
         {
@@ -2629,11 +2915,7 @@
       "required": true,
       "types": [
         {
-          "type": "local_assign_scatter",
-          "named": true
-        },
-        {
-          "type": "local_assign_single",
+          "type": "assign",
           "named": true
         }
       ]
@@ -2655,6 +2937,178 @@
     }
   },
   {
+    "type": "object_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "object_property",
+          "named": true
+        },
+        {
+          "type": "property_definition",
+          "named": true
+        },
+        {
+          "type": "verb_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "object_property",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ERR",
+            "named": true
+          },
+          {
+            "type": "FLOAT",
+            "named": true
+          },
+          {
+            "type": "INTEGER",
+            "named": true
+          },
+          {
+            "type": "STRING",
+            "named": true
+          },
+          {
+            "type": "assign",
+            "named": true
+          },
+          {
+            "type": "binary_expr",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "cond",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "flyweight",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index_range",
+            "named": true
+          },
+          {
+            "type": "index_single",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "objid",
+            "named": true
+          },
+          {
+            "type": "parens",
+            "named": true
+          },
+          {
+            "type": "pass",
+            "named": true
+          },
+          {
+            "type": "property",
+            "named": true
+          },
+          {
+            "type": "range_comprehension",
+            "named": true
+          },
+          {
+            "type": "range_end",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "sysprop",
+            "named": true
+          },
+          {
+            "type": "try_expr",
+            "named": true
+          },
+          {
+            "type": "unary",
+            "named": true
+          },
+          {
+            "type": "verb",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "objid",
     "named": true,
     "fields": {},
@@ -2664,6 +3118,10 @@
       "types": [
         {
           "type": "INTEGER",
+          "named": true
+        },
+        {
+          "type": "STRING",
           "named": true
         }
       ]
@@ -2677,6 +3135,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -2702,7 +3164,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -2734,11 +3208,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -2747,6 +3225,137 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        },
+        {
+          "type": "sysprop",
+          "named": true
+        },
+        {
+          "type": "try_expr",
+          "named": true
+        },
+        {
+          "type": "unary",
+          "named": true
+        },
+        {
+          "type": "verb",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parens",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
+        {
+          "type": "FLOAT",
+          "named": true
+        },
+        {
+          "type": "INTEGER",
+          "named": true
+        },
+        {
+          "type": "STRING",
+          "named": true
+        },
+        {
+          "type": "assign",
+          "named": true
+        },
+        {
+          "type": "binary_expr",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
+          "named": true
+        },
+        {
+          "type": "flyweight",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_range",
+          "named": true
+        },
+        {
+          "type": "index_single",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "objid",
+          "named": true
+        },
+        {
+          "type": "parens",
+          "named": true
+        },
+        {
+          "type": "pass",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        },
+        {
+          "type": "range_comprehension",
+          "named": true
+        },
+        {
+          "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -2781,6 +3390,10 @@
       "required": false,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -2805,7 +3418,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -2837,11 +3462,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -2850,6 +3479,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -2878,11 +3511,16 @@
   {
     "type": "program",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -2913,6 +3551,10 @@
         },
         {
           "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
           "named": true
         },
         {
@@ -2972,7 +3614,15 @@
           "named": true
         },
         {
+          "type": "object_definition",
+          "named": true
+        },
+        {
           "type": "objid",
+          "named": true
+        },
+        {
+          "type": "parens",
           "named": true
         },
         {
@@ -2980,7 +3630,7 @@
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -3027,13 +3677,17 @@
     }
   },
   {
-    "type": "prop",
+    "type": "property",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -3059,7 +3713,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -3091,11 +3757,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -3104,6 +3774,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -3130,13 +3804,17 @@
     }
   },
   {
-    "type": "range_comprehension",
+    "type": "property_attrs",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -3162,7 +3840,294 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
+          "named": true
+        },
+        {
+          "type": "flyweight",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_range",
+          "named": true
+        },
+        {
+          "type": "index_single",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "objid",
+          "named": true
+        },
+        {
+          "type": "parens",
+          "named": true
+        },
+        {
+          "type": "pass",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        },
+        {
+          "type": "range_comprehension",
+          "named": true
+        },
+        {
+          "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        },
+        {
+          "type": "sysprop",
+          "named": true
+        },
+        {
+          "type": "try_expr",
+          "named": true
+        },
+        {
+          "type": "unary",
+          "named": true
+        },
+        {
+          "type": "verb",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "property_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ERR",
+            "named": true
+          },
+          {
+            "type": "FLOAT",
+            "named": true
+          },
+          {
+            "type": "INTEGER",
+            "named": true
+          },
+          {
+            "type": "STRING",
+            "named": true
+          },
+          {
+            "type": "assign",
+            "named": true
+          },
+          {
+            "type": "binary_expr",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "cond",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "flyweight",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "index_range",
+            "named": true
+          },
+          {
+            "type": "index_single",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "map",
+            "named": true
+          },
+          {
+            "type": "objid",
+            "named": true
+          },
+          {
+            "type": "parens",
+            "named": true
+          },
+          {
+            "type": "pass",
+            "named": true
+          },
+          {
+            "type": "property",
+            "named": true
+          },
+          {
+            "type": "range_comprehension",
+            "named": true
+          },
+          {
+            "type": "range_end",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "symbol",
+            "named": true
+          },
+          {
+            "type": "sysprop",
+            "named": true
+          },
+          {
+            "type": "try_expr",
+            "named": true
+          },
+          {
+            "type": "unary",
+            "named": true
+          },
+          {
+            "type": "verb",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "property_attrs",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "range_comprehension",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
+        {
+          "type": "FLOAT",
+          "named": true
+        },
+        {
+          "type": "INTEGER",
+          "named": true
+        },
+        {
+          "type": "STRING",
+          "named": true
+        },
+        {
+          "type": "assign",
+          "named": true
+        },
+        {
+          "type": "binary_expr",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -3202,11 +4167,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -3215,6 +4184,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -3254,6 +4227,10 @@
       "required": false,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -3278,7 +4255,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -3310,11 +4299,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -3323,6 +4316,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -3395,6 +4392,10 @@
       "required": true,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -3419,7 +4420,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -3451,11 +4464,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -3464,6 +4481,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -3562,6 +4583,10 @@
             "named": false
           },
           {
+            "type": "ERR",
+            "named": true
+          },
+          {
             "type": "FLOAT",
             "named": true
           },
@@ -3591,6 +4616,10 @@
           },
           {
             "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
             "named": true
           },
           {
@@ -3654,11 +4683,15 @@
             "named": true
           },
           {
+            "type": "parens",
+            "named": true
+          },
+          {
             "type": "pass",
             "named": true
           },
           {
-            "type": "prop",
+            "type": "property",
             "named": true
           },
           {
@@ -3703,7 +4736,7 @@
           }
         ]
       },
-      "excepts": {
+      "except": {
         "multiple": true,
         "required": false,
         "types": [
@@ -3720,6 +4753,10 @@
           {
             "type": ";",
             "named": false
+          },
+          {
+            "type": "ERR",
+            "named": true
           },
           {
             "type": "FLOAT",
@@ -3754,6 +4791,10 @@
             "named": true
           },
           {
+            "type": "call",
+            "named": true
+          },
+          {
             "type": "cond",
             "named": true
           },
@@ -3764,10 +4805,6 @@
           {
             "type": "continue",
             "named": true
-          },
-          {
-            "type": "finally",
-            "named": false
           },
           {
             "type": "flyweight",
@@ -3818,11 +4855,15 @@
             "named": true
           },
           {
+            "type": "parens",
+            "named": true
+          },
+          {
             "type": "pass",
             "named": true
           },
           {
-            "type": "prop",
+            "type": "property",
             "named": true
           },
           {
@@ -3878,6 +4919,10 @@
       "required": true,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -3902,7 +4947,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -3934,11 +4991,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -3947,6 +5008,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -3975,11 +5040,30 @@
   {
     "type": "unary",
     "named": true,
-    "fields": {},
+    "fields": {
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "!",
+            "named": false
+          },
+          {
+            "type": "-",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -4005,7 +5089,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -4037,11 +5133,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -4050,6 +5150,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -4084,6 +5188,10 @@
       "required": true,
       "types": [
         {
+          "type": "ERR",
+          "named": true
+        },
+        {
           "type": "FLOAT",
           "named": true
         },
@@ -4112,7 +5220,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
           "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -4144,11 +5264,15 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
           "named": true
         },
         {
@@ -4157,6 +5281,10 @@
         },
         {
           "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -4183,13 +5311,195 @@
     }
   },
   {
-    "type": "while",
+    "type": "verb_args",
+    "named": true,
+    "fields": {
+      "dobj": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "iobj": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prep": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "verb_attr",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
+        {
+          "type": "FLOAT",
+          "named": true
+        },
+        {
+          "type": "INTEGER",
+          "named": true
+        },
+        {
+          "type": "STRING",
+          "named": true
+        },
+        {
+          "type": "assign",
+          "named": true
+        },
+        {
+          "type": "binary_expr",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "cond",
+          "named": true
+        },
+        {
+          "type": "continue",
+          "named": true
+        },
+        {
+          "type": "flyweight",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_range",
+          "named": true
+        },
+        {
+          "type": "index_single",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "objid",
+          "named": true
+        },
+        {
+          "type": "parens",
+          "named": true
+        },
+        {
+          "type": "pass",
+          "named": true
+        },
+        {
+          "type": "property",
+          "named": true
+        },
+        {
+          "type": "range_comprehension",
+          "named": true
+        },
+        {
+          "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        },
+        {
+          "type": "sysprop",
+          "named": true
+        },
+        {
+          "type": "try_expr",
+          "named": true
+        },
+        {
+          "type": "unary",
+          "named": true
+        },
+        {
+          "type": "verb",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "verb_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "STRING",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
         {
           "type": "FLOAT",
           "named": true
@@ -4220,6 +5530,10 @@
         },
         {
           "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
           "named": true
         },
         {
@@ -4283,11 +5597,197 @@
           "named": true
         },
         {
+          "type": "parens",
+          "named": true
+        },
+        {
           "type": "pass",
           "named": true
         },
         {
-          "type": "prop",
+          "type": "property",
+          "named": true
+        },
+        {
+          "type": "range_comprehension",
+          "named": true
+        },
+        {
+          "type": "range_end",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "symbol",
+          "named": true
+        },
+        {
+          "type": "sysprop",
+          "named": true
+        },
+        {
+          "type": "try",
+          "named": true
+        },
+        {
+          "type": "try_expr",
+          "named": true
+        },
+        {
+          "type": "unary",
+          "named": true
+        },
+        {
+          "type": "verb",
+          "named": true
+        },
+        {
+          "type": "verb_args",
+          "named": true
+        },
+        {
+          "type": "verb_attr",
+          "named": true
+        },
+        {
+          "type": "while",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "while",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ERR",
+          "named": true
+        },
+        {
+          "type": "FLOAT",
+          "named": true
+        },
+        {
+          "type": "INTEGER",
+          "named": true
+        },
+        {
+          "type": "STRING",
+          "named": true
+        },
+        {
+          "type": "assign",
+          "named": true
+        },
+        {
+          "type": "binary_expr",
+          "named": true
+        },
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "cond",
+          "named": true
+        },
+        {
+          "type": "const_assignment",
+          "named": true
+        },
+        {
+          "type": "continue",
+          "named": true
+        },
+        {
+          "type": "flyweight",
+          "named": true
+        },
+        {
+          "type": "for",
+          "named": true
+        },
+        {
+          "type": "fork",
+          "named": true
+        },
+        {
+          "type": "global_assignment",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if",
+          "named": true
+        },
+        {
+          "type": "index_range",
+          "named": true
+        },
+        {
+          "type": "index_single",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "local_assignment",
+          "named": true
+        },
+        {
+          "type": "map",
+          "named": true
+        },
+        {
+          "type": "objid",
+          "named": true
+        },
+        {
+          "type": "parens",
+          "named": true
+        },
+        {
+          "type": "pass",
+          "named": true
+        },
+        {
+          "type": "property",
           "named": true
         },
         {
@@ -4466,74 +5966,6 @@
     "named": false
   },
   {
-    "type": "ANY",
-    "named": false
-  },
-  {
-    "type": "E_ARGS",
-    "named": false
-  },
-  {
-    "type": "E_DIV",
-    "named": false
-  },
-  {
-    "type": "E_FLOAT",
-    "named": false
-  },
-  {
-    "type": "E_INVARG",
-    "named": false
-  },
-  {
-    "type": "E_INVIND",
-    "named": false
-  },
-  {
-    "type": "E_MAXREC",
-    "named": false
-  },
-  {
-    "type": "E_NACC",
-    "named": false
-  },
-  {
-    "type": "E_NONE",
-    "named": false
-  },
-  {
-    "type": "E_PERM",
-    "named": false
-  },
-  {
-    "type": "E_PROPNF",
-    "named": false
-  },
-  {
-    "type": "E_QUOTA",
-    "named": false
-  },
-  {
-    "type": "E_RANGE",
-    "named": false
-  },
-  {
-    "type": "E_RECMOVE",
-    "named": false
-  },
-  {
-    "type": "E_TYPE",
-    "named": false
-  },
-  {
-    "type": "E_VARNF",
-    "named": false
-  },
-  {
-    "type": "E_VERBNF",
-    "named": false
-  },
-  {
     "type": "FLOAT",
     "named": true
   },
@@ -4566,19 +5998,11 @@
     "named": false
   },
   {
-    "type": "any",
-    "named": false
-  },
-  {
     "type": "begin",
     "named": false
   },
   {
     "type": "break",
-    "named": false
-  },
-  {
-    "type": "const",
     "named": false
   },
   {
@@ -4610,23 +6034,11 @@
     "named": false
   },
   {
-    "type": "endtry",
-    "named": false
-  },
-  {
     "type": "endwhile",
     "named": false
   },
   {
-    "type": "except",
-    "named": false
-  },
-  {
     "type": "false",
-    "named": false
-  },
-  {
-    "type": "finally",
     "named": false
   },
   {
@@ -4635,10 +6047,6 @@
   },
   {
     "type": "fork",
-    "named": false
-  },
-  {
-    "type": "global",
     "named": false
   },
   {
@@ -4654,23 +6062,11 @@
     "named": false
   },
   {
-    "type": "let",
-    "named": false
-  },
-  {
-    "type": "pass",
-    "named": false
-  },
-  {
     "type": "return",
     "named": false
   },
   {
     "type": "true",
-    "named": false
-  },
-  {
-    "type": "try",
     "named": false
   },
   {
