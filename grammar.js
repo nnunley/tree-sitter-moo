@@ -208,20 +208,20 @@ module.exports = grammar({
 
     binary_expr: ($) => choice(
       $.unary_expr,
-      prec.left(3, seq($.binary_expr, "||", $.binary_expr)),
-      prec.left(3, seq($.binary_expr, "&&", $.binary_expr)),
-      prec.left(4, seq($.binary_expr, choice("==", "!="), $.binary_expr)),
-      prec.left(4, seq($.binary_expr, choice("<", "<=", ">", ">=", "in"), $.binary_expr)),
-      prec.left(5, seq($.binary_expr, choice("|.", "&.", "^."), $.binary_expr)),
-      prec.left(6, seq($.binary_expr, choice("<<", ">>"), $.binary_expr)),
-      prec.left(7, seq($.binary_expr, choice("+", "-"), $.binary_expr)),
-      prec.left(8, seq($.binary_expr, choice("*", "/", "%"), $.binary_expr)),
-      prec.right(9, seq($.unary_expr, "^", $.binary_expr))
+      prec.left(3, seq(field("left", $.binary_expr), field("operator", "||"), field("right", $.binary_expr))),
+      prec.left(3, seq(field("left", $.binary_expr), field("operator", "&&"), field("right", $.binary_expr))),
+      prec.left(4, seq(field("left", $.binary_expr), field("operator", choice("==", "!=")), field("right", $.binary_expr))),
+      prec.left(4, seq(field("left", $.binary_expr), field("operator", choice("<", "<=", ">", ">=", "in")), field("right", $.binary_expr))),
+      prec.left(5, seq(field("left", $.binary_expr), field("operator", choice("|.", "&.", "^.")), field("right", $.binary_expr))),
+      prec.left(6, seq(field("left", $.binary_expr), field("operator", choice("<<", ">>")), field("right", $.binary_expr))),
+      prec.left(7, seq(field("left", $.binary_expr), field("operator", choice("+", "-")), field("right", $.binary_expr))),
+      prec.left(8, seq(field("left", $.binary_expr), field("operator", choice("*", "/", "%")), field("right", $.binary_expr))),
+      prec.right(9, seq(field("left", $.unary_expr), field("operator", "^"), field("right", $.binary_expr)))
     ),
 
     unary_expr: ($) => choice(
       $.postfix_expr,
-      prec.left(10, seq(choice("!", "-"), $.unary_expr))
+      prec.left(10, seq(field("operator", choice("!", "-")), field("operand", $.unary_expr)))
     ),
 
     postfix_expr: ($) => choice(
