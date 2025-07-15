@@ -16,9 +16,9 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (ERR)
-      (return
-        (INTEGER)))))
+      codes: (ERR)
+      body: (return
+        value: (INTEGER)))))
 
 ===================
 Try-except with lowercase errors
@@ -38,9 +38,9 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (ERR)
-      (return
-        (INTEGER)))))
+      codes: (ERR)
+      body: (return
+        value: (INTEGER)))))
 
 ===================
 Try-except with mixed case errors
@@ -60,11 +60,11 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (identifier)
-      (ERR)
-      (ERR)
-      (ERR)
-      (call
+      variable: (identifier)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist
           (STRING))))))
@@ -87,8 +87,8 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (return
-        (STRING)))))
+      body: (return
+        value: (STRING)))))
 
 ===================
 Try-except with lowercase ANY
@@ -108,8 +108,8 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (return
-        (boolean)))))
+      body: (return
+        value: (boolean)))))
 
 ===================
 Try-except with label
@@ -129,10 +129,10 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (identifier)
-      (ERR)
-      (ERR)
-      (call
+      variable: (identifier)
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist
           (binary_expr
@@ -159,13 +159,13 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (ERR)
-      (call
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))
     except: (except
-      (ERR)
-      (call
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))))
 
@@ -189,8 +189,8 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (ERR)
-      (call
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))
     finally: (call
@@ -207,11 +207,11 @@ Try expression simple
 
 (program
   (try_expr
-    (property_access
+    expression: (property_access
       object: (identifier)
       property: (identifier))
-    (ERR)
-    (STRING)))
+    codes: (ERR)
+    fallback: (STRING)))
 
 ===================
 Try expression with lowercase error
@@ -223,11 +223,11 @@ Try expression with lowercase error
 
 (program
   (try_expr
-    (property_access
+    expression: (property_access
       object: (identifier)
       property: (identifier))
-    (ERR)
-    (INTEGER)))
+    codes: (ERR)
+    fallback: (INTEGER)))
 
 ===================
 Try expression with error list
@@ -239,13 +239,13 @@ Try expression with error list
 
 (program
   (try_expr
-    (method_call
+    expression: (method_call
       object: (identifier)
       method: (identifier)
       arguments: (arglist))
-    (ERR)
-    (ERR)
-    (INTEGER)))
+    codes: (ERR)
+    codes: (ERR)
+    fallback: (INTEGER)))
 
 ===================
 Try expression with mixed case errors
@@ -257,14 +257,14 @@ Try expression with mixed case errors
 
 (program
   (try_expr
-    (method_call
+    expression: (method_call
       object: (identifier)
       method: (identifier)
       arguments: (arglist))
-    (ERR)
-    (ERR)
-    (ERR)
-    (boolean)))
+    codes: (ERR)
+    codes: (ERR)
+    codes: (ERR)
+    fallback: (boolean)))
 
 ===================
 Try expression without handler
@@ -276,6 +276,6 @@ Try expression without handler
 
 (program
   (try_expr
-    (call
+    expression: (call
       function: (identifier)
       arguments: (arglist))))

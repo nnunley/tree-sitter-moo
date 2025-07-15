@@ -22,36 +22,36 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (call
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))
     except: (except
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (call
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))
     except: (except
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (call
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))
     except: (except
-      (ERR)
-      (ERR)
-      (call
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))))
 
@@ -79,36 +79,36 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (call
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))
     except: (except
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (call
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))
     except: (except
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (call
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))
     except: (except
-      (ERR)
-      (ERR)
-      (call
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))))
 
@@ -130,12 +130,12 @@ endtry
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (ERR)
-      (call
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))))
 
@@ -151,23 +151,23 @@ Try expressions with all cases
 
 (program
   (try_expr
-    (property_access
+    expression: (property_access
       object: (identifier)
       property: (identifier))
-    (ERR)
-    (INTEGER))
+    codes: (ERR)
+    fallback: (INTEGER))
   (try_expr
-    (property_access
+    expression: (property_access
       object: (identifier)
       property: (identifier))
-    (ERR)
-    (INTEGER))
+    codes: (ERR)
+    fallback: (INTEGER))
   (try_expr
-    (property_access
+    expression: (property_access
       object: (identifier)
       property: (identifier))
-    (ERR)
-    (INTEGER)))
+    codes: (ERR)
+    fallback: (INTEGER)))
 
 ===================
 Error constants in regular expressions
@@ -219,9 +219,9 @@ EnDtRy
       function: (identifier)
       arguments: (arglist))
     except: (except
-      (ERR)
-      (ERR)
-      (call
+      codes: (ERR)
+      codes: (ERR)
+      body: (call
         function: (identifier)
         arguments: (arglist)))
     finally: (call

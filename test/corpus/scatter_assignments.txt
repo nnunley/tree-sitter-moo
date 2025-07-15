@@ -9,13 +9,13 @@ Basic scatter assignment
 (program
   (assignment_expr
     left: (scatter_pattern
-      (scatter
+      elements: (scatter
         (scatter_target
-          (identifier))
+          name: (identifier))
         (scatter_target
-          (identifier))
+          name: (identifier))
         (scatter_target
-          (identifier))))
+          name: (identifier))))
     right: (identifier)))
 
 ===================
@@ -28,15 +28,15 @@ let {first, second, @rest} = my_list;
 
 (program
   (local_assignment
-    (scatter_pattern
-      (scatter
+    target: (scatter_pattern
+      elements: (scatter
         (scatter_target
-          (identifier))
+          name: (identifier))
         (scatter_target
-          (identifier))
+          name: (identifier))
         (scatter_rest
-          (identifier))))
-    (identifier)))
+          name: (identifier))))
+    value: (identifier)))
 
 ===================
 Scatter assignment in const statement
@@ -48,16 +48,16 @@ const {x, ?y = 10, @remaining} = data;
 
 (program
   (const_assignment
-    (scatter_pattern
-      (scatter
+    target: (scatter_pattern
+      elements: (scatter
         (scatter_target
-          (identifier))
+          name: (identifier))
         (scatter_optional
-          (identifier)
-          (INTEGER))
+          name: (identifier)
+          default: (INTEGER))
         (scatter_rest
-          (identifier))))
-    (identifier)))
+          name: (identifier))))
+    value: (identifier)))
 
 ===================
 Lambda with scatter parameters
@@ -69,16 +69,16 @@ let handler = {?code = E_NONE, @args} => handle(code, args);
 
 (program
   (local_assignment
-    (identifier)
-    (lambda_expr
+    target: (identifier)
+    value: (lambda_expr
       params: (lambda_params
         (lambda_param
           (scatter_optional
-            (identifier)
-            (identifier)))
+            name: (identifier)
+            default: (identifier)))
         (lambda_param
           (scatter_rest
-            (identifier))))
+            name: (identifier))))
       body: (call
         function: (identifier)
         arguments: (arglist

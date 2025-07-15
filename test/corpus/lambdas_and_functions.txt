@@ -9,25 +9,25 @@ let double = {n} => n * 2;
 
 (program
   (local_assignment
-    (identifier)
-    (lambda_expr
+    target: (identifier)
+    value: (lambda_expr
       params: (lambda_params
         (lambda_param
           (scatter_target
-            (identifier)))
+            name: (identifier)))
         (lambda_param
           (scatter_target
-            (identifier))))
+            name: (identifier))))
       body: (binary_expr
         left: (identifier)
         right: (identifier))))
   (local_assignment
-    (identifier)
-    (lambda_expr
+    target: (identifier)
+    value: (lambda_expr
       params: (lambda_params
         (lambda_param
           (scatter_target
-            (identifier))))
+            name: (identifier))))
       body: (binary_expr
         left: (identifier)
         right: (INTEGER)))))
@@ -42,8 +42,8 @@ let greet = {} => "Hello!";
 
 (program
   (local_assignment
-    (identifier)
-    (lambda_expr
+    target: (identifier)
+    value: (lambda_expr
       body: (STRING))))
 
 ===================
@@ -62,20 +62,20 @@ endfn;
 
 (program
   (local_assignment
-    (identifier)
-    (fn_expr
+    target: (identifier)
+    value: (fn_expr
       params: (lambda_params
         (lambda_param
           (scatter_target
-            (identifier))))
+            name: (identifier))))
       body: (if
-        (binary_expr
+        condition: (binary_expr
           left: (identifier)
           right: (INTEGER))
-        (return
-          (INTEGER))
-        (return
-          (binary_expr
+        body: (return
+          value: (INTEGER))
+        body: (return
+          value: (binary_expr
             left: (identifier)
             right: (call
               function: (identifier)
@@ -100,9 +100,9 @@ endfn
     params: (lambda_params
       (lambda_param
         (scatter_target
-          (identifier))))
+          name: (identifier))))
     body: (return
-      (binary_expr
+      value: (binary_expr
         left: (binary_expr
           left: (STRING)
           right: (identifier))
@@ -118,12 +118,12 @@ let squares = {x * x for x in [1..10]};
 
 (program
   (local_assignment
-    (identifier)
-    (range_comprehension
+    target: (identifier)
+    value: (range_comprehension
       (binary_expr
         left: (identifier)
         right: (identifier))
       (identifier)
       (for_range_clause
-        (INTEGER)
-        (INTEGER)))))
+        start: (INTEGER)
+        end: (INTEGER)))))

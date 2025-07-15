@@ -38,8 +38,8 @@ Complex Flyweights
       (INTEGER))
     (map
       (pair
-        (identifier)
-        (STRING)))
+        key: (identifier)
+        value: (STRING)))
     (list
       (INTEGER)
       (INTEGER)))
@@ -48,11 +48,11 @@ Complex Flyweights
       (INTEGER))
     (map
       (pair
-        (identifier)
-        (STRING))
+        key: (identifier)
+        value: (STRING))
       (pair
-        (identifier)
-        (boolean)))
+        key: (identifier)
+        value: (boolean)))
     (list
       (STRING)
       (STRING)))
@@ -61,11 +61,11 @@ Complex Flyweights
       (INTEGER))
     (map
       (pair
-        (identifier)
-        (INTEGER))
+        key: (identifier)
+        value: (INTEGER))
       (pair
-        (identifier)
-        (FLOAT)))
+        key: (identifier)
+        value: (FLOAT)))
     (list
       (boolean)
       (boolean)

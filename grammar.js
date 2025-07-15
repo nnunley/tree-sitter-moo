@@ -63,54 +63,59 @@ module.exports = grammar({
       ";"
     ),
 
-    break: ($) => prec.right(1, seq("break", optional($.identifier))),
-    continue: ($) => prec.right(1, seq("continue", optional($.identifier))),
+    break: ($) => prec.right(1, seq("break", optional(field("label", $.identifier)))),
+    continue: ($) => prec.right(1, seq("continue", optional(field("label", $.identifier)))),
     return: ($) => prec.right(1, seq(
       "return",
-      optional($._expr)
+      optional(field("value", $._expr))
     )),
-    block: ($) => seq("begin", repeat($._statement), "end"),
+    block: ($) => seq("begin", field("body", repeat($._statement)), "end"),
 
     if: ($) => seq(
       "if",
-      "(", $._expr, ")",
-      repeat($._statement),
-      repeat($._elseif),
-      optional($._else),
+      "(",
+      field("condition", $._expr),
+      ")",
+      field("body", repeat($._statement)),
+      field("elseif_clauses", repeat($._elseif)),
+      field("else_clause", optional($._else)),
       "endif"
     ),
 
     _elseif: ($) => seq(
       "elseif",
-      "(", $._expr, ")",
-      repeat($._statement)
+      "(",
+      field("condition", $._expr),
+      ")",
+      field("body", repeat($._statement))
     ),
 
     _else: ($) => seq(
       "else",
-      repeat($._statement)
+      field("body", repeat($._statement))
     ),
 
     for: ($) => seq(
       "for",
-      $.identifier,
+      field("variable", $.identifier),
       "in",
-      choice(
-        $.for_range_clause,
-        $.for_in_clause
-      ),
-      repeat($._statement),
+      field("iterable", $.for_iterable),
+      field("body", repeat($._statement)),
       "endfor"
     ),
 
-    for_range_clause: ($) => seq("[", $._expr, token(prec(1, "..")), $._expr, "]"),
-    for_in_clause: ($) => seq("(", $._expr, ")"),
+    for_iterable: ($) => choice(
+      seq("[", field("start", $._expr), token(prec(1, "..")), field("end", $._expr), "]"),
+      seq("(", field("expression", $._expr), ")")
+    ),
 
     while: ($) => seq(
       "while",
       optional(field("label", $.identifier)),
-      "(", $._expr, ")",
-      repeat($._statement),
+      "(",
+      field("condition", $._expr),
+      ")",
+      field("body", repeat($._statement)),
       "endwhile"
     ),
 
@@ -138,27 +143,27 @@ module.exports = grammar({
       choice(
         // Handler with identifier and codes
         seq(
-          $.identifier,
+          field("variable", $.identifier),
           "(",
-          $._try_expr_codes,
+          field("codes", $._try_expr_codes),
           ")"
         ),
         // Handler with just codes
         seq(
           "(",
-          $._try_expr_codes,
+          field("codes", $._try_expr_codes),
           ")"
         )
       ),
-      repeat($._statement)
+      field("body", repeat($._statement))
     ),
 
     try_expr: ($) => seq(
       "`",
-      $._expr,
+      field("expression", $._expr),
       "!",
-      $._try_expr_codes,
-      optional(seq("=>", $._expr)),
+      field("codes", $._try_expr_codes),
+      optional(seq("=>", field("fallback", $._expr))),
       "'"
     ),
 
@@ -169,22 +174,22 @@ module.exports = grammar({
 
     local_assignment: ($) => seq(
       caseInsensitive("let"),
-      choice($.identifier, $.scatter_pattern),
+      field("target", choice($.identifier, $.scatter_pattern)),
       "=",
-      $._expr
+      field("value", $._expr)
     ),
 
     const_assignment: ($) => seq(
       caseInsensitive("const"),
-      choice($.identifier, $.scatter_pattern),
+      field("target", choice($.identifier, $.scatter_pattern)),
       "=",
-      $._expr
+      field("value", $._expr)
     ),
 
     global_assignment: ($) => seq(
       caseInsensitive("global"),
-      $.identifier,
-      optional(seq("=", $._expr))
+      field("name", $.identifier),
+      optional(seq("=", field("value", $._expr)))
     ),
 
     _expr: ($) => choice(
@@ -296,18 +301,18 @@ module.exports = grammar({
 
     range_comprehension: ($) => seq(
       "{",
-      $._expr,
+      field("expression", $._expr),
       "for",
-      $.identifier,
+      field("variable", $.identifier),
       "in",
-      choice($.for_range_clause, $.for_in_clause),
+      field("iterable", $.for_iterable),
       "}"
     ),
 
     pass: ($) => seq(
       caseInsensitive("pass"),
       "(",
-      optional(intersperse(seq(optional("@"), $._expr), ",")),
+      optional(field("arguments", intersperse(seq(optional("@"), $._expr), ","))),
       ")"
     ),
 
@@ -315,7 +320,7 @@ module.exports = grammar({
 
     scatter_pattern: ($) => seq(
       "{",
-      $.scatter,
+      field("elements", $.scatter),
       "}"
     ),
 
@@ -332,12 +337,12 @@ module.exports = grammar({
 
     scatter_optional: ($) => seq(
       "?",
-      $.identifier,
-      optional(seq("=", $._expr))
+      field("name", $.identifier),
+      optional(seq("=", field("default", $._expr)))
     ),
 
-    scatter_target: ($) => $.identifier,
-    scatter_rest: ($) => seq("@", $.identifier),
+    scatter_target: ($) => field("name", $.identifier),
+    scatter_rest: ($) => seq("@", field("name", $.identifier)),
 
 
 
@@ -354,9 +359,9 @@ module.exports = grammar({
     ),
 
     pair: ($) => seq(
-      $._expr,
+      field("key", $._expr),
       "->",
-      $._expr
+      field("value", $._expr)
     ),
 
     flyweight: ($) => prec(15, seq(
@@ -390,10 +395,13 @@ module.exports = grammar({
     )),
 
     range_end: ($) => prec(1, "$"),
-    symbol: ($) => seq("'", $.identifier),
+    symbol: ($) => seq("'", field("name", $.identifier)),
     boolean: ($) => choice("true", "false"),
-    objid: ($) => seq("#", optional("-"), choice($.INTEGER, $.STRING)),
-    sysprop: ($) => seq("$", $.identifier),
+    objid: ($) => seq("#", choice(
+      field("number", seq(optional("-"), $.INTEGER)),
+      field("symbol", $.identifier)
+    )),
+    sysprop: ($) => seq("$", field("name", $.identifier)),
 
     identifier: ($) => token(/[A-Za-z_][A-Za-z0-9_]*/),
     INTEGER: ($) => token(/[+-]?[0-9]+/),
@@ -501,9 +509,9 @@ module.exports = grammar({
     ),
 
     verb_attr: ($) => prec(1, seq(
-      $.identifier,
+      field("name", $.identifier),
       ":",
-      $._expr
+      field("value", $._expr)
     )),
 
     // Lambda expressions: {x, y} => expr

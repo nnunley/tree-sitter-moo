@@ -87,4 +87,4 @@ endobject
         (identifier)
         (STRING))
       (return
-        (INTEGER)))))
+        value: (INTEGER)))))
