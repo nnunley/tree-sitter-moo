@@ -12,33 +12,18 @@ endobject
 
 (program
   (object_definition
-    (identifier)
+    name: (identifier)
     (object_property
-      (identifier)
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (STRING)))))))
+      name: (identifier)
+      value: (STRING))
     (object_property
-      (identifier)
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (objid
-                  (INTEGER))))))))
+      name: (identifier)
+      value: (objid
+        (INTEGER)))
     (object_property
-      (identifier)
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (objid
-                  (INTEGER))))))))))
+      name: (identifier)
+      value: (objid
+        (INTEGER)))))
 
 ===================
 Object with properties
@@ -53,55 +38,25 @@ endobject
 
 (program
   (object_definition
-    (identifier)
+    name: (identifier)
     (property_definition
-      (identifier)
+      name: (identifier)
       (property_attrs
         (identifier)
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (objid
-                    (INTEGER)))))))
+        (objid
+          (INTEGER))
         (identifier)
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (STRING)))))))
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (STRING)))))))
+        (STRING))
+      value: (STRING))
     (property_definition
-      (identifier)
+      name: (identifier)
       (property_attrs
         (identifier)
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (objid
-                    (INTEGER)))))))
+        (objid
+          (INTEGER))
         (identifier)
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (STRING)))))))
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (INTEGER)))))))))
+        (STRING))
+      value: (INTEGER))))
 
 ===================
 Object with verb
@@ -117,34 +72,19 @@ endobject
 
 (program
   (object_definition
-    (identifier)
+    name: (identifier)
     (verb_definition
-      (identifier)
+      name: (identifier)
       (verb_args
-        (identifier)
-        (identifier)
-        (identifier))
+        dobj: (identifier)
+        prep: (identifier)
+        iobj: (identifier))
       (verb_attr
         (identifier)
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (objid
-                    (INTEGER))))))))
+        (objid
+          (INTEGER)))
       (verb_attr
         (identifier)
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (STRING)))))))
+        (STRING))
       (return
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (INTEGER))))))))))
+        (INTEGER)))))

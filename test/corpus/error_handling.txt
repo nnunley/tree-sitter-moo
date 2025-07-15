@@ -12,21 +12,62 @@ endtry
 
 (program
   (try
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist)))))
-    (except
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
       (ERR)
       (return
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (INTEGER))))))))))
+        (INTEGER)))))
+
+===================
+Try-except with lowercase errors
+===================
+
+try
+  bar();
+except (e_type)
+  return 1;
+endtry
+
+---
+
+(program
+  (try
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
+      (ERR)
+      (return
+        (INTEGER)))))
+
+===================
+Try-except with mixed case errors
+===================
+
+try
+  baz();
+except err (E_Type, e_ARGS, E_pErM)
+  notify("Error caught");
+endtry
+
+---
+
+(program
+  (try
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
+      (identifier)
+      (ERR)
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist
+          (STRING))))))
 
 ===================
 Try-except with any
@@ -42,101 +83,100 @@ endtry
 
 (program
   (try
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist)))))
-    (except
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
       (return
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (STRING))))))))))
+        (STRING)))))
+
+===================
+Try-except with lowercase ANY
+===================
+
+try
+  risky();
+except (any)
+  return false;
+endtry
+
+---
+
+(program
+  (try
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
+      (return
+        (boolean)))))
 
 ===================
 Try-except with label
 ===================
 
 try
-  foo();
-except handler (E_TYPE)
-  return "handled";
+  risky_operation();
+except err (E_PERM, E_ARGS)
+  notify("Error: " + err);
 endtry
 
 ---
 
 (program
   (try
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist)))))
-    (except
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
       (identifier)
       (ERR)
-      (return
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (STRING))))))))))
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist
+          (binary_expr
+            left: (STRING)
+            right: (identifier)))))))
 
 ===================
 Try-except with multiple handlers
 ===================
 
 try
-  foo();
-except (E_TYPE, E_DIV)
-  return 0;
-except (ANY)
-  return -1;
+  some_code();
+except (E_TYPE)
+  handle_type_error();
+except (E_ARGS)
+  handle_args_error();
 endtry
 
 ---
 
 (program
   (try
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist)))))
-    (except
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
       (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))
+    except: (except
       (ERR)
-      (return
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (INTEGER))))))))
-    (except
-      (return
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (INTEGER))))))))))
+      (call
+        function: (identifier)
+        arguments: (arglist)))))
 
 ===================
 Try-except with finally
 ===================
 
 try
-  foo();
+  process();
 except (E_TYPE)
-  return 0;
+  handle_error();
 finally
   cleanup();
 endtry
@@ -145,110 +185,97 @@ endtry
 
 (program
   (try
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist)))))
-    (except
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
       (ERR)
-      (return
-        (assignment_expr
-          (conditional_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (INTEGER))))))))
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist)))))))
+      (call
+        function: (identifier)
+        arguments: (arglist)))
+    finally: (call
+      function: (identifier)
+      arguments: (arglist))))
 
 ===================
 Try expression simple
 ===================
 
-x = `foo() ! ANY => 0';
+`x.prop ! E_PROPNF => "default"';
 
 ---
 
 (program
-  (assignment_expr
-    (identifier)
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (primary_expr
-              (try_expr
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (identifier)
-                        (arglist)))))
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (primary_expr
-                          (INTEGER))))))))))))))
+  (try_expr
+    (property_access
+      object: (identifier)
+      property: (identifier))
+    (ERR)
+    (STRING)))
+
+===================
+Try expression with lowercase error
+===================
+
+`obj.value ! e_propnf => 0';
+
+---
+
+(program
+  (try_expr
+    (property_access
+      object: (identifier)
+      property: (identifier))
+    (ERR)
+    (INTEGER)))
 
 ===================
 Try expression with error list
 ===================
 
-x = `foo() ! E_TYPE, E_ARGS => -1';
+`obj:method() ! E_INVARG, E_PERM => 0';
 
 ---
 
 (program
-  (assignment_expr
-    (identifier)
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (primary_expr
-              (try_expr
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (identifier)
-                        (arglist)))))
-                (ERR)
-                (ERR)
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (primary_expr
-                          (INTEGER))))))))))))))
+  (try_expr
+    (method_call
+      object: (identifier)
+      method: (identifier)
+      arguments: (arglist))
+    (ERR)
+    (ERR)
+    (INTEGER)))
+
+===================
+Try expression with mixed case errors
+===================
+
+`server:command() ! e_invarg, E_Perm, E_TYPE => false';
+
+---
+
+(program
+  (try_expr
+    (method_call
+      object: (identifier)
+      method: (identifier)
+      arguments: (arglist))
+    (ERR)
+    (ERR)
+    (ERR)
+    (boolean)))
 
 ===================
 Try expression without handler
 ===================
 
-x = `foo() ! ANY';
+`dangerous() ! ANY';
 
 ---
 
 (program
-  (assignment_expr
-    (identifier)
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (primary_expr
-              (try_expr
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (identifier)
-                        (arglist)))))))))))))
+  (try_expr
+    (call
+      function: (identifier)
+      arguments: (arglist))))

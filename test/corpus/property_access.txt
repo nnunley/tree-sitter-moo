@@ -1,18 +1,33 @@
-=======
+===================
 Simple property access
-=======
+===================
+
 a.b.c;
+obj.prop;
+player.name;
+#123.location;
+$version;
+'symbol;
 
 ---
 
 (program
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (postfix_expr
-            (postfix_expr
-              (primary_expr
-                (identifier)))
-            (identifier))
-          (identifier))))))
+  (property_access
+    object: (property_access
+      object: (identifier)
+      property: (identifier))
+    property: (identifier))
+  (property_access
+    object: (identifier)
+    property: (identifier))
+  (property_access
+    object: (identifier)
+    property: (identifier))
+  (property_access
+    object: (objid
+      (INTEGER))
+    property: (identifier))
+  (sysprop
+    (identifier))
+  (symbol
+    (identifier)))

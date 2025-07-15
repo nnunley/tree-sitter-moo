@@ -112,22 +112,16 @@
 (scatter_rest (identifier) @variable.parameter)
 
 ; Property access
-(postfix_expr
-  (postfix_expr)
-  "."
-  (identifier) @property)
+(property_access
+  property: (identifier) @property)
 
 ; Method calls  
-(postfix_expr
-  (postfix_expr)
-  ":"
-  (identifier) @method
-  (arglist))
+(method_call
+  method: (identifier) @method)
 
 ; Function calls
-(postfix_expr
-  (identifier) @function
-  (arglist))
+(call
+  function: (identifier) @function)
 
 ; System properties
 (sysprop 

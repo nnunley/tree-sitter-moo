@@ -1,0 +1,242 @@
+===================
+Basic indexing
+===================
+
+arr[0];
+list[5];
+str[i];
+obj.prop[x + 1];
+
+---
+
+(program
+  (index_access
+    object: (identifier)
+    index: (INTEGER))
+  (index_access
+    object: (identifier)
+    index: (INTEGER))
+  (index_access
+    object: (identifier)
+    index: (identifier))
+  (index_access
+    object: (property_access
+      object: (identifier)
+      property: (identifier))
+    index: (binary_expr
+      left: (identifier)
+      right: (INTEGER))))
+
+===================
+Basic slices
+===================
+
+str[1..5];
+list[0..10];
+data[i..j];
+
+---
+
+(program
+  (slice
+    object: (identifier)
+    from: (INTEGER)
+    to: (INTEGER))
+  (slice
+    object: (identifier)
+    from: (INTEGER)
+    to: (INTEGER))
+  (slice
+    object: (identifier)
+    from: (identifier)
+    to: (identifier)))
+
+===================
+Slices with $ (length marker)
+===================
+
+str[1..$];
+list[$..$];
+data[$..5];
+text[0..$];
+name[$-3..$];
+items[1..$-1];
+
+---
+
+(program
+  (slice
+    object: (identifier)
+    from: (INTEGER)
+    to: (range_end))
+  (slice
+    object: (identifier)
+    from: (range_end)
+    to: (range_end))
+  (slice
+    object: (identifier)
+    from: (range_end)
+    to: (INTEGER))
+  (slice
+    object: (identifier)
+    from: (INTEGER)
+    to: (range_end))
+  (slice
+    object: (identifier)
+    from: (binary_expr
+      left: (range_end)
+      right: (INTEGER))
+    to: (range_end))
+  (slice
+    object: (identifier)
+    from: (INTEGER)
+    to: (binary_expr
+      left: (range_end)
+      right: (INTEGER))))
+
+===================
+Special $ indexing
+===================
+
+arr[$];
+list[$];
+str[$];
+
+---
+
+(program
+  (index_access
+    object: (identifier)
+    index: (range_end))
+  (index_access
+    object: (identifier)
+    index: (range_end))
+  (index_access
+    object: (identifier)
+    index: (range_end)))
+
+===================
+Complex slice expressions
+===================
+
+data[i + 1..j - 1];
+str[1..length(str)];
+list[foo()..bar()];
+nested[a[0]..b[$]];
+
+---
+
+(program
+  (slice
+    object: (identifier)
+    from: (binary_expr
+      left: (identifier)
+      right: (INTEGER))
+    to: (binary_expr
+      left: (identifier)
+      right: (INTEGER)))
+  (slice
+    object: (identifier)
+    from: (INTEGER)
+    to: (call
+      function: (identifier)
+      arguments: (arglist
+        (identifier))))
+  (slice
+    object: (identifier)
+    from: (call
+      function: (identifier)
+      arguments: (arglist))
+    to: (call
+      function: (identifier)
+      arguments: (arglist)))
+  (slice
+    object: (identifier)
+    from: (index_access
+      object: (identifier)
+      index: (INTEGER))
+    to: (index_access
+      object: (identifier)
+      index: (range_end))))
+
+===================
+Nested indexing and slicing
+===================
+
+matrix[i][j];
+arr[1..5][0];
+data[x][y..z];
+complex[a..b][c][d..$];
+
+---
+
+(program
+  (index_access
+    object: (index_access
+      object: (identifier)
+      index: (identifier))
+    index: (identifier))
+  (index_access
+    object: (slice
+      object: (identifier)
+      from: (INTEGER)
+      to: (INTEGER))
+    index: (INTEGER))
+  (slice
+    object: (index_access
+      object: (identifier)
+      index: (identifier))
+    from: (identifier)
+    to: (identifier))
+  (slice
+    object: (index_access
+      object: (slice
+        object: (identifier)
+        from: (identifier)
+        to: (identifier))
+      index: (identifier))
+    from: (identifier)
+    to: (range_end)))
+
+===================
+$ in nested contexts
+===================
+
+// $ refers to the list {3, 2, 4}, not "frob"
+"frob"[{3, 2, 4}[$]];
+
+// $ refers to inner_list
+outer[inner_list[$]];
+
+// Multiple $ at different levels
+data[arr[$-1]][1..$];
+
+---
+
+(program
+  (comment)
+  (index_access
+    object: (STRING)
+    index: (index_access
+      object: (list
+        (INTEGER)
+        (INTEGER)
+        (INTEGER))
+      index: (range_end)))
+  (comment)
+  (index_access
+    object: (identifier)
+    index: (index_access
+      object: (identifier)
+      index: (range_end)))
+  (comment)
+  (slice
+    object: (index_access
+      object: (identifier)
+      index: (index_access
+        object: (identifier)
+        index: (binary_expr
+          left: (range_end)
+          right: (INTEGER))))
+    from: (INTEGER)
+    to: (range_end)))

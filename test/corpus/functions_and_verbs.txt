@@ -1,59 +1,67 @@
-==============
+===================
 Function calls
-==============
+===================
 
 foo(a, b);
+bar();
+calculate(x + y, z * 2);
 
 ---
 
 (program
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (identifier)
-          (arglist
-            (assignment_expr
-              (conditional_expr
-                (unary_expr
-                  (postfix_expr
-                    (primary_expr
-                      (identifier))))))
-            (assignment_expr
-              (conditional_expr
-                (unary_expr
-                  (postfix_expr
-                    (primary_expr
-                      (identifier))))))))))))
+  (call
+    function: (identifier)
+    arguments: (arglist
+      (identifier)
+      (identifier)))
+  (call
+    function: (identifier)
+    arguments: (arglist))
+  (call
+    function: (identifier)
+    arguments: (arglist
+      (binary_expr
+        left: (identifier)
+        right: (identifier))
+      (binary_expr
+        left: (identifier)
+        right: (INTEGER)))))
 
-==============
+===================
 Verbs
-==============
+===================
 
 $system:foo(a, b);
+obj:method();
+player:tell("Hello");
+#123:verb(arg1, arg2);
+pass(@args);
 
 ---
 
 (program
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (postfix_expr
-            (primary_expr
-              (sysprop
-                (identifier))))
-          (identifier)
-          (arglist
-            (assignment_expr
-              (conditional_expr
-                (unary_expr
-                  (postfix_expr
-                    (primary_expr
-                      (identifier))))))
-            (assignment_expr
-              (conditional_expr
-                (unary_expr
-                  (postfix_expr
-                    (primary_expr
-                      (identifier))))))))))))
+  (method_call
+    object: (sysprop
+      (identifier))
+    method: (identifier)
+    arguments: (arglist
+      (identifier)
+      (identifier)))
+  (method_call
+    object: (identifier)
+    method: (identifier)
+    arguments: (arglist))
+  (method_call
+    object: (identifier)
+    method: (identifier)
+    arguments: (arglist
+      (STRING)))
+  (method_call
+    object: (objid
+      (INTEGER))
+    method: (identifier)
+    arguments: (arglist
+      (identifier)
+      (identifier)))
+  (pass
+    (identifier)))

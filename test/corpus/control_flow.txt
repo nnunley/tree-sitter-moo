@@ -3,44 +3,28 @@ Simple while loop
 ===================
 
 while (x < 10)
-  x = x + 1;
+    x = x + 1;
 endwhile
 
 ---
 
 (program
   (while
+    (binary_expr
+      left: (identifier)
+      right: (INTEGER))
     (assignment_expr
-      (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (identifier))))
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (INTEGER)))))))
-    (assignment_expr
-      (identifier)
-      (assignment_expr
-        (conditional_expr
-          (binary_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (identifier))))
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (INTEGER))))))))))
+      left: (identifier)
+      right: (binary_expr
+        left: (identifier)
+        right: (INTEGER)))))
 
 ===================
 Labeled while loop
 ===================
 
-while outer (condition)
-  break outer;
+while main_loop (running)
+    break main_loop;
 endwhile
 
 ---
@@ -48,12 +32,7 @@ endwhile
 (program
   (while
     label: (identifier)
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (primary_expr
-              (identifier))))))
+    (identifier)
     (break
       (identifier))))
 
@@ -61,8 +40,8 @@ endwhile
 For range loop
 ===================
 
-for x in [1..10]
-  print(x);
+for i in [1..10]
+    print(i);
 endfor
 
 ---
@@ -71,37 +50,19 @@ endfor
   (for
     (identifier)
     (for_range_clause
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (INTEGER))))))
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (INTEGER)))))))
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (identifier)))))))))))))
+      (INTEGER)
+      (INTEGER))
+    (call
+      function: (identifier)
+      arguments: (arglist
+        (identifier)))))
 
 ===================
 For in loop
 ===================
 
-for item in (mylist)
-  process(item);
+for item in (my_list)
+    process(item);
 endfor
 
 ---
@@ -110,56 +71,35 @@ endfor
   (for
     (identifier)
     (for_in_clause
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (identifier)))))))
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (identifier)))))))))))))
+      (identifier))
+    (call
+      function: (identifier)
+      arguments: (arglist
+        (identifier)))))
 
 ===================
 Fork statement
 ===================
 
-fork (10)
-  do_something();
+fork (60)
+    background_task();
 endfork
 
 ---
 
 (program
   (fork
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (primary_expr
-              (INTEGER))))))
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist)))))))
+    (INTEGER)
+    (call
+      function: (identifier)
+      arguments: (arglist))))
 
 ===================
 Labeled fork
 ===================
 
-fork mytask (delay)
-  background_job();
+fork task_fork (delay)
+    long_running_operation();
 endfork
 
 ---
@@ -167,156 +107,74 @@ endfork
 (program
   (fork
     label: (identifier)
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (primary_expr
-              (identifier))))))
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist)))))))
+    (identifier)
+    (call
+      function: (identifier)
+      arguments: (arglist))))
 
 ===================
 Begin end block
 ===================
 
 begin
-  x = 1;
-  y = 2;
+    statement1();
+    statement2();
 end
 
 ---
 
 (program
   (block
-    (assignment_expr
-      (identifier)
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (INTEGER)))))))
-    (assignment_expr
-      (identifier)
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (INTEGER)))))))))
+    (call
+      function: (identifier)
+      arguments: (arglist))
+    (call
+      function: (identifier)
+      arguments: (arglist))))
 
 ===================
 Break statement
 ===================
 
-while (true)
-  if (done)
-    break;
-  endif
-endwhile
+break;
+break loop_label;
 
 ---
 
 (program
-  (while
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (primary_expr
-              (boolean))))))
-    (if
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (identifier))))))
-      (break))))
+  (break)
+  (break
+    (identifier)))
 
 ===================
 Continue statement
 ===================
 
-for x in [1..10]
-  if (x % 2 == 0)
-    continue;
-  endif
-  print(x);
-endfor
+continue;
+continue loop_label;
 
 ---
 
 (program
-  (for
-    (identifier)
-    (for_range_clause
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (INTEGER))))))
-      (assignment_expr
-        (conditional_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (INTEGER)))))))
-    (if
-      (assignment_expr
-        (conditional_expr
-          (binary_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (identifier))))
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (INTEGER)))))
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (INTEGER)))))))
-      (continue))
-    (assignment_expr
-      (conditional_expr
-        (unary_expr
-          (postfix_expr
-            (identifier)
-            (arglist
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (identifier)))))))))))))
+  (continue)
+  (continue
+    (identifier)))
 
 ===================
 Return with expression
 ===================
 
-return x + 1;
+return;
+return 42;
+return x + y;
 
 ---
 
 (program
+  (return)
   (return
-    (assignment_expr
-      (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (identifier))))
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (INTEGER)))))))))
+    (INTEGER))
+  (return
+    (binary_expr
+      left: (identifier)
+      right: (identifier))))

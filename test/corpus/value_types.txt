@@ -17,72 +17,17 @@ Atomic Values - Numbers
 ---
 
 (program
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (INTEGER))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (INTEGER))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (FLOAT))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (FLOAT))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (FLOAT))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (FLOAT))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (FLOAT))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (FLOAT))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (FLOAT))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (FLOAT))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (FLOAT)))))))
+  (INTEGER)
+  (INTEGER)
+  (FLOAT)
+  (FLOAT)
+  (FLOAT)
+  (FLOAT)
+  (FLOAT)
+  (FLOAT)
+  (FLOAT)
+  (FLOAT)
+  (FLOAT))
 
 ===================
 Atomic Values - Strings and Identifiers
@@ -98,42 +43,12 @@ _underscore123;
 ---
 
 (program
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (STRING))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (STRING))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (STRING))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (STRING))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (identifier))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (identifier)))))))
+  (STRING)
+  (STRING)
+  (STRING)
+  (STRING)
+  (identifier)
+  (identifier))
 
 ===================
 Object and System IDs
@@ -150,52 +65,13 @@ $;
 ---
 
 (program
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (objid
-              (INTEGER)))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (objid
-              (INTEGER)))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (sysprop
-              (identifier)))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (symbol
-              (identifier)))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (boolean))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (boolean))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (range_end)))))))
+  (objid (INTEGER))
+  (objid (INTEGER))
+  (sysprop (identifier))
+  (symbol (identifier))
+  (boolean)
+  (boolean)
+  (range_end))
 
 ===================
 Lists
@@ -209,85 +85,19 @@ Lists
 ---
 
 (program
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (list))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (list
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (INTEGER))))))
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (INTEGER))))))
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (INTEGER))))))))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (list
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (STRING))))))
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (STRING))))))
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (STRING))))))))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (list
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (INTEGER))))))
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (STRING))))))
-              (assignment_expr
-                (conditional_expr
-                  (unary_expr
-                    (postfix_expr
-                      (primary_expr
-                        (objid
-                          (INTEGER))))))))))))))
+  (list)
+  (list
+    (INTEGER)
+    (INTEGER)
+    (INTEGER))
+  (list
+    (STRING)
+    (STRING)
+    (STRING))
+  (list
+    (INTEGER)
+    (STRING)
+    (objid (INTEGER))))
 
 ===================
 Maps
@@ -300,60 +110,15 @@ Maps
 ---
 
 (program
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (map))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (map
-              (pair
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (primary_expr
-                          (INTEGER))))))
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (primary_expr
-                          (STRING)))))))))))))
-  (assignment_expr
-    (conditional_expr
-      (unary_expr
-        (postfix_expr
-          (primary_expr
-            (map
-              (pair
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (primary_expr
-                          (STRING))))))
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (primary_expr
-                          (STRING)))))))
-              (pair
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (primary_expr
-                          (STRING))))))
-                (assignment_expr
-                  (conditional_expr
-                    (unary_expr
-                      (postfix_expr
-                        (primary_expr
-                          (INTEGER))))))))))))))
+  (map)
+  (map
+    (pair
+      (INTEGER)
+      (STRING)))
+  (map
+    (pair
+      (STRING)
+      (STRING))
+    (pair
+      (STRING)
+      (INTEGER))))

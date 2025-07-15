@@ -31,12 +31,11 @@ module.exports = grammar({
   conflicts: ($) => [
     [$.scatter_target, $._atom],
     [$._scatter_item, $.lambda_param],
-    [$.conditional_expr],
   ],
 
   rules: {
     program: ($) => choice(
-      // Object definition file (objdef format)  
+      // Object definition file (objdef format)
       $.object_definition,
       // Traditional MOO program (list of statements)
       repeat($._statement)
@@ -172,71 +171,108 @@ module.exports = grammar({
       caseInsensitive("let"),
       choice($.identifier, $.scatter_pattern),
       "=",
-      $.assignment_expr
+      $._expr
     ),
 
     const_assignment: ($) => seq(
-      caseInsensitive("const"), 
+      caseInsensitive("const"),
       choice($.identifier, $.scatter_pattern),
       "=",
-      $.assignment_expr
+      $._expr
     ),
 
     global_assignment: ($) => seq(
       caseInsensitive("global"),
       $.identifier,
-      optional(seq("=", $.assignment_expr))
+      optional(seq("=", $._expr))
     ),
 
     _expr: ($) => choice(
       $.assignment_expr,
+      $.conditional_expr,
+      $.binary_expr,
+      $.unary_expr,
+      $.property_access,
+      $.method_call,
+      $.index_access,
+      $.slice,
+      $.call,
+      $._primary_expr,
       $.break,
       $.continue,
       $.return,
     ),
 
-    assignment_expr: ($) => choice(
-      $.conditional_expr,
-      prec.right(1, seq(
-        choice($.identifier, $.scatter_pattern),
-        "=",
-        $.assignment_expr
-      ))
-    ),
+    // Only create assignment_expr when there's actually an assignment
+    assignment_expr: ($) => prec.right(1, seq(
+      field("left", choice($.identifier, $.scatter_pattern)),
+      "=",
+      field("right", $._expr)
+    )),
 
-    conditional_expr: ($) => choice(
-      $.binary_expr,
-      $.unary_expr,
-      prec.right(0, seq($.binary_expr, "?", $.assignment_expr, "|", $.conditional_expr))
-    ),
+    // Only create conditional_expr for ternary operator
+    conditional_expr: ($) => prec.right(2, seq(
+      field("condition", $._expr),
+      "?",
+      field("consequence", $._expr),
+      "|",
+      field("alternative", $._expr)
+    )),
 
+    // Use precedence for binary operators instead of nesting
     binary_expr: ($) => choice(
-      prec.left(3, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", "||"), field("right", choice($.binary_expr, $.unary_expr)))),
-      prec.left(3, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", "&&"), field("right", choice($.binary_expr, $.unary_expr)))),
-      prec.left(4, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("==", "!=")), field("right", choice($.binary_expr, $.unary_expr)))),
-      prec.left(4, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("<", "<=", ">", ">=", "in")), field("right", choice($.binary_expr, $.unary_expr)))),
-      prec.left(5, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("|.", "&.", "^.")), field("right", choice($.binary_expr, $.unary_expr)))),
-      prec.left(6, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("<<", ">>")), field("right", choice($.binary_expr, $.unary_expr)))),
-      prec.left(7, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("+", "-")), field("right", choice($.binary_expr, $.unary_expr)))),
-      prec.left(8, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("*", "/", "%")), field("right", choice($.binary_expr, $.unary_expr)))),
-      prec.right(9, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", "^"), field("right", choice($.binary_expr, $.unary_expr))))
+      prec.left(3, seq(field("left", $._expr), field("operator", "||"), field("right", $._expr))),
+      prec.left(3, seq(field("left", $._expr), field("operator", "&&"), field("right", $._expr))),
+      prec.left(4, seq(field("left", $._expr), field("operator", choice("==", "!=")), field("right", $._expr))),
+      prec.left(4, seq(field("left", $._expr), field("operator", choice("<", "<=", ">", ">=", "in")), field("right", $._expr))),
+      prec.left(5, seq(field("left", $._expr), field("operator", choice("|.", "&.", "^.")), field("right", $._expr))),
+      prec.left(6, seq(field("left", $._expr), field("operator", choice("<<", ">>")), field("right", $._expr))),
+      prec.left(7, seq(field("left", $._expr), field("operator", choice("+", "-")), field("right", $._expr))),
+      prec.left(8, seq(field("left", $._expr), field("operator", choice("*", "/", "%")), field("right", $._expr))),
+      prec.right(9, seq(field("left", $._expr), field("operator", "^"), field("right", $._expr)))
     ),
 
-    unary_expr: ($) => choice(
-      $.postfix_expr,
-      prec.left(10, seq(field("operator", choice("!", "-")), field("operand", $.unary_expr)))
-    ),
+    // Only create unary_expr when there's actually a unary operator
+    unary_expr: ($) => prec.left(10, seq(
+      field("operator", choice("!", "-")), 
+      field("operand", $._expr)
+    )),
 
-    postfix_expr: ($) => choice(
-      $.primary_expr,
-      prec.left(11, seq($.postfix_expr, ".", choice($.identifier, seq("(", $.assignment_expr, ")")))),
-      prec.left(11, seq($.postfix_expr, ":", choice($.identifier, seq("(", $.assignment_expr, ")")), $.arglist)),
-      prec.left(11, seq($.postfix_expr, "[", $._index_expr, "]")),
-      prec.left(11, seq($.postfix_expr, "[", field("from", $._index_expr), token(prec(1, "..")), field("to", $._index_expr), "]")),
-      prec(12, seq(choice($.identifier, seq("(", $.assignment_expr, ")")), $.arglist))
-    ),
+    property_access: ($) => prec.left(11, seq(
+      field("object", $._expr),
+      ".",
+      field("property", choice($.identifier, seq("(", $._expr, ")")))
+    )),
 
-    primary_expr: ($) => choice(
+    method_call: ($) => prec.left(11, seq(
+      field("object", $._expr),
+      ":",
+      field("method", choice($.identifier, seq("(", $._expr, ")"))),
+      field("arguments", $.arglist)
+    )),
+
+    index_access: ($) => prec.left(11, seq(
+      field("object", $._expr),
+      "[",
+      field("index", $._index_expr),
+      "]"
+    )),
+
+    slice: ($) => prec.left(11, seq(
+      field("object", $._expr),
+      "[",
+      field("from", $._index_expr),
+      token(prec(1, "..")),
+      field("to", $._index_expr),
+      "]"
+    )),
+
+    call: ($) => prec(12, seq(
+      field("function", choice($.identifier, seq("(", $._expr, ")"))),
+      field("arguments", $.arglist)
+    )),
+
+    _primary_expr: ($) => choice(
       $.flyweight,
       $._atom,
       $.list,
@@ -258,14 +294,14 @@ module.exports = grammar({
 
     parens: ($) => seq(
       "(",
-      $.assignment_expr,
+      $._expr,
       ")"
     ),
     // range_comprehension: ($) => seq(
 
     range_comprehension: ($) => seq(
       "{",
-      $.assignment_expr,
+      $._expr,
       "for",
       $.identifier,
       "in",
@@ -276,11 +312,11 @@ module.exports = grammar({
     pass: ($) => seq(
       caseInsensitive("pass"),
       "(",
-      optional($._expr_list),
+      optional(intersperse(seq(optional("@"), $._expr), ",")),
       ")"
     ),
 
-    _index_expr: ($) => choice("$", $.assignment_expr),
+    _index_expr: ($) => choice("$", $._expr),
 
     scatter_pattern: ($) => seq(
       "{",
@@ -302,7 +338,7 @@ module.exports = grammar({
     scatter_optional: ($) => seq(
       "?",
       $.identifier,
-      optional(seq("=", $.assignment_expr))
+      optional(seq("=", $._expr))
     ),
 
     scatter_target: ($) => $.identifier,
@@ -312,7 +348,7 @@ module.exports = grammar({
 
     list: ($) => prec(1, seq(
       "{",
-      optional(intersperse($.assignment_expr, ",")),
+      optional(intersperse($._expr, ",")),
       "}"
     )),
 
@@ -323,14 +359,14 @@ module.exports = grammar({
     ),
 
     pair: ($) => seq(
-      $.assignment_expr,
+      $._expr,
       "->",
-      $.assignment_expr
+      $._expr
     ),
 
     flyweight: ($) => prec(15, seq(
       token("<"),
-      field("parent", $.unary_expr),
+      field("parent", $._expr),
       optional(seq(",", $.map)),
       optional(seq(",", $.list)),
       token(">")
@@ -338,12 +374,12 @@ module.exports = grammar({
 
 
     _expr_list: ($) => seq(
-      $.assignment_expr,
-      repeat(seq(",", $.assignment_expr))
+      $._expr,
+      repeat(seq(",", $._expr))
     ),
 
     arglist: ($) => seq("(",
-      optional(intersperse(seq(optional("@"), $.assignment_expr), ",",)),
+      optional(intersperse(seq(optional("@"), $._expr), ",",)),
       ")"),
 
     _atom: ($) => prec(0, choice(
@@ -369,7 +405,7 @@ module.exports = grammar({
     FLOAT: ($) => token(choice(
       // Scientific notation without decimal point
       /[+-]?\d+[eE][+-]?\d+/,
-      // Decimal with digits after point  
+      // Decimal with digits after point
       /[+-]?\d+\.\d+(?:[eE][+-]?\d+)?/,
       // Leading decimal point
       /[+-]?\.\d+(?:[eE][+-]?\d+)?/
@@ -417,7 +453,7 @@ module.exports = grammar({
       repeat($._object_member),
       optional(keyword("endobject", 1))
     ),
-    
+
     _object_member: ($) => choice(
       $.object_property,
       $.property_definition,
@@ -476,12 +512,12 @@ module.exports = grammar({
     )),
 
     // Lambda expressions: {x, y} => expr
-    lambda_expr: ($) => prec.right(13, seq(
+    lambda_expr: ($) => prec.right(0, seq(
       "{",
       field("params", optional($.lambda_params)),
       "}",
       "=>",
-      field("body", $.assignment_expr)
+      field("body", $._expr)
     )),
 
     lambda_params: ($) => seq(
@@ -495,7 +531,7 @@ module.exports = grammar({
       $.scatter_rest
     ),
 
-    // Function expressions: fn(params) statements endfn  
+    // Function expressions: fn(params) statements endfn
     fn_expr: ($) => seq(
       "fn",
       "(",

@@ -1,0 +1,229 @@
+===================
+All error constants - uppercase
+===================
+
+try
+  test();
+except (E_NONE, E_TYPE, E_DIV, E_PERM, E_PROPNF)
+  handle1();
+except (E_VERBNF, E_VARNF, E_INVIND, E_RECMOVE, E_MAXREC)
+  handle2();
+except (E_RANGE, E_ARGS, E_NACC, E_INVARG, E_QUOTA)
+  handle3();
+except (E_FLOAT, E_ASSERT)
+  handle4();
+endtry
+
+---
+
+(program
+  (try
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))
+    except: (except
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))
+    except: (except
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))
+    except: (except
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))))
+
+===================
+All error constants - lowercase
+===================
+
+try
+  test();
+except (e_none, e_type, e_div, e_perm, e_propnf)
+  handle1();
+except (e_verbnf, e_varnf, e_invind, e_recmove, e_maxrec)
+  handle2();
+except (e_range, e_args, e_nacc, e_invarg, e_quota)
+  handle3();
+except (e_float, e_assert)
+  handle4();
+endtry
+
+---
+
+(program
+  (try
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))
+    except: (except
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))
+    except: (except
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))
+    except: (except
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))))
+
+===================
+Mixed case error constants
+===================
+
+try
+  complex_operation();
+except (E_Type, e_DIV, E_pErM, e_PropNF, E_VERBNF)
+  log_error();
+endtry
+
+---
+
+(program
+  (try
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))))
+
+===================
+Try expressions with all cases
+===================
+
+`x.y ! E_PROPNF => 0';
+`a.b ! e_propnf => 1';
+`c.d ! E_PropNF => 2';
+
+---
+
+(program
+  (try_expr
+    (property_access
+      object: (identifier)
+      property: (identifier))
+    (ERR)
+    (INTEGER))
+  (try_expr
+    (property_access
+      object: (identifier)
+      property: (identifier))
+    (ERR)
+    (INTEGER))
+  (try_expr
+    (property_access
+      object: (identifier)
+      property: (identifier))
+    (ERR)
+    (INTEGER)))
+
+===================
+Error constants in regular expressions
+===================
+
+// Note: These are parsed as identifiers, not ERR tokens
+x = E_TYPE;
+y = e_type;
+z = E_Type;
+errors = {E_NONE, e_div, E_Perm};
+
+---
+
+(program
+  (comment)
+  (assignment_expr
+    left: (identifier)
+    right: (identifier))
+  (assignment_expr
+    left: (identifier)
+    right: (identifier))
+  (assignment_expr
+    left: (identifier)
+    right: (identifier))
+  (assignment_expr
+    left: (identifier)
+    right: (list
+      (identifier)
+      (identifier)
+      (identifier))))
+
+===================
+Try-except with creative casing
+===================
+
+TrY
+  foo();
+ExCePt (E_TyPe, e_ArGs)
+  bar();
+FiNaLlY
+  cleanup();
+EnDtRy
+
+---
+
+(program
+  (try
+    body: (call
+      function: (identifier)
+      arguments: (arglist))
+    except: (except
+      (ERR)
+      (ERR)
+      (call
+        function: (identifier)
+        arguments: (arglist)))
+    finally: (call
+      function: (identifier)
+      arguments: (arglist))))
