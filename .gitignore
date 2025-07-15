@@ -47,3 +47,16 @@ zig-out/
 *.zip
 
 .DS_Store
+
+# Benchmark results
+benchmark-results.txt
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Pre-commit
+.pre-commit-config.yaml.backup

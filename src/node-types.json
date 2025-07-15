@@ -40,7 +40,7 @@
           "named": true
         },
         {
-          "type": "scatter_assign",
+          "type": "scatter_pattern",
           "named": true
         }
       ]
@@ -52,7 +52,7 @@
     "fields": {
       "left": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "binary_expr",
@@ -66,7 +66,7 @@
       },
       "operator": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "!=",
@@ -152,24 +152,18 @@
       },
       "right": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "binary_expr",
             "named": true
+          },
+          {
+            "type": "unary_expr",
+            "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "unary_expr",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -198,6 +192,10 @@
         },
         {
           "type": "continue",
+          "named": true
+        },
+        {
+          "type": "fn_statement",
           "named": true
         },
         {
@@ -279,6 +277,10 @@
         {
           "type": "conditional_expr",
           "named": true
+        },
+        {
+          "type": "unary_expr",
+          "named": true
         }
       ]
     }
@@ -297,6 +299,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "scatter_pattern",
           "named": true
         }
       ]
@@ -347,6 +353,10 @@
         },
         {
           "type": "continue",
+          "named": true
+        },
+        {
+          "type": "fn_statement",
           "named": true
         },
         {
@@ -419,6 +429,180 @@
     }
   },
   {
+    "type": "fn_expr",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "assignment_expr",
+            "named": true
+          },
+          {
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "const_assignment",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "fn_statement",
+            "named": true
+          },
+          {
+            "type": "for",
+            "named": true
+          },
+          {
+            "type": "fork",
+            "named": true
+          },
+          {
+            "type": "global_assignment",
+            "named": true
+          },
+          {
+            "type": "if",
+            "named": true
+          },
+          {
+            "type": "local_assignment",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "try",
+            "named": true
+          },
+          {
+            "type": "while",
+            "named": true
+          }
+        ]
+      },
+      "params": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "lambda_params",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "fn_statement",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "assignment_expr",
+            "named": true
+          },
+          {
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "const_assignment",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "fn_statement",
+            "named": true
+          },
+          {
+            "type": "for",
+            "named": true
+          },
+          {
+            "type": "fork",
+            "named": true
+          },
+          {
+            "type": "global_assignment",
+            "named": true
+          },
+          {
+            "type": "if",
+            "named": true
+          },
+          {
+            "type": "local_assignment",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "try",
+            "named": true
+          },
+          {
+            "type": "while",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "params": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "lambda_params",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "for",
     "named": true,
     "fields": {},
@@ -444,6 +628,10 @@
         },
         {
           "type": "continue",
+          "named": true
+        },
+        {
+          "type": "fn_statement",
           "named": true
         },
         {
@@ -587,6 +775,10 @@
           "named": true
         },
         {
+          "type": "fn_statement",
+          "named": true
+        },
+        {
           "type": "for",
           "named": true
         },
@@ -669,6 +861,10 @@
           "named": true
         },
         {
+          "type": "fn_statement",
+          "named": true
+        },
+        {
           "type": "for",
           "named": true
         },
@@ -704,6 +900,70 @@
     }
   },
   {
+    "type": "lambda_expr",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assignment_expr",
+            "named": true
+          }
+        ]
+      },
+      "params": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "lambda_params",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "lambda_param",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "scatter_optional",
+          "named": true
+        },
+        {
+          "type": "scatter_rest",
+          "named": true
+        },
+        {
+          "type": "scatter_target",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lambda_params",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "lambda_param",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "list",
     "named": true,
     "fields": {},
@@ -732,6 +992,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "scatter_pattern",
           "named": true
         }
       ]
@@ -981,7 +1245,15 @@
           "named": true
         },
         {
+          "type": "fn_expr",
+          "named": true
+        },
+        {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "lambda_expr",
           "named": true
         },
         {
@@ -1030,6 +1302,7 @@
   {
     "type": "program",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -1053,6 +1326,10 @@
         },
         {
           "type": "continue",
+          "named": true
+        },
+        {
+          "type": "fn_statement",
           "named": true
         },
         {
@@ -1256,21 +1533,6 @@
     }
   },
   {
-    "type": "scatter_assign",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "scatter",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "scatter_optional",
     "named": true,
     "fields": {},
@@ -1284,6 +1546,21 @@
         },
         {
           "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scatter_pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "scatter",
           "named": true
         }
       ]
@@ -1382,6 +1659,10 @@
             "named": true
           },
           {
+            "type": "fn_statement",
+            "named": true
+          },
+          {
             "type": "for",
             "named": true
           },
@@ -1451,6 +1732,14 @@
           },
           {
             "type": "continue",
+            "named": true
+          },
+          {
+            "type": "finally",
+            "named": false
+          },
+          {
+            "type": "fn_statement",
             "named": true
           },
           {
@@ -1671,6 +1960,10 @@
           "named": true
         },
         {
+          "type": "fn_statement",
+          "named": true
+        },
+        {
           "type": "for",
           "named": true
         },
@@ -1750,6 +2043,10 @@
         },
         {
           "type": "continue",
+          "named": true
+        },
+        {
+          "type": "fn_statement",
           "named": true
         },
         {
@@ -1920,6 +2217,74 @@
     "named": false
   },
   {
+    "type": "E_ARGS",
+    "named": false
+  },
+  {
+    "type": "E_ASSERT",
+    "named": false
+  },
+  {
+    "type": "E_DIV",
+    "named": false
+  },
+  {
+    "type": "E_FLOAT",
+    "named": false
+  },
+  {
+    "type": "E_INVARG",
+    "named": false
+  },
+  {
+    "type": "E_INVIND",
+    "named": false
+  },
+  {
+    "type": "E_MAXREC",
+    "named": false
+  },
+  {
+    "type": "E_NACC",
+    "named": false
+  },
+  {
+    "type": "E_NONE",
+    "named": false
+  },
+  {
+    "type": "E_PERM",
+    "named": false
+  },
+  {
+    "type": "E_PROPNF",
+    "named": false
+  },
+  {
+    "type": "E_QUOTA",
+    "named": false
+  },
+  {
+    "type": "E_RANGE",
+    "named": false
+  },
+  {
+    "type": "E_RECMOVE",
+    "named": false
+  },
+  {
+    "type": "E_TYPE",
+    "named": false
+  },
+  {
+    "type": "E_VARNF",
+    "named": false
+  },
+  {
+    "type": "E_VERBNF",
+    "named": false
+  },
+  {
     "type": "FLOAT",
     "named": true
   },
@@ -1976,6 +2341,10 @@
     "named": false
   },
   {
+    "type": "endfn",
+    "named": false
+  },
+  {
     "type": "endfor",
     "named": false
   },
@@ -1988,11 +2357,35 @@
     "named": false
   },
   {
+    "type": "endobj",
+    "named": false
+  },
+  {
+    "type": "endobject",
+    "named": false
+  },
+  {
+    "type": "endtry",
+    "named": false
+  },
+  {
     "type": "endwhile",
     "named": false
   },
   {
+    "type": "except",
+    "named": false
+  },
+  {
     "type": "false",
+    "named": false
+  },
+  {
+    "type": "finally",
+    "named": false
+  },
+  {
+    "type": "fn",
     "named": false
   },
   {
@@ -2016,11 +2409,19 @@
     "named": false
   },
   {
+    "type": "object",
+    "named": false
+  },
+  {
     "type": "return",
     "named": false
   },
   {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "try",
     "named": false
   },
   {

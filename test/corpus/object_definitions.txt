@@ -17,31 +17,28 @@ endobj
       (identifier)
       (assignment_expr
         (conditional_expr
-          (binary_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (STRING))))))))
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (STRING)))))))
     (object_property
       (identifier)
       (assignment_expr
         (conditional_expr
-          (binary_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (objid
-                    (INTEGER)))))))))
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (objid
+                  (INTEGER))))))))
     (object_property
       (identifier)
       (assignment_expr
         (conditional_expr
-          (binary_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (objid
-                    (INTEGER)))))))))))
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (objid
+                  (INTEGER))))))))))
 
 ===================
 Object with properties
@@ -63,54 +60,48 @@ endobj
         (identifier)
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (objid
-                      (INTEGER))))))))
-        (identifier)
-        (assignment_expr
-          (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (STRING))))))))
-      (assignment_expr
-        (conditional_expr
-          (binary_expr
             (unary_expr
               (postfix_expr
                 (primary_expr
-                  (STRING))))))))
+                  (objid
+                    (INTEGER)))))))
+        (identifier)
+        (assignment_expr
+          (conditional_expr
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (STRING)))))))
+      (assignment_expr
+        (conditional_expr
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (STRING)))))))
     (property_definition
       (identifier)
       (property_attrs
         (identifier)
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (objid
-                      (INTEGER))))))))
-        (identifier)
-        (assignment_expr
-          (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (STRING))))))))
-      (assignment_expr
-        (conditional_expr
-          (binary_expr
             (unary_expr
               (postfix_expr
                 (primary_expr
-                  (INTEGER))))))))))
+                  (objid
+                    (INTEGER)))))))
+        (identifier)
+        (assignment_expr
+          (conditional_expr
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (STRING)))))))
+      (assignment_expr
+        (conditional_expr
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (INTEGER)))))))))
 
 ===================
 Object with verb
@@ -137,26 +128,23 @@ endobj
         (identifier)
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (objid
-                      (INTEGER)))))))))
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (objid
+                    (INTEGER))))))))
       (verb_attr
         (identifier)
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (STRING))))))))
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (STRING)))))))
       (return
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (INTEGER)))))))))))
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (INTEGER))))))))))

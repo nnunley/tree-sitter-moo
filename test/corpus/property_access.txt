@@ -8,12 +8,11 @@ a.b.c;
 (program
   (assignment_expr
     (conditional_expr
-      (binary_expr
-        (unary_expr
+      (unary_expr
+        (postfix_expr
           (postfix_expr
             (postfix_expr
-              (postfix_expr
-                (primary_expr
-                  (identifier)))
-              (identifier))
-            (identifier)))))))
+              (primary_expr
+                (identifier)))
+            (identifier))
+          (identifier))))))

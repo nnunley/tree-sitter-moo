@@ -14,21 +14,19 @@ endtry
   (try
     (assignment_expr
       (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (identifier)
-              (arglist))))))
+        (unary_expr
+          (postfix_expr
+            (identifier)
+            (arglist)))))
     (except
       (ERR)
       (return
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (INTEGER)))))))))))
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (INTEGER))))))))))
 
 ===================
 Try-except with any
@@ -46,20 +44,18 @@ endtry
   (try
     (assignment_expr
       (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (identifier)
-              (arglist))))))
+        (unary_expr
+          (postfix_expr
+            (identifier)
+            (arglist)))))
     (except
       (return
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (STRING)))))))))))
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (STRING))))))))))
 
 ===================
 Try-except with label
@@ -77,22 +73,20 @@ endtry
   (try
     (assignment_expr
       (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (identifier)
-              (arglist))))))
+        (unary_expr
+          (postfix_expr
+            (identifier)
+            (arglist)))))
     (except
       (identifier)
       (ERR)
       (return
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (STRING)))))))))))
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (STRING))))))))))
 
 ===================
 Try-except with multiple handlers
@@ -112,31 +106,28 @@ endtry
   (try
     (assignment_expr
       (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (identifier)
-              (arglist))))))
+        (unary_expr
+          (postfix_expr
+            (identifier)
+            (arglist)))))
     (except
       (ERR)
       (ERR)
       (return
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (INTEGER)))))))))
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (INTEGER))))))))
     (except
       (return
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (INTEGER)))))))))))
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (INTEGER))))))))))
 
 ===================
 Try-except with finally
@@ -156,28 +147,25 @@ endtry
   (try
     (assignment_expr
       (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (identifier)
-              (arglist))))))
+        (unary_expr
+          (postfix_expr
+            (identifier)
+            (arglist)))))
     (except
       (ERR)
       (return
         (assignment_expr
           (conditional_expr
-            (binary_expr
-              (unary_expr
-                (postfix_expr
-                  (primary_expr
-                    (INTEGER)))))))))
+            (unary_expr
+              (postfix_expr
+                (primary_expr
+                  (INTEGER))))))))
     (assignment_expr
       (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (identifier)
-              (arglist))))))))
+        (unary_expr
+          (postfix_expr
+            (identifier)
+            (arglist)))))))
 
 ===================
 Try expression simple
@@ -192,25 +180,22 @@ x = `foo() ! ANY => 0';
     (identifier)
     (assignment_expr
       (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (try_expr
-                  (assignment_expr
-                    (conditional_expr
-                      (binary_expr
-                        (unary_expr
-                          (postfix_expr
-                            (identifier)
-                            (arglist))))))
-                  (assignment_expr
-                    (conditional_expr
-                      (binary_expr
-                        (unary_expr
-                          (postfix_expr
-                            (primary_expr
-                              (INTEGER))))))))))))))))
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (try_expr
+                (assignment_expr
+                  (conditional_expr
+                    (unary_expr
+                      (postfix_expr
+                        (identifier)
+                        (arglist)))))
+                (assignment_expr
+                  (conditional_expr
+                    (unary_expr
+                      (postfix_expr
+                        (primary_expr
+                          (INTEGER))))))))))))))
 
 ===================
 Try expression with error list
@@ -225,27 +210,24 @@ x = `foo() ! E_TYPE, E_ARGS => -1';
     (identifier)
     (assignment_expr
       (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (try_expr
-                  (assignment_expr
-                    (conditional_expr
-                      (binary_expr
-                        (unary_expr
-                          (postfix_expr
-                            (identifier)
-                            (arglist))))))
-                  (ERR)
-                  (ERR)
-                  (assignment_expr
-                    (conditional_expr
-                      (binary_expr
-                        (unary_expr
-                          (postfix_expr
-                            (primary_expr
-                              (INTEGER))))))))))))))))
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (try_expr
+                (assignment_expr
+                  (conditional_expr
+                    (unary_expr
+                      (postfix_expr
+                        (identifier)
+                        (arglist)))))
+                (ERR)
+                (ERR)
+                (assignment_expr
+                  (conditional_expr
+                    (unary_expr
+                      (postfix_expr
+                        (primary_expr
+                          (INTEGER))))))))))))))
 
 ===================
 Try expression without handler
@@ -260,15 +242,13 @@ x = `foo() ! ANY';
     (identifier)
     (assignment_expr
       (conditional_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (try_expr
-                  (assignment_expr
-                    (conditional_expr
-                      (binary_expr
-                        (unary_expr
-                          (postfix_expr
-                            (identifier)
-                            (arglist)))))))))))))))
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (try_expr
+                (assignment_expr
+                  (conditional_expr
+                    (unary_expr
+                      (postfix_expr
+                        (identifier)
+                        (arglist)))))))))))))

@@ -1,0 +1,196 @@
+================================================================================
+Lambda expressions - simple
+================================================================================
+
+let add = {x, y} => x + y;
+
+--------------------------------------------------------------------------------
+
+(program
+  (local_assignment
+    (identifier)
+    (assignment_expr
+      (conditional_expr
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (lambda_expr
+                params: (lambda_params
+                  (lambda_param
+                    (scatter_target
+                      (identifier)))
+                  (lambda_param
+                    (scatter_target
+                      (identifier))))
+                body: (assignment_expr
+                  (conditional_expr
+                    (binary_expr
+                      left: (unary_expr
+                        (postfix_expr
+                          (primary_expr
+                            (identifier))))
+                      right: (unary_expr
+                        (postfix_expr
+                          (primary_expr
+                            (identifier)))))))))))))))
+
+================================================================================
+Lambda expressions - no parameters
+================================================================================
+
+let random_func = {} => random(100);
+
+--------------------------------------------------------------------------------
+
+(program
+  (local_assignment
+    (identifier)
+    (assignment_expr
+      (conditional_expr
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (lambda_expr
+                body: (assignment_expr
+                  (conditional_expr
+                    (unary_expr
+                      (postfix_expr
+                        (identifier)
+                        (arglist
+                          (assignment_expr
+                            (conditional_expr
+                              (unary_expr
+                                (postfix_expr
+                                  (primary_expr
+                                    (INTEGER)))))))))))))))))))
+
+================================================================================
+Function expressions
+================================================================================
+
+let max_func = fn(a, b)
+    if (a > b)
+        return a;
+    else
+        return b;
+    endif
+endfn;
+
+--------------------------------------------------------------------------------
+
+(program
+  (local_assignment
+    (identifier)
+    (assignment_expr
+      (conditional_expr
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (fn_expr
+                params: (lambda_params
+                  (lambda_param
+                    (scatter_target
+                      (identifier)))
+                  (lambda_param
+                    (scatter_target
+                      (identifier))))
+                body: (if
+                  (assignment_expr
+                    (conditional_expr
+                      (binary_expr
+                        left: (unary_expr
+                          (postfix_expr
+                            (primary_expr
+                              (identifier))))
+                        right: (unary_expr
+                          (postfix_expr
+                            (primary_expr
+                              (identifier)))))))
+                  (return
+                    (assignment_expr
+                      (conditional_expr
+                        (unary_expr
+                          (postfix_expr
+                            (primary_expr
+                              (identifier)))))))
+                  (return
+                    (assignment_expr
+                      (conditional_expr
+                        (unary_expr
+                          (postfix_expr
+                            (primary_expr
+                              (identifier))))))))))))))))
+
+================================================================================
+Function statements
+================================================================================
+
+fn calculate_damage(attacker, defender)
+    return attacker.strength - defender.armor;
+endfn
+
+--------------------------------------------------------------------------------
+
+(program
+  (fn_statement
+    name: (identifier)
+    params: (lambda_params
+      (lambda_param
+        (scatter_target
+          (identifier)))
+      (lambda_param
+        (scatter_target
+          (identifier))))
+    body: (return
+      (assignment_expr
+        (conditional_expr
+          (binary_expr
+            left: (unary_expr
+              (postfix_expr
+                (postfix_expr
+                  (primary_expr
+                    (identifier)))
+                (identifier)))
+            right: (unary_expr
+              (postfix_expr
+                (postfix_expr
+                  (primary_expr
+                    (identifier)))
+                (identifier)))))))))
+
+================================================================================
+List comprehensions
+================================================================================
+
+let doubled = {x * 2 for x in (numbers)};
+
+--------------------------------------------------------------------------------
+
+(program
+  (local_assignment
+    (identifier)
+    (assignment_expr
+      (conditional_expr
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (range_comprehension
+                (assignment_expr
+                  (conditional_expr
+                    (binary_expr
+                      left: (unary_expr
+                        (postfix_expr
+                          (primary_expr
+                            (identifier))))
+                      right: (unary_expr
+                        (postfix_expr
+                          (primary_expr
+                            (INTEGER)))))))
+                (identifier)
+                (for_in_clause
+                  (assignment_expr
+                    (conditional_expr
+                      (unary_expr
+                        (postfix_expr
+                          (primary_expr
+                            (identifier)))))))))))))))

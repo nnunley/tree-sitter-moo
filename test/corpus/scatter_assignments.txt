@@ -1,0 +1,125 @@
+================================================================================
+Basic scatter assignment
+================================================================================
+
+{a, b, c} = some_list;
+
+--------------------------------------------------------------------------------
+
+(program
+  (assignment_expr
+    (scatter_pattern
+      (scatter
+        (scatter_target
+          (identifier))
+        (scatter_target
+          (identifier))
+        (scatter_target
+          (identifier))))
+    (assignment_expr
+      (conditional_expr
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (identifier))))))))
+
+================================================================================
+Scatter assignment in let statement
+================================================================================
+
+let {x, ?y = 5, @rest} = some_list;
+
+--------------------------------------------------------------------------------
+
+(program
+  (local_assignment
+    (scatter_pattern
+      (scatter
+        (scatter_target
+          (identifier))
+        (scatter_optional
+          (identifier)
+          (assignment_expr
+            (conditional_expr
+              (unary_expr
+                (postfix_expr
+                  (primary_expr
+                    (INTEGER)))))))
+        (scatter_rest
+          (identifier))))
+    (assignment_expr
+      (conditional_expr
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (identifier))))))))
+
+================================================================================
+Scatter assignment in const statement
+================================================================================
+
+const {first, second, @remaining} = data;
+
+--------------------------------------------------------------------------------
+
+(program
+  (const_assignment
+    (scatter_pattern
+      (scatter
+        (scatter_target
+          (identifier))
+        (scatter_target
+          (identifier))
+        (scatter_rest
+          (identifier))))
+    (assignment_expr
+      (conditional_expr
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (identifier))))))))
+
+================================================================================
+Lambda with scatter parameters
+================================================================================
+
+let handler = {x, ?default = 0, @args} => x + default;
+
+--------------------------------------------------------------------------------
+
+(program
+  (local_assignment
+    (identifier)
+    (assignment_expr
+      (conditional_expr
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (lambda_expr
+                params: (lambda_params
+                  (lambda_param
+                    (scatter_target
+                      (identifier)))
+                  (lambda_param
+                    (scatter_optional
+                      (identifier)
+                      (assignment_expr
+                        (conditional_expr
+                          (unary_expr
+                            (postfix_expr
+                              (primary_expr
+                                (INTEGER))))))))
+                  (lambda_param
+                    (scatter_rest
+                      (identifier))))
+                body: (assignment_expr
+                  (conditional_expr
+                    (binary_expr
+                      left: (unary_expr
+                        (postfix_expr
+                          (primary_expr
+                            (identifier))))
+                      right: (unary_expr
+                        (postfix_expr
+                          (primary_expr
+                            (identifier)))))))))))))))

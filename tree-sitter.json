@@ -5,7 +5,8 @@
       "camelcase": "Moo",
       "scope": "source.moo",
       "path": ".",
-      "file-types": null,
+      "file-types": ["moo"],
+      "highlights": "queries/highlights.scm",
       "injection-regex": "^moo$"
     }
   ],

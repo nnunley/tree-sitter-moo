@@ -10,16 +10,14 @@ a + b;
   (assignment_expr
     (conditional_expr
       (binary_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (identifier)))))
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (identifier)))))))))
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (identifier))))
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (identifier))))))))
 
 ===================
 Multiplication
@@ -33,16 +31,14 @@ a * b;
   (assignment_expr
     (conditional_expr
       (binary_expr
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (identifier)))))
-        (binary_expr
-          (unary_expr
-            (postfix_expr
-              (primary_expr
-                (identifier)))))))))
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (identifier))))
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (identifier))))))))
 
 ===================
 Precedence
@@ -56,19 +52,16 @@ a + b * c;
   (assignment_expr
     (conditional_expr
       (binary_expr
+        (unary_expr
+          (postfix_expr
+            (primary_expr
+              (identifier))))
         (binary_expr
           (unary_expr
             (postfix_expr
               (primary_expr
-                (identifier)))))
-        (binary_expr
-          (binary_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (identifier)))))
-          (binary_expr
-            (unary_expr
-              (postfix_expr
-                (primary_expr
-                  (identifier))))))))))
+                (identifier))))
+          (unary_expr
+            (postfix_expr
+              (primary_expr
+                (identifier)))))))))

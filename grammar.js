@@ -30,6 +30,10 @@ module.exports = grammar({
 
   conflicts: ($) => [
     [$.scatter_target, $._atom],
+    [$.list, $.lambda_expr],
+    [$.list, $.range_comprehension],
+    [$._scatter_item, $.lambda_param],
+    [$.conditional_expr],
   ],
 
   rules: {
@@ -48,6 +52,7 @@ module.exports = grammar({
       $.for,
       $.fork,
       $.try,
+      $.fn_statement,
     ),
 
     _delimited_statement: ($) => seq(
@@ -121,18 +126,18 @@ module.exports = grammar({
     ),
 
     try: ($) => seq(
-      caseInsensitive("try"),
+      keyword("try"),
       field("body", repeat1($._statement)),
       field("except", repeat($.except)),
       field("finally", optional(seq(
-       caseInsensitive( "finally"),
+        keyword("finally"),
         repeat($._statement)
       ))),
-      caseInsensitive("endtry")
+      keyword("endtry")
     ),
 
     except: ($) => seq(
-      caseInsensitive("except"),
+      keyword("except"),
       choice(
         // Handler with identifier and codes
         seq(
@@ -167,14 +172,14 @@ module.exports = grammar({
 
     local_assignment: ($) => seq(
       caseInsensitive("let"),
-      $.identifier,
+      choice($.identifier, $.scatter_pattern),
       "=",
       $.assignment_expr
     ),
 
     const_assignment: ($) => seq(
-      caseInsensitive("const"),
-      $.identifier,
+      caseInsensitive("const"), 
+      choice($.identifier, $.scatter_pattern),
       "=",
       $.assignment_expr
     ),
@@ -195,7 +200,7 @@ module.exports = grammar({
     assignment_expr: ($) => choice(
       $.conditional_expr,
       prec.right(1, seq(
-        choice($.identifier, $.scatter_assign),
+        choice($.identifier, $.scatter_pattern),
         "=",
         $.assignment_expr
       ))
@@ -203,20 +208,20 @@ module.exports = grammar({
 
     conditional_expr: ($) => choice(
       $.binary_expr,
+      $.unary_expr,
       prec.right(0, seq($.binary_expr, "?", $.assignment_expr, "|", $.conditional_expr))
     ),
 
     binary_expr: ($) => choice(
-      $.unary_expr,
-      prec.left(3, seq(field("left", $.binary_expr), field("operator", "||"), field("right", $.binary_expr))),
-      prec.left(3, seq(field("left", $.binary_expr), field("operator", "&&"), field("right", $.binary_expr))),
-      prec.left(4, seq(field("left", $.binary_expr), field("operator", choice("==", "!=")), field("right", $.binary_expr))),
-      prec.left(4, seq(field("left", $.binary_expr), field("operator", choice("<", "<=", ">", ">=", "in")), field("right", $.binary_expr))),
-      prec.left(5, seq(field("left", $.binary_expr), field("operator", choice("|.", "&.", "^.")), field("right", $.binary_expr))),
-      prec.left(6, seq(field("left", $.binary_expr), field("operator", choice("<<", ">>")), field("right", $.binary_expr))),
-      prec.left(7, seq(field("left", $.binary_expr), field("operator", choice("+", "-")), field("right", $.binary_expr))),
-      prec.left(8, seq(field("left", $.binary_expr), field("operator", choice("*", "/", "%")), field("right", $.binary_expr))),
-      prec.right(9, seq(field("left", $.unary_expr), field("operator", "^"), field("right", $.binary_expr)))
+      prec.left(3, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", "||"), field("right", choice($.binary_expr, $.unary_expr)))),
+      prec.left(3, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", "&&"), field("right", choice($.binary_expr, $.unary_expr)))),
+      prec.left(4, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("==", "!=")), field("right", choice($.binary_expr, $.unary_expr)))),
+      prec.left(4, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("<", "<=", ">", ">=", "in")), field("right", choice($.binary_expr, $.unary_expr)))),
+      prec.left(5, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("|.", "&.", "^.")), field("right", choice($.binary_expr, $.unary_expr)))),
+      prec.left(6, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("<<", ">>")), field("right", choice($.binary_expr, $.unary_expr)))),
+      prec.left(7, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("+", "-")), field("right", choice($.binary_expr, $.unary_expr)))),
+      prec.left(8, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", choice("*", "/", "%")), field("right", choice($.binary_expr, $.unary_expr)))),
+      prec.right(9, seq(field("left", choice($.binary_expr, $.unary_expr)), field("operator", "^"), field("right", choice($.binary_expr, $.unary_expr))))
     ),
 
     unary_expr: ($) => choice(
@@ -240,6 +245,8 @@ module.exports = grammar({
       $.map,
       $.try_expr,
       $.pass,
+      $.lambda_expr,
+      $.fn_expr,
       $.range_comprehension,
       $.sysprop,
       $.parens,
@@ -277,11 +284,10 @@ module.exports = grammar({
 
     _index_expr: ($) => choice("$", $.assignment_expr),
 
-    scatter_assign: ($) => seq(
+    scatter_pattern: ($) => seq(
       "{",
       $.scatter,
-      "}",
-      "="
+      "}"
     ),
 
     scatter: ($) => seq(
@@ -394,10 +400,7 @@ module.exports = grammar({
         "E_ASSERT",
       ];
 
-      return choice(...errorCodes.map(err => {
-        // Create a case-insensitive regex for each error code
-        return token(alias(caseInsensitive(err), err));
-      }));
+      return choice(...errorCodes.map(err => keyword(err)));
     },
 
     comment: ($) => choice(
@@ -411,10 +414,13 @@ module.exports = grammar({
 
     // Object definition syntax extension
     object_definition: ($) => seq(
-      token(prec(1, caseInsensitive("object"))),
+      keyword("object", 1),
       field("name", $.identifier),
       repeat($._object_member),
-      optional(token(prec(1, caseInsensitive("endobj"))))
+      optional(choice(
+        keyword("endobj", 1),
+        keyword("endobject", 1)
+      ))
     ),
     
     _object_member: ($) => choice(
@@ -474,6 +480,48 @@ module.exports = grammar({
       $._expr
     )),
 
+    // Lambda expressions: {x, y} => expr
+    lambda_expr: ($) => prec.right(13, seq(
+      "{",
+      field("params", optional($.lambda_params)),
+      "}",
+      "=>",
+      field("body", $.assignment_expr)
+    )),
+
+    lambda_params: ($) => seq(
+      $.lambda_param,
+      repeat(seq(",", $.lambda_param))
+    ),
+
+    lambda_param: ($) => choice(
+      $.scatter_target,
+      $.scatter_optional,
+      $.scatter_rest
+    ),
+
+    // Function expressions: fn(params) statements endfn  
+    fn_expr: ($) => seq(
+      "fn",
+      "(",
+      field("params", optional($.lambda_params)),
+      ")",
+      field("body", repeat($._statement)),
+      "endfn"
+    ),
+
+    // Function statements: fn name(params) statements endfn
+    fn_statement: ($) => seq(
+      "fn",
+      field("name", $.identifier),
+      "(",
+      field("params", optional($.lambda_params)),
+      ")",
+      field("body", repeat($._statement)),
+      "endfn"
+    ),
+
+
   }
 });
 
@@ -493,6 +541,13 @@ function caseInsensitive (keyword) {
 }
 function intersperse(rule, separator) {
   return seq(rule, repeat(seq(separator, rule)));
+}
+
+// Helper to create an aliased case-insensitive keyword
+function keyword(word, precedence = null) {
+  const pattern = caseInsensitive(word);
+  const token_pattern = precedence !== null ? token(prec(precedence, pattern)) : pattern;
+  return alias(token_pattern, word);
 }
 
 function commaSep1(rule) {

@@ -4,7 +4,7 @@
   "description": "Moo grammar for tree-sitter",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tree-sitter/tree-sitter-moo.git"
+    "url": "git+https://github.com/nnunley/tree-sitter-moo.git"
   },
   "license": "MIT",
   "main": "bindings/node",
@@ -48,15 +48,17 @@
     "test": "tree-sitter test",
     "parse": "tree-sitter parse"
   },
-  "homepage": "https://github.com/tree-sitter/tree-sitter-moo#readme",
+  "homepage": "https://github.com/nnunley/tree-sitter-moo#readme",
   "author": "Norman Nunley, Jr.",
   "bugs": {
-    "url": "https://github.com/tree-sitter/tree-sitter-moo/issues"
+    "url": "https://github.com/nnunley/tree-sitter-moo/issues"
   },
   "tree-sitter": [
     {
       "scope": "source.moo",
-      "injection-regex": "^moo$"
+      "file-types": ["moo"],
+      "injection-regex": "^moo$",
+      "highlights": "queries/highlights.scm"
     }
   ]
 }
