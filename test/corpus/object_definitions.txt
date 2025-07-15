@@ -6,7 +6,7 @@ object ROOT
   name: "Root Object"
   location: #1
   owner: #2
-endobj
+endobject
 
 ---
 
@@ -47,7 +47,7 @@ Object with properties
 object TEST
   property foo (owner: #1, flags: "rc") = "bar";
   property num (owner: #1, flags: "r") = 42;
-endobj
+endobject
 
 ---
 
@@ -111,7 +111,7 @@ object UTILS
   verb test (this none this) owner: #1 flags: "rxd"
     return 42;
   endverb
-endobj
+endobject
 
 ---
 

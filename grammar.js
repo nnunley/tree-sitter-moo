@@ -417,10 +417,7 @@ module.exports = grammar({
       keyword("object", 1),
       field("name", $.identifier),
       repeat($._object_member),
-      optional(choice(
-        keyword("endobj", 1),
-        keyword("endobject", 1)
-      ))
+      optional(keyword("endobject", 1))
     ),
     
     _object_member: ($) => choice(

@@ -75,7 +75,7 @@
 ["fn" "endfn"] @keyword.function
 
 ; Object definition keywords
-["object" "endobj" "endobject"] @keyword
+["object" "endobject"] @keyword
 
 ; Control flow keywords  
 [

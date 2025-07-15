@@ -2614,41 +2614,20 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "ALIAS",
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
                   "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[eE][nN][dD][oO][bB][jJ]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "endobj"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[eE][nN][dD][oO][bB][jJ][eE][cC][tT]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "endobject"
+                    "type": "PATTERN",
+                    "value": "[eE][nN][dD][oO][bB][jJ][eE][cC][tT]"
+                  }
                 }
-              ]
+              },
+              "named": false,
+              "value": "endobject"
             },
             {
               "type": "BLANK"
