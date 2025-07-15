@@ -94,6 +94,11 @@ The grammar is defined in `grammar.js`. After making changes:
    tree-sitter test
    ```
 
+   If grammar changes affect the expected parse output, you can automatically update test expectations:
+   ```bash
+   tree-sitter test --update
+   ```
+
 3. Test highlighting:
    ```bash
    tree-sitter highlight examples/test_highlight.moo

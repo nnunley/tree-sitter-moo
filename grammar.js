@@ -283,7 +283,7 @@ module.exports = grammar({
       $.fn_expr,
       $.range_comprehension,
       $.sysprop,
-      $.parens,
+      seq("(", $._expr, ")"),
     ),
 
     // in: ($) => prec.left(1,seq(
@@ -292,11 +292,6 @@ module.exports = grammar({
     //   $._expr
     // )),
 
-    parens: ($) => seq(
-      "(",
-      $._expr,
-      ")"
-    ),
     // range_comprehension: ($) => seq(
 
     range_comprehension: ($) => seq(

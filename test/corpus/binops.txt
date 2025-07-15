@@ -254,60 +254,50 @@ one + two + three + four + five + six + seven + eight + nine + ten;
       left: (INTEGER)
       right: (INTEGER)))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier)))
+    left: (binary_expr
+      left: (identifier)
+      right: (identifier))
     right: (identifier))
   (binary_expr
     left: (identifier)
-    right: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier))))
+    right: (binary_expr
+      left: (identifier)
+      right: (identifier)))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier)))
+    left: (binary_expr
+      left: (identifier)
+      right: (identifier))
     right: (identifier))
   (binary_expr
     left: (identifier)
-    right: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier))))
+    right: (binary_expr
+      left: (identifier)
+      right: (identifier)))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier)))
+    left: (binary_expr
+      left: (identifier)
+      right: (identifier))
     right: (identifier))
   (binary_expr
     left: (identifier)
-    right: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier))))
+    right: (binary_expr
+      left: (identifier)
+      right: (identifier)))
   (unary_expr
-    operand: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier))))
+    operand: (binary_expr
+      left: (identifier)
+      right: (identifier)))
   (unary_expr
-    operand: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier))))
+    operand: (binary_expr
+      left: (identifier)
+      right: (identifier)))
   (unary_expr
-    operand: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier))))
+    operand: (binary_expr
+      left: (identifier)
+      right: (identifier)))
   (unary_expr
-    operand: (parens
-      (unary_expr
-        operand: (identifier))))
+    operand: (unary_expr
+      operand: (identifier)))
   (binary_expr
     left: (INTEGER)
     right: (binary_expr
@@ -357,68 +347,54 @@ one + two + three + four + five + six + seven + eight + nine + ten;
     left: (INTEGER)
     right: (INTEGER))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (INTEGER)
-        right: (INTEGER)))
-    right: (parens
-      (binary_expr
-        left: (INTEGER)
-        right: (INTEGER))))
+    left: (binary_expr
+      left: (INTEGER)
+      right: (INTEGER))
+    right: (binary_expr
+      left: (INTEGER)
+      right: (INTEGER)))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (INTEGER)
-        right: (INTEGER)))
-    right: (parens
-      (binary_expr
-        left: (INTEGER)
-        right: (INTEGER))))
+    left: (binary_expr
+      left: (INTEGER)
+      right: (INTEGER))
+    right: (binary_expr
+      left: (INTEGER)
+      right: (INTEGER)))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (INTEGER)
-        right: (INTEGER)))
-    right: (parens
-      (binary_expr
-        left: (INTEGER)
-        right: (INTEGER))))
+    left: (binary_expr
+      left: (INTEGER)
+      right: (INTEGER))
+    right: (binary_expr
+      left: (INTEGER)
+      right: (INTEGER)))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (parens
-          (binary_expr
-            left: (identifier)
-            right: (identifier)))
+    left: (binary_expr
+      left: (binary_expr
+        left: (identifier)
+        right: (identifier))
+      right: (identifier))
+    right: (identifier))
+  (binary_expr
+    left: (identifier)
+    right: (binary_expr
+      left: (binary_expr
+        left: (identifier)
+        right: (identifier))
+      right: (identifier)))
+  (binary_expr
+    left: (binary_expr
+      left: (identifier)
+      right: (binary_expr
+        left: (identifier)
         right: (identifier)))
     right: (identifier))
   (binary_expr
     left: (identifier)
-    right: (parens
-      (binary_expr
-        left: (parens
-          (binary_expr
-            left: (identifier)
-            right: (identifier)))
+    right: (binary_expr
+      left: (identifier)
+      right: (binary_expr
+        left: (identifier)
         right: (identifier))))
-  (binary_expr
-    left: (parens
-      (binary_expr
-        left: (identifier)
-        right: (parens
-          (binary_expr
-            left: (identifier)
-            right: (identifier)))))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (parens
-      (binary_expr
-        left: (identifier)
-        right: (parens
-          (binary_expr
-            left: (identifier)
-            right: (identifier))))))
   (binary_expr
     left: (binary_expr
       left: (FLOAT)
@@ -429,14 +405,12 @@ one + two + three + four + five + six + seven + eight + nine + ten;
       left: (FLOAT)
       right: (FLOAT)))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (FLOAT)
-        right: (FLOAT)))
-    right: (parens
-      (binary_expr
-        left: (FLOAT)
-        right: (FLOAT))))
+    left: (binary_expr
+      left: (FLOAT)
+      right: (FLOAT))
+    right: (binary_expr
+      left: (FLOAT)
+      right: (FLOAT)))
   (binary_expr
     left: (FLOAT)
     right: (binary_expr
@@ -455,31 +429,25 @@ one + two + three + four + five + six + seven + eight + nine + ten;
       right: (identifier)))
   (binary_expr
     left: (binary_expr
-      left: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier)))
-      right: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier))))
-    right: (parens
-      (binary_expr
+      left: (binary_expr
         left: (identifier)
-        right: (identifier))))
+        right: (identifier))
+      right: (binary_expr
+        left: (identifier)
+        right: (identifier)))
+    right: (binary_expr
+      left: (identifier)
+      right: (identifier)))
   (binary_expr
     left: (binary_expr
-      left: (parens
-        (binary_expr
-          left: (parens
-            (binary_expr
-              left: (identifier)
-              right: (identifier)))
-          right: (identifier)))
-      right: (parens
-        (binary_expr
+      left: (binary_expr
+        left: (binary_expr
           left: (identifier)
-          right: (identifier))))
+          right: (identifier))
+        right: (identifier))
+      right: (binary_expr
+        left: (identifier)
+        right: (identifier)))
     right: (identifier))
   (binary_expr
     left: (binary_expr
@@ -570,29 +538,23 @@ one + two + three + four + five + six + seven + eight + nine + ten;
         left: (identifier)
         right: (identifier))))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (parens
-          (binary_expr
-            left: (parens
-              (binary_expr
-                left: (identifier)
-                right: (identifier)))
-            right: (identifier)))
-        right: (identifier)))
+    left: (binary_expr
+      left: (binary_expr
+        left: (binary_expr
+          left: (identifier)
+          right: (identifier))
+        right: (identifier))
+      right: (identifier))
     right: (identifier))
   (binary_expr
     left: (identifier)
-    right: (parens
-      (binary_expr
+    right: (binary_expr
+      left: (identifier)
+      right: (binary_expr
         left: (identifier)
-        right: (parens
-          (binary_expr
-            left: (identifier)
-            right: (parens
-              (binary_expr
-                left: (identifier)
-                right: (identifier))))))))
+        right: (binary_expr
+          left: (identifier)
+          right: (identifier)))))
   (binary_expr
     left: (binary_expr
       left: (INTEGER)
@@ -750,63 +712,49 @@ one + two + three + four + five + six + seven + eight + nine + ten;
         right: (identifier))))
   (binary_expr
     left: (binary_expr
-      left: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier)))
-      right: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier))))
+      left: (binary_expr
+        left: (identifier)
+        right: (identifier))
+      right: (binary_expr
+        left: (identifier)
+        right: (identifier)))
     right: (binary_expr
-      left: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier)))
-      right: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier)))))
+      left: (binary_expr
+        left: (identifier)
+        right: (identifier))
+      right: (binary_expr
+        left: (identifier)
+        right: (identifier))))
   (binary_expr
     left: (binary_expr
-      left: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier)))
-      right: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier))))
+      left: (binary_expr
+        left: (identifier)
+        right: (identifier))
+      right: (binary_expr
+        left: (identifier)
+        right: (identifier)))
     right: (binary_expr
-      left: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier)))
-      right: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier)))))
+      left: (binary_expr
+        left: (identifier)
+        right: (identifier))
+      right: (binary_expr
+        left: (identifier)
+        right: (identifier))))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (parens
-          (binary_expr
-            left: (identifier)
-            right: (identifier)))
-        right: (parens
-          (binary_expr
-            left: (identifier)
-            right: (identifier)))))
-    right: (parens
-      (binary_expr
-        left: (parens
-          (binary_expr
-            left: (identifier)
-            right: (identifier)))
-        right: (parens
-          (binary_expr
-            left: (identifier)
-            right: (identifier))))))
+    left: (binary_expr
+      left: (binary_expr
+        left: (identifier)
+        right: (identifier))
+      right: (binary_expr
+        left: (identifier)
+        right: (identifier)))
+    right: (binary_expr
+      left: (binary_expr
+        left: (identifier)
+        right: (identifier))
+      right: (binary_expr
+        left: (identifier)
+        right: (identifier))))
   (binary_expr
     left: (binary_expr
       left: (binary_expr
@@ -843,43 +791,36 @@ one + two + three + four + five + six + seven + eight + nine + ten;
   (binary_expr
     left: (binary_expr
       left: (unary_expr
-        operand: (parens
-          (binary_expr
-            left: (identifier)
-            right: (identifier))))
-      right: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier))))
-    right: (binary_expr
-      left: (parens
-        (binary_expr
+        operand: (binary_expr
           left: (identifier)
           right: (identifier)))
-      right: (parens
-        (binary_expr
-          left: (identifier)
-          right: (identifier)))))
+      right: (binary_expr
+        left: (identifier)
+        right: (identifier)))
+    right: (binary_expr
+      left: (binary_expr
+        left: (identifier)
+        right: (identifier))
+      right: (binary_expr
+        left: (identifier)
+        right: (identifier))))
   (binary_expr
     left: (binary_expr
-      left: (parens
-        (binary_expr
-          left: (binary_expr
-            left: (identifier)
-            right: (identifier))
-          right: (identifier)))
-      right: (parens
-        (binary_expr
-          left: (binary_expr
-            left: (identifier)
-            right: (identifier))
-          right: (identifier))))
-    right: (parens
-      (binary_expr
+      left: (binary_expr
         left: (binary_expr
           left: (identifier)
           right: (identifier))
-        right: (identifier)))))
+        right: (identifier))
+      right: (binary_expr
+        left: (binary_expr
+          left: (identifier)
+          right: (identifier))
+        right: (identifier)))
+    right: (binary_expr
+      left: (binary_expr
+        left: (identifier)
+        right: (identifier))
+      right: (identifier))))
 
 ===================
 Binary operators - Logical
@@ -905,10 +846,9 @@ p || q && r;
       right: (identifier))
     right: (identifier))
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier)))
+    left: (binary_expr
+      left: (identifier)
+      right: (identifier))
     right: (identifier)))
 
 ===================
@@ -1095,14 +1035,12 @@ a + b[1..5][0] * c;
 
 (program
   (binary_expr
-    left: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (parens
-      (binary_expr
-        left: (identifier)
-        right: (identifier))))
+    left: (binary_expr
+      left: (identifier)
+      right: (identifier))
+    right: (binary_expr
+      left: (identifier)
+      right: (identifier)))
   (binary_expr
     left: (index_access
       object: (identifier)
