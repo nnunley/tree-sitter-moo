@@ -30,8 +30,6 @@ module.exports = grammar({
 
   conflicts: ($) => [
     [$.scatter_target, $._atom],
-    [$.list, $.lambda_expr],
-    [$.list, $.range_comprehension],
     [$._scatter_item, $.lambda_param],
     [$.conditional_expr],
   ],
@@ -312,11 +310,11 @@ module.exports = grammar({
 
 
 
-    list: ($) => seq(
+    list: ($) => prec(1, seq(
       "{",
       optional(intersperse($.assignment_expr, ",")),
       "}"
-    ),
+    )),
 
     map: ($) => seq(
       "[",
