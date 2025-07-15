@@ -141,7 +141,8 @@ nested[a[0]..b[$]];
     to: (call
       function: (identifier)
       arguments: (arglist
-        (identifier))))
+        arguments: (argument
+          value: (identifier)))))
   (slice
     object: (identifier)
     from: (call
@@ -219,9 +220,9 @@ data[arr[$-1]][1..$];
     object: (STRING)
     index: (index_access
       object: (list
-        (INTEGER)
-        (INTEGER)
-        (INTEGER))
+        elements: (INTEGER)
+        elements: (INTEGER)
+        elements: (INTEGER))
       index: (range_end)))
   (comment)
   (index_access

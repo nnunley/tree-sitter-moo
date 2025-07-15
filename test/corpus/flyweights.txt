@@ -11,16 +11,16 @@ Basic Flyweights
 (program
   (flyweight
     parent: (objid
-      (INTEGER)))
+      number: (INTEGER)))
   (flyweight
     parent: (objid
-      (INTEGER))
-    (map))
+      number: (INTEGER))
+    properties: (map))
   (flyweight
     parent: (objid
-      (INTEGER))
-    (map)
-    (list)))
+      number: (INTEGER))
+    properties: (map)
+    values: (list)))
 
 ===================
 Complex Flyweights
@@ -35,39 +35,39 @@ Complex Flyweights
 (program
   (flyweight
     parent: (objid
-      (INTEGER))
-    (map
-      (pair
+      number: (INTEGER))
+    properties: (map
+      entries: (pair
         key: (identifier)
         value: (STRING)))
-    (list
-      (INTEGER)
-      (INTEGER)))
+    values: (list
+      elements: (INTEGER)
+      elements: (INTEGER)))
   (flyweight
     parent: (objid
-      (INTEGER))
-    (map
-      (pair
+      number: (INTEGER))
+    properties: (map
+      entries: (pair
         key: (identifier)
         value: (STRING))
-      (pair
+      entries: (pair
         key: (identifier)
         value: (boolean)))
-    (list
-      (STRING)
-      (STRING)))
+    values: (list
+      elements: (STRING)
+      elements: (STRING)))
   (flyweight
     parent: (objid
-      (INTEGER))
-    (map
-      (pair
+      number: (INTEGER))
+    properties: (map
+      entries: (pair
         key: (identifier)
         value: (INTEGER))
-      (pair
+      entries: (pair
         key: (identifier)
         value: (FLOAT)))
-    (list
-      (boolean)
-      (boolean)
-      (objid
-        (INTEGER)))))
+    values: (list
+      elements: (boolean)
+      elements: (boolean)
+      elements: (objid
+        number: (INTEGER)))))

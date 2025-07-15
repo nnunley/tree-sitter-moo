@@ -12,20 +12,24 @@ calculate(x + y, z * 2);
   (call
     function: (identifier)
     arguments: (arglist
-      (identifier)
-      (identifier)))
+      arguments: (argument
+        value: (identifier))
+      arguments: (argument
+        value: (identifier))))
   (call
     function: (identifier)
     arguments: (arglist))
   (call
     function: (identifier)
     arguments: (arglist
-      (binary_expr
-        left: (identifier)
-        right: (identifier))
-      (binary_expr
-        left: (identifier)
-        right: (INTEGER)))))
+      arguments: (argument
+        value: (binary_expr
+          left: (identifier)
+          right: (identifier)))
+      arguments: (argument
+        value: (binary_expr
+          left: (identifier)
+          right: (INTEGER))))))
 
 ===================
 Verbs
@@ -42,11 +46,13 @@ pass(@args);
 (program
   (method_call
     object: (sysprop
-      (identifier))
+      name: (identifier))
     method: (identifier)
     arguments: (arglist
-      (identifier)
-      (identifier)))
+      arguments: (argument
+        value: (identifier))
+      arguments: (argument
+        value: (identifier))))
   (method_call
     object: (identifier)
     method: (identifier)
@@ -55,13 +61,17 @@ pass(@args);
     object: (identifier)
     method: (identifier)
     arguments: (arglist
-      (STRING)))
+      arguments: (argument
+        value: (STRING))))
   (method_call
     object: (objid
-      (INTEGER))
+      number: (INTEGER))
     method: (identifier)
     arguments: (arglist
-      (identifier)
-      (identifier)))
+      arguments: (argument
+        value: (identifier))
+      arguments: (argument
+        value: (identifier))))
   (pass
-    (identifier)))
+    arguments: (argument
+      splat: (identifier))))

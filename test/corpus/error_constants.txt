@@ -195,9 +195,9 @@ errors = {E_NONE, e_div, E_Perm};
   (assignment_expr
     left: (identifier)
     right: (list
-      (identifier)
-      (identifier)
-      (identifier))))
+      elements: (identifier)
+      elements: (identifier)
+      elements: (identifier))))
 
 ===================
 Try-except with creative casing
@@ -224,6 +224,6 @@ EnDtRy
       body: (call
         function: (identifier)
         arguments: (arglist)))
-    finally: (call
+    body: (call
       function: (identifier)
       arguments: (arglist))))

@@ -19,11 +19,11 @@ endobject
     (object_property
       name: (identifier)
       value: (objid
-        (INTEGER)))
+        number: (INTEGER)))
     (object_property
       name: (identifier)
       value: (objid
-        (INTEGER)))))
+        number: (INTEGER)))))
 
 ===================
 Object with properties
@@ -42,20 +42,20 @@ endobject
     (property_definition
       name: (identifier)
       (property_attrs
-        (identifier)
-        (objid
-          (INTEGER))
-        (identifier)
-        (STRING))
+        name: (identifier)
+        value: (objid
+          number: (INTEGER))
+        name: (identifier)
+        value: (STRING))
       value: (STRING))
     (property_definition
       name: (identifier)
       (property_attrs
-        (identifier)
-        (objid
-          (INTEGER))
-        (identifier)
-        (STRING))
+        name: (identifier)
+        value: (objid
+          number: (INTEGER))
+        name: (identifier)
+        value: (STRING))
       value: (INTEGER))))
 
 ===================
@@ -80,11 +80,11 @@ endobject
         prep: (identifier)
         iobj: (identifier))
       (verb_attr
-        (identifier)
-        (objid
-          (INTEGER)))
+        name: (identifier)
+        value: (objid
+          number: (INTEGER)))
       (verb_attr
-        (identifier)
-        (STRING))
+        name: (identifier)
+        value: (STRING))
       (return
         value: (INTEGER)))))

@@ -49,13 +49,14 @@ endfor
 (program
   (for
     variable: (identifier)
-    iterable: (for_range_clause
+    iterable: (for_iterable
       start: (INTEGER)
       end: (INTEGER))
     body: (call
       function: (identifier)
       arguments: (arglist
-        (identifier)))))
+        arguments: (argument
+          value: (identifier))))))
 
 ===================
 For in loop
@@ -70,12 +71,13 @@ endfor
 (program
   (for
     variable: (identifier)
-    iterable: (for_in_clause
+    iterable: (for_iterable
       expression: (identifier))
     body: (call
       function: (identifier)
       arguments: (arglist
-        (identifier)))))
+        arguments: (argument
+          value: (identifier))))))
 
 ===================
 Fork statement
@@ -89,8 +91,8 @@ endfork
 
 (program
   (fork
-    (INTEGER)
-    (call
+    expression: (INTEGER)
+    body: (call
       function: (identifier)
       arguments: (arglist))))
 
@@ -107,8 +109,8 @@ endfork
 (program
   (fork
     label: (identifier)
-    (identifier)
-    (call
+    expression: (identifier)
+    body: (call
       function: (identifier)
       arguments: (arglist))))
 

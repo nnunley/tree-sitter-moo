@@ -25,9 +25,9 @@ $version;
     property: (identifier))
   (property_access
     object: (objid
-      (INTEGER))
+      number: (INTEGER))
     property: (identifier))
   (sysprop
-    (identifier))
+    name: (identifier))
   (symbol
-    (identifier)))
+    name: (identifier)))

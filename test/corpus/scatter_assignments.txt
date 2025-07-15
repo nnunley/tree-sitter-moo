@@ -10,11 +10,11 @@ Basic scatter assignment
   (assignment_expr
     left: (scatter_pattern
       elements: (scatter
-        (scatter_target
+        items: (scatter_target
           name: (identifier))
-        (scatter_target
+        items: (scatter_target
           name: (identifier))
-        (scatter_target
+        items: (scatter_target
           name: (identifier))))
     right: (identifier)))
 
@@ -30,11 +30,11 @@ let {first, second, @rest} = my_list;
   (local_assignment
     target: (scatter_pattern
       elements: (scatter
-        (scatter_target
+        items: (scatter_target
           name: (identifier))
-        (scatter_target
+        items: (scatter_target
           name: (identifier))
-        (scatter_rest
+        items: (scatter_rest
           name: (identifier))))
     value: (identifier)))
 
@@ -50,12 +50,12 @@ const {x, ?y = 10, @remaining} = data;
   (const_assignment
     target: (scatter_pattern
       elements: (scatter
-        (scatter_target
+        items: (scatter_target
           name: (identifier))
-        (scatter_optional
+        items: (scatter_optional
           name: (identifier)
           default: (INTEGER))
-        (scatter_rest
+        items: (scatter_rest
           name: (identifier))))
     value: (identifier)))
 
@@ -82,5 +82,7 @@ let handler = {?code = E_NONE, @args} => handle(code, args);
       body: (call
         function: (identifier)
         arguments: (arglist
-          (identifier)
-          (identifier))))))
+          arguments: (argument
+            value: (identifier))
+          arguments: (argument
+            value: (identifier)))))))

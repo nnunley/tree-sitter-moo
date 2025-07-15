@@ -1016,7 +1016,7 @@ flag && true || false;
   (binary_expr
     left: (property_access
       object: (objid
-        (INTEGER))
+        number: (INTEGER))
       property: (identifier))
     right: (INTEGER)))
 
@@ -1067,16 +1067,19 @@ a + b[1..5][0] * c;
     left: (call
       function: (identifier)
       arguments: (arglist
-        (identifier)))
+        arguments: (argument
+          value: (identifier))))
     right: (binary_expr
       left: (call
         function: (identifier)
         arguments: (arglist
-          (identifier)))
+          arguments: (argument
+            value: (identifier))))
       right: (call
         function: (identifier)
         arguments: (arglist
-          (identifier)))))
+          arguments: (argument
+            value: (identifier))))))
   (binary_expr
     left: (identifier)
     right: (binary_expr
@@ -1090,9 +1093,9 @@ a + b[1..5][0] * c;
   (binary_expr
     left: (index_access
       object: (list
-        (INTEGER)
-        (INTEGER)
-        (INTEGER))
+        elements: (INTEGER)
+        elements: (INTEGER)
+        elements: (INTEGER))
       index: (binary_expr
         left: (range_end)
         right: (INTEGER)))
@@ -1150,11 +1153,11 @@ str[1..$] + "suffix";
     right: (STRING))
   (binary_expr
     left: (list
-      (INTEGER)
-      (INTEGER))
+      elements: (INTEGER)
+      elements: (INTEGER))
     right: (list
-      (INTEGER)
-      (INTEGER)))
+      elements: (INTEGER)
+      elements: (INTEGER)))
   (binary_expr
     left: (slice
       object: (identifier)

@@ -80,9 +80,10 @@ endfn;
             right: (call
               function: (identifier)
               arguments: (arglist
-                (binary_expr
-                  left: (identifier)
-                  right: (INTEGER))))))))))
+                arguments: (argument
+                  value: (binary_expr
+                    left: (identifier)
+                    right: (INTEGER)))))))))))
 
 ===================
 Function statements
@@ -120,10 +121,10 @@ let squares = {x * x for x in [1..10]};
   (local_assignment
     target: (identifier)
     value: (range_comprehension
-      (binary_expr
+      expression: (binary_expr
         left: (identifier)
         right: (identifier))
-      (identifier)
-      (for_range_clause
+      variable: (identifier)
+      iterable: (for_iterable
         start: (INTEGER)
         end: (INTEGER)))))

@@ -1,0 +1,38 @@
+===================
+Nested for loops with scatter assignment
+===================
+
+result = {};
+for i in [1..3]
+    for j in [1..2]
+        result = {@result, i * j};
+    endfor
+endfor
+return result;
+
+---
+
+(program
+  (assignment_expr
+    left: (identifier)
+    right: (list))
+  (for
+    variable: (identifier)
+    iterable: (for_iterable
+      start: (INTEGER)
+      end: (INTEGER))
+    body: (for
+      variable: (identifier)
+      iterable: (for_iterable
+        start: (INTEGER)
+        end: (INTEGER))
+      body: (assignment_expr
+        left: (identifier)
+        right: (list
+          elements: (scatter_element
+            expression: (identifier))
+          elements: (binary_expr
+            left: (identifier)
+            right: (identifier))))))
+  (return
+    value: (identifier)))

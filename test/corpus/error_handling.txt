@@ -67,7 +67,8 @@ endtry
       body: (call
         function: (identifier)
         arguments: (arglist
-          (STRING))))))
+          arguments: (argument
+            value: (STRING)))))))
 
 ===================
 Try-except with any
@@ -135,9 +136,10 @@ endtry
       body: (call
         function: (identifier)
         arguments: (arglist
-          (binary_expr
-            left: (STRING)
-            right: (identifier)))))))
+          arguments: (argument
+            value: (binary_expr
+              left: (STRING)
+              right: (identifier))))))))
 
 ===================
 Try-except with multiple handlers
@@ -193,7 +195,7 @@ endtry
       body: (call
         function: (identifier)
         arguments: (arglist)))
-    finally: (call
+    body: (call
       function: (identifier)
       arguments: (arglist))))
 

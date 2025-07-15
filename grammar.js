@@ -31,6 +31,9 @@ module.exports = grammar({
   conflicts: ($) => [
     [$.scatter_target, $._atom],
     [$._scatter_item, $.lambda_param],
+    [$.scatter_element, $.scatter_rest],
+    [$.scatter_rest, $._atom],
+    [$.list, $.lambda_expr],
   ],
 
   rules: {
@@ -122,8 +125,10 @@ module.exports = grammar({
     fork: ($) => seq(
       "fork",
       optional(field("label", $.identifier)),
-      "(", $._expr, ")",
-      repeat($._statement),
+      "(",
+      field("expression", $._expr),
+      ")",
+      field("body", repeat($._statement)),
       "endfork"
     ),
 
@@ -133,7 +138,7 @@ module.exports = grammar({
       field("except", repeat($.except)),
       field("finally", optional(seq(
         keyword("finally"),
-        repeat($._statement)
+        field("body", repeat($._statement))
       ))),
       keyword("endtry")
     ),
@@ -312,7 +317,7 @@ module.exports = grammar({
     pass: ($) => seq(
       caseInsensitive("pass"),
       "(",
-      optional(field("arguments", intersperse(seq(optional("@"), $._expr), ","))),
+      field("arguments", optional(commaSep($.argument))),
       ")"
     ),
 
@@ -324,10 +329,10 @@ module.exports = grammar({
       "}"
     ),
 
-    scatter: ($) => seq(
+    scatter: ($) => field("items", seq(
       $._scatter_item,
       repeat(seq(",", $._scatter_item))
-    ),
+    )),
 
     _scatter_item: ($) => choice(
       $.scatter_optional,
@@ -346,15 +351,22 @@ module.exports = grammar({
 
 
 
-    list: ($) => prec(1, seq(
+    list: ($) => prec(2, seq(
       "{",
-      optional(intersperse($._expr, ",")),
+      field("elements", optional(intersperse($._list_element, ","))),
       "}"
     )),
 
+    _list_element: ($) => choice(
+      $._expr,
+      $.scatter_element
+    ),
+
+    scatter_element: ($) => seq("@", field("expression", $._expr)),
+
     map: ($) => seq(
       "[",
-      optional(intersperse($.pair, ",")),
+      field("entries", optional(intersperse($.pair, ","))),
       "]"
     ),
 
@@ -367,8 +379,8 @@ module.exports = grammar({
     flyweight: ($) => prec(15, seq(
       token("<"),
       field("parent", $._expr),
-      optional(seq(",", $.map)),
-      optional(seq(",", $.list)),
+      optional(seq(",", field("properties", $.map))),
+      optional(seq(",", field("values", $.list))),
       token(">")
     )),
 
@@ -378,9 +390,16 @@ module.exports = grammar({
       repeat(seq(",", $._expr))
     ),
 
-    arglist: ($) => seq("(",
-      optional(intersperse(seq(optional("@"), $._expr), ",",)),
-      ")"),
+    arglist: ($) => seq(
+      "(",
+      field("arguments", optional(commaSep($.argument))),
+      ")"
+    ),
+
+    argument: ($) => choice(
+      field("value", $._expr),
+      seq("@", field("splat", $._expr))
+    ),
 
     _atom: ($) => prec(0, choice(
       $.INTEGER,
@@ -481,9 +500,9 @@ module.exports = grammar({
     property_attrs: ($) => seq(
       "(",
       commaSep1(seq(
-        $.identifier,
+        field("name", $.identifier),
         ":",
-        $._expr
+        field("value", $._expr)
       )),
       ")"
     ),
