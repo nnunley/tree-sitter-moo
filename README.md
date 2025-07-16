@@ -109,10 +109,13 @@ The grammar is defined in `grammar.js`. After making changes:
 See the `examples/` directory for various MOO code samples demonstrating different language features:
 
 - `demo.moo` - General MOO syntax examples
+- `simple_object.moo` - Simple object definition example
+- `test_highlight.moo` - Syntax highlighting test cases
+- `test_injections.moo` - Language injection examples
+- `test_new_features.moo` - Examples of newer MOO features
 - `test_object.moo` - Object definition syntax
 - `test_scatter.moo` - Scatter assignment examples
 - `test_try.moo` - Exception handling
-- `debug_*.moo` - Various debugging test cases
 
 ## Query Files
 
