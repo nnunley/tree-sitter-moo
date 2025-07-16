@@ -41,16 +41,16 @@ module.exports = grammar({
 
   conflicts: ($) => [
     // Binding patterns vs expressions in lists
-    [$.binding_rest, $.expression],
+    [$.binding_rest, $._expression],
     
     // Binding pattern vs lambda parameters vs expression
-    [$.expression, $.binding_pattern, $.lambda_parameters],
+    [$._expression, $.binding_pattern, $.lambda_parameters],
     
     // Binding pattern vs lambda parameters
     [$.binding_pattern, $.lambda_parameters],
     
     // Range end vs system property
-    [$.expression, $.system_property],
+    [$._expression, $.system_property],
   ],
 
   rules: {
@@ -81,7 +81,7 @@ module.exports = grammar({
     empty_statement: ($) => ";",
 
     expression_statement: ($) => seq(
-      field("expression", $.expression),
+      field("expression", $._expression),
       ";"
     ),
 
@@ -96,7 +96,7 @@ module.exports = grammar({
       keyword("let"),
       field("target", choice($.identifier, $.binding_pattern)),
       "=",
-      field("expression", $.expression),
+      field("expression", $._expression),
       ";"
     ),
 
@@ -104,14 +104,14 @@ module.exports = grammar({
       keyword("const"),
       field("target", choice($.identifier, $.binding_pattern)),
       "=",
-      field("expression", $.expression),
+      field("expression", $._expression),
       ";"
     ),
 
     global_statement: ($) => seq(
       keyword("global"),
       field("target", $.identifier),
-      optional(seq("=", field("expression", $.expression))),
+      optional(seq("=", field("expression", $._expression))),
       ";"
     ),
 
@@ -128,7 +128,7 @@ module.exports = grammar({
 
     return_expression: ($) => prec.right(1, seq(
       keyword("return"),
-      optional(field("value", $.expression))
+      optional(field("value", $._expression))
     )),
 
     block_statement: ($) => seq(
@@ -140,7 +140,7 @@ module.exports = grammar({
     if_statement: ($) => seq(
       keyword("if"),
       "(",
-      field("condition", $.expression),
+      field("condition", $._expression),
       ")",
       field("then_body", repeat($._statement)),
       field("elseif_clauses", repeat($.elseif_clause)),
@@ -151,7 +151,7 @@ module.exports = grammar({
     elseif_clause: ($) => seq(
       keyword("elseif"),
       "(",
-      field("condition", $.expression),
+      field("condition", $._expression),
       ")",
       field("body", repeat($._statement))
     ),
@@ -165,16 +165,16 @@ module.exports = grammar({
       keyword("for"),
       field("variable", $.identifier),
       keyword("in"),
-      field("iterable", $.expression),
+      field("iterable", $._expression),
       field("body", repeat($._statement)),
       keyword("endfor")
     ),
 
     range: ($) => seq(
       "[",
-      field("start", $.expression),
+      field("start", $._expression),
       "..",
-      field("end", $.expression),
+      field("end", $._expression),
       "]"
     ),
 
@@ -182,7 +182,7 @@ module.exports = grammar({
       keyword("while"),
       optional(field("label", $.identifier)),
       "(",
-      field("condition", $.expression),
+      field("condition", $._expression),
       ")",
       field("body", repeat($._statement)),
       keyword("endwhile")
@@ -192,7 +192,7 @@ module.exports = grammar({
       keyword("fork"),
       optional(field("label", $.identifier)),
       "(",
-      field("expression", $.expression),
+      field("expression", $._expression),
       ")",
       field("body", repeat($._statement)),
       keyword("endfork")
@@ -225,18 +225,18 @@ module.exports = grammar({
 
     try_expr: ($) => seq(
       "`",
-      field("expression", $.expression),
+      field("expression", $._expression),
       "!",
       field("codes", choice(
         keyword("ANY"),
         commaSep1($.error_code)
       )),
-      optional(seq("=>", field("fallback", $.expression))),
+      optional(seq("=>", field("fallback", $._expression))),
       "'"
     ),
 
     // Flattened expression hierarchy
-    expression: ($) => choice(
+    _expression: ($) => choice(
       // Literals (no wrapper needed)
       $.identifier,
       $.integer,
@@ -279,7 +279,7 @@ module.exports = grammar({
       $.pass_expression,
       
       // Parentheses (just for precedence, no node)
-      seq("(", $.expression, ")"),
+      seq("(", $._expression, ")"),
     ),
 
     assignment_operation: ($) => prec.right(1, seq(
@@ -291,15 +291,15 @@ module.exports = grammar({
         $.slice
       )),
       "=",
-      field("right", $.expression)
+      field("right", $._expression)
     )),
 
     conditional_operation: ($) => prec.right(2, seq(
-      field("condition", $.expression),
+      field("condition", $._expression),
       "?",
-      field("consequence", $.expression),
+      field("consequence", $._expression),
       "|",
-      field("alternative", $.expression)
+      field("alternative", $._expression)
     )),
 
     // Table-driven binary operations
@@ -307,9 +307,9 @@ module.exports = grammar({
       ...BINARY_OPERATORS.flatMap(([precedence, associativity, ops]) =>
         ops.map(op => {
           const rule = seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", op === 'in' ? keyword('in') : op),
-            field("right", $.expression)
+            field("right", $._expression)
           );
           return associativity === 'left' 
             ? prec.left(precedence, rule)
@@ -320,71 +320,71 @@ module.exports = grammar({
 
     unary_operation: ($) => prec.left(10, seq(
       field("operator", choice("!", "-")),
-      field("operand", $.expression)
+      field("operand", $._expression)
     )),
 
     property_access: ($) => prec.left(11, seq(
-      field("object", $.expression),
+      field("object", $._expression),
       ".",
       field("property", choice(
         $.identifier,
-        seq("(", $.expression, ")")
+        seq("(", $._expression, ")")
       ))
     )),
 
     method_call: ($) => prec.left(11, seq(
-      field("object", $.expression),
+      field("object", $._expression),
       ":",
       field("method", choice(
         $.identifier,
-        seq("(", $.expression, ")")
+        seq("(", $._expression, ")")
       )),
       "(",
       field("arguments", optional(commaSep(choice(
-        $.expression,
+        $._expression,
         $.splat_argument
       )))),
       ")"
     )),
 
     index_access: ($) => prec.left(11, seq(
-      field("object", $.expression),
+      field("object", $._expression),
       "[",
-      field("index", $.expression),
+      field("index", $._expression),
       "]"
     )),
 
     slice: ($) => prec.left(11, seq(
-      field("object", $.expression),
+      field("object", $._expression),
       "[",
-      field("start", $.expression),
+      field("start", $._expression),
       "..",
-      field("end", $.expression),
+      field("end", $._expression),
       "]"
     )),
 
     call: ($) => prec(12, seq(
       field("function", choice(
         $.identifier,
-        seq("(", $.expression, ")")
+        seq("(", $._expression, ")")
       )),
       "(",
       field("arguments", optional(commaSep(choice(
-        $.expression,
+        $._expression,
         $.splat_argument
       )))),
       ")"
     )),
 
-    splat_argument: ($) => seq("@", field("expression", $.expression)),
+    splat_argument: ($) => seq("@", field("expression", $._expression)),
 
     range_comprehension: ($) => seq(
       "{",
-      field("expression", $.expression),
+      field("expression", $._expression),
       keyword("for"),
       field("variable", $.identifier),
       keyword("in"),
-      field("iterable", $.expression),
+      field("iterable", $._expression),
       "}"
     ),
 
@@ -392,7 +392,7 @@ module.exports = grammar({
       keyword("pass"),
       "(",
       field("arguments", optional(commaSep(choice(
-        $.expression,
+        $._expression,
         $.splat_argument
       )))),
       ")"
@@ -412,7 +412,7 @@ module.exports = grammar({
     binding_optional: ($) => seq(
       "?",
       field("name", $.identifier),
-      optional(seq("=", field("default", $.expression)))
+      optional(seq("=", field("default", $._expression)))
     ),
 
     binding_rest: ($) => seq("@", field("name", $.identifier)),
@@ -420,13 +420,13 @@ module.exports = grammar({
     list: ($) => prec(2, seq(
       "{",
       field("elements", commaSep(choice(
-        $.expression,
+        $._expression,
         $.scatter_element
       ))),
       "}"
     )),
 
-    scatter_element: ($) => seq("@", field("expression", $.expression)),
+    scatter_element: ($) => seq("@", field("expression", $._expression)),
 
     map: ($) => seq(
       "[",
@@ -435,14 +435,14 @@ module.exports = grammar({
     ),
 
     map_entry: ($) => seq(
-      field("key", $.expression),
+      field("key", $._expression),
       "->",
-      field("value", $.expression)
+      field("value", $._expression)
     ),
 
     flyweight: ($) => prec(15, seq(
       "<",
-      field("parent", $.expression),
+      field("parent", $._expression),
       optional(seq(",", field("properties", $.map))),
       optional(seq(",", field("values", $.list))),
       ">"
@@ -454,7 +454,7 @@ module.exports = grammar({
       field("parameters", optional($.lambda_parameters)),
       "}",
       "=>",
-      field("body", $.expression)
+      field("body", $._expression)
     )),
 
     lambda_parameters: ($) => commaSep1(choice(
@@ -535,7 +535,7 @@ module.exports = grammar({
     object_property: ($) => prec.left(seq(
       field("name", $.identifier),
       ":",
-      field("value", $.expression)
+      field("value", $._expression)
     )),
 
     property_definition: ($) => seq(
@@ -547,14 +547,14 @@ module.exports = grammar({
         ")"
       )),
       "=",
-      field("value", $.expression),
+      field("value", $._expression),
       ";"
     ),
 
     property_attribute: ($) => seq(
       field("name", $.identifier),
       ":",
-      field("value", $.expression)
+      field("value", $._expression)
     ),
 
     verb_definition: ($) => seq(
@@ -573,7 +573,7 @@ module.exports = grammar({
     verb_attribute: ($) => prec(1, seq(
       field("name", $.identifier),
       ":",
-      field("value", $.expression)
+      field("value", $._expression)
     )),
   }
 });
