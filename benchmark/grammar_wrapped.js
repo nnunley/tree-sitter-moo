@@ -1,12 +1,22 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-nocheck
 
-// OPTIMIZED GRAMMAR FOR HIGH-SPEED PARSING
-// Key optimizations:
-// 1. Inline simple expressions to reduce node creation
-// 2. Use prec.dynamic for better conflict resolution
-// 3. Optimize regex patterns
-// 4. Reorder choices by frequency
+/** Original Yacc grammar
+
+%right  '='                           1
+%nonassoc '?' '|'                     2
+%left   tOR tAND                      3
+%left   tEQ tNE '<' tLE '>' tGE tIN   4
+%left   tBITOR tBITAND tBITXOR        5
+%left   tBITSHL tBITSHR               6
+%left   '+' '-'                       7
+%left   '*' '/' '%'                   8
+%right  '^'                           9
+%left   '!' '~' tUNARYMINUS           10
+%nonassoc '.' ':' '[' '$'             11
+
+%%
+**/
 
 // Binary operator table for cleaner grammar
 const BINARY_OPERATORS = [
@@ -29,12 +39,6 @@ module.exports = grammar({
 
   word: ($) => $.identifier,
 
-  inline: ($) => [
-    // Inline these rules to reduce node count
-    $._simple_expression,
-    $._literal,
-  ],
-
   conflicts: ($) => [
     // Binding patterns vs expressions in lists
     [$.binding_rest, $._expression],
@@ -47,6 +51,9 @@ module.exports = grammar({
     
     // Range end vs system property
     [$._expression, $.system_property],
+    
+    // Expression wrapper conflicts
+    [$.expression, $._expression],
     
     // For statement range vs expression
     [$.for_statement, $._expression],
@@ -63,19 +70,18 @@ module.exports = grammar({
       repeat($.statement)
     ),
 
-    // Keep statement wrapper for compatibility but optimize internals
+    // Statement wrapper node to match expected test structure
     statement: ($) => choice(
-      // Most common statements first
+      // Simple statements (require semicolon)
       $.expression_statement,
       $.assignment_statement,
-      $.if_statement,
-      $.for_statement,
-      $.while_statement,
-      $.return_statement,
-      
-      // Less common
       $.empty_statement,
+      
+      // Block statements (no semicolon)
       $.block_statement,
+      $.if_statement,
+      $.while_statement,
+      $.for_statement,
       $.fork_statement,
       $.try_statement,
       $.function_statement,
@@ -83,16 +89,8 @@ module.exports = grammar({
 
     empty_statement: ($) => ";",
 
-    // Optimize expression_statement to inline simple cases
-    expression_statement: ($) => prec.right(seq(
+    expression_statement: ($) => seq(
       field("expression", $.expression),
-      ";"
-    )),
-
-    // Special case for return statements (very common)
-    return_statement: ($) => seq(
-      keyword("return"),
-      optional(field("value", $.expression)),
       ";"
     ),
 
@@ -246,60 +244,54 @@ module.exports = grammar({
       "'"
     ),
 
-    // Expression wrapper - keep for compatibility but optimize internals
-    expression: ($) => prec.dynamic(-1, $._expression),
+    // Expression wrapper node to match expected test structure
+    expression: ($) => $._expression,
     
-    // Optimized expression hierarchy
+    // Flattened expression hierarchy
     _expression: ($) => choice(
-      // Most common expressions first
-      $._simple_expression,
-      $.assignment_operation,
-      $.binary_operation,
-      $.call,
-      $.method_call,
-      $.property_access,
-      $.index_access,
-      
-      // Less common
-      $.conditional_operation,
-      $.unary_operation,
-      $.slice,
-      $.list,
-      $.map,
-      $.lambda,
-      $.range_comprehension,
-      $.range,
-      $.try_expression,
-      $.pass_expression,
-      $.flyweight,
-      $.function_expression,
-      
-      // Control flow expressions
-      $.break_expression,
-      $.continue_expression,
-      $.return_expression,
-      
-      // Parentheses
-      seq("(", $.expression, ")"),
-    ),
-
-    // Inline simple expressions for speed
-    _simple_expression: ($) => choice(
-      $._literal,
+      // Literals (no wrapper needed)
       $.identifier,
-      $.system_property,
-      alias("$", "range_end"),
-    ),
-
-    // Group literals together
-    _literal: ($) => choice(
       $.integer,
       $.float,
       $.string,
       $.boolean,
       $.error_code,
       $.object_id,
+      $.system_property,
       $.symbol,
+      alias("$", "range_end"),  // Range end marker
+      
+      // Operations
+      $.assignment_operation,
+      $.conditional_operation,
+      $.binary_operation,
+      $.unary_operation,
+      
+      // Control flow expressions
+      $.break_expression,
+      $.continue_expression,
+      $.return_expression,
+      
+      // Access patterns
+      $.property_access,
+      $.method_call,
+      $.index_access,
+      $.slice,
+      $.call,
+      
+      // Compound expressions
+      $.list,
+      $.map,
+      $.flyweight,
+      $.lambda,
+      $.function_expression,
+      $.range_comprehension,
+      $.range,
+      $.try_expression,
+      $.pass_expression,
+      
+      // Parentheses (creates expression wrapper)
+      seq("(", $.expression, ")"),
     ),
 
     assignment_operation: ($) => prec.right(1, seq(
@@ -421,12 +413,13 @@ module.exports = grammar({
     binding_pattern: ($) => seq(
       "{",
       commaSep(choice(
-        field("name", $.identifier),
+        field("name", $.identifier), // Direct identifier for simple bindings
         $.binding_optional,
         $.binding_rest
       )),
       "}"
     ),
+
 
     binding_optional: ($) => seq(
       "?",
@@ -477,7 +470,7 @@ module.exports = grammar({
     )),
 
     lambda_parameters: ($) => commaSep1(choice(
-      $.identifier,
+      $.identifier, // Direct identifier for simple parameters
       $.binding_optional,
       $.binding_rest
     )),
@@ -503,9 +496,9 @@ module.exports = grammar({
       keyword("endfn")
     ),
 
-    // Optimized literals with simpler regex
-    identifier: ($) => /[A-Za-z_]\w*/,
-    integer: ($) => /[+-]?\d+/,
+    // Literals
+    identifier: ($) => token(/[A-Za-z_][A-Za-z0-9_]*/),
+    integer: ($) => token(/[+-]?[0-9]+/),
     float: ($) => token(choice(
       // Scientific notation without decimal point
       /[+-]?\d+[eE][+-]?\d+/,
@@ -514,11 +507,11 @@ module.exports = grammar({
       // Leading decimal point
       /[+-]?\.\d+(?:[eE][+-]?\d+)?/
     )),
-    string: ($) => /"[^"\\]*(?:\\.[^"\\]*)*"|'[^'\\]*(?:\\.[^'\\]*)*'/,
+    string: ($) => /\"[^\"\\]*(?:\\.[^\"\\]*)*\"|'[^'\\]*(?:\\.[^'\\]*)*'/,
     boolean: ($) => choice(keyword("true"), keyword("false")),
     symbol: ($) => seq("'", field("name", $.identifier)),
     object_id: ($) => seq("#", choice(
-      field("number", seq(optional("-"), /\d+/)),
+      field("number", seq(optional("-"), $.integer)),
       field("name", $.identifier)
     )),
     system_property: ($) => seq("$", field("name", $.identifier)),

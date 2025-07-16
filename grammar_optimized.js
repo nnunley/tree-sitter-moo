@@ -30,7 +30,7 @@ module.exports = grammar({
   word: ($) => $.identifier,
 
   inline: ($) => [
-    // Inline these rules to reduce node count
+    // Inline these rules to reduce node count for maximum performance
     $._simple_expression,
     $._literal,
   ],
@@ -518,7 +518,7 @@ module.exports = grammar({
     boolean: ($) => choice(keyword("true"), keyword("false")),
     symbol: ($) => seq("'", field("name", $.identifier)),
     object_id: ($) => seq("#", choice(
-      field("number", seq(optional("-"), /\d+/)),
+      field("number", seq(optional("-"), $.integer)),
       field("name", $.identifier)
     )),
     system_property: ($) => seq("$", field("name", $.identifier)),

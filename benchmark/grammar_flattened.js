@@ -1,12 +1,22 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-nocheck
 
-// OPTIMIZED GRAMMAR FOR HIGH-SPEED PARSING
-// Key optimizations:
-// 1. Inline simple expressions to reduce node creation
-// 2. Use prec.dynamic for better conflict resolution
-// 3. Optimize regex patterns
-// 4. Reorder choices by frequency
+/** Original Yacc grammar
+
+%right  '='                           1
+%nonassoc '?' '|'                     2
+%left   tOR tAND                      3
+%left   tEQ tNE '<' tLE '>' tGE tIN   4
+%left   tBITOR tBITAND tBITXOR        5
+%left   tBITSHL tBITSHR               6
+%left   '+' '-'                       7
+%left   '*' '/' '%'                   8
+%right  '^'                           9
+%left   '!' '~' tUNARYMINUS           10
+%nonassoc '.' ':' '[' '$'             11
+
+%%
+**/
 
 // Binary operator table for cleaner grammar
 const BINARY_OPERATORS = [
@@ -28,12 +38,6 @@ module.exports = grammar({
   ],
 
   word: ($) => $.identifier,
-
-  inline: ($) => [
-    // Inline these rules to reduce node count
-    $._simple_expression,
-    $._literal,
-  ],
 
   conflicts: ($) => [
     // Binding patterns vs expressions in lists
@@ -60,22 +64,21 @@ module.exports = grammar({
       // Object definition file (objdef format)
       $.object_definition,
       // Traditional MOO program (list of statements)
-      repeat($.statement)
+      repeat($._statement)
     ),
 
-    // Keep statement wrapper for compatibility but optimize internals
-    statement: ($) => choice(
-      // Most common statements first
+    // Flat statement structure - using hidden rule to avoid wrapper node
+    _statement: ($) => choice(
+      // Simple statements (require semicolon)
       $.expression_statement,
       $.assignment_statement,
-      $.if_statement,
-      $.for_statement,
-      $.while_statement,
-      $.return_statement,
-      
-      // Less common
       $.empty_statement,
+      
+      // Block statements (no semicolon)
       $.block_statement,
+      $.if_statement,
+      $.while_statement,
+      $.for_statement,
       $.fork_statement,
       $.try_statement,
       $.function_statement,
@@ -83,16 +86,8 @@ module.exports = grammar({
 
     empty_statement: ($) => ";",
 
-    // Optimize expression_statement to inline simple cases
-    expression_statement: ($) => prec.right(seq(
-      field("expression", $.expression),
-      ";"
-    )),
-
-    // Special case for return statements (very common)
-    return_statement: ($) => seq(
-      keyword("return"),
-      optional(field("value", $.expression)),
+    expression_statement: ($) => seq(
+      field("expression", $._expression),
       ";"
     ),
 
@@ -107,7 +102,7 @@ module.exports = grammar({
       keyword("let"),
       field("target", choice($.identifier, $.binding_pattern)),
       "=",
-      field("expression", $.expression),
+      field("expression", $._expression),
       ";"
     ),
 
@@ -115,14 +110,14 @@ module.exports = grammar({
       keyword("const"),
       field("target", choice($.identifier, $.binding_pattern)),
       "=",
-      field("expression", $.expression),
+      field("expression", $._expression),
       ";"
     ),
 
     global_statement: ($) => seq(
       keyword("global"),
       field("target", $.identifier),
-      optional(seq("=", field("expression", $.expression))),
+      optional(seq("=", field("expression", $._expression))),
       ";"
     ),
 
@@ -139,21 +134,21 @@ module.exports = grammar({
 
     return_expression: ($) => prec.right(1, seq(
       keyword("return"),
-      optional(field("value", $.expression))
+      optional(field("value", $._expression))
     )),
 
     block_statement: ($) => seq(
       keyword("begin"),
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("end")
     ),
 
     if_statement: ($) => seq(
       keyword("if"),
       "(",
-      field("condition", $.expression),
+      field("condition", $._expression),
       ")",
-      field("then_body", repeat($.statement)),
+      field("then_body", repeat($._statement)),
       field("elseif_clauses", repeat($.elseif_clause)),
       field("else_clause", optional($.else_clause)),
       keyword("endif")
@@ -162,30 +157,30 @@ module.exports = grammar({
     elseif_clause: ($) => seq(
       keyword("elseif"),
       "(",
-      field("condition", $.expression),
+      field("condition", $._expression),
       ")",
-      field("body", repeat($.statement))
+      field("body", repeat($._statement))
     ),
 
     else_clause: ($) => seq(
       keyword("else"),
-      field("body", repeat($.statement))
+      field("body", repeat($._statement))
     ),
 
     for_statement: ($) => seq(
       keyword("for"),
       field("variable", $.identifier),
       keyword("in"),
-      field("iterable", choice($.range, $.expression)),
-      field("body", repeat($.statement)),
+      field("iterable", choice($.range, $._expression)),
+      field("body", repeat($._statement)),
       keyword("endfor")
     ),
 
     range: ($) => seq(
       "[",
-      field("start", $.expression),
+      field("start", $._expression),
       "..",
-      field("end", $.expression),
+      field("end", $._expression),
       "]"
     ),
 
@@ -193,9 +188,9 @@ module.exports = grammar({
       keyword("while"),
       optional(field("label", $.identifier)),
       "(",
-      field("condition", $.expression),
+      field("condition", $._expression),
       ")",
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("endwhile")
     ),
 
@@ -203,15 +198,15 @@ module.exports = grammar({
       keyword("fork"),
       optional(field("label", $.identifier)),
       "(",
-      field("expression", $.expression),
+      field("expression", $._expression),
       ")",
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("endfork")
     ),
 
     try_statement: ($) => seq(
       keyword("try"),
-      field("body", repeat1($.statement)),
+      field("body", repeat1($._statement)),
       field("handlers", repeat($.except_clause)),
       field("finally", optional($.finally_clause)),
       keyword("endtry")
@@ -226,80 +221,71 @@ module.exports = grammar({
         commaSep1($.error_code)
       )),
       ")",
-      field("body", repeat($.statement))
+      field("body", repeat($._statement))
     ),
 
     finally_clause: ($) => seq(
       keyword("finally"),
-      field("body", repeat($.statement))
+      field("body", repeat($._statement))
     ),
 
     try_expression: ($) => seq(
       "`",
-      field("expression", $.expression),
+      field("expression", $._expression),
       "!",
       field("codes", choice(
         keyword("ANY"),
         commaSep1($.error_code)
       )),
-      optional(seq("=>", field("fallback", $.expression))),
+      optional(seq("=>", field("fallback", $._expression))),
       "'"
     ),
 
-    // Expression wrapper - keep for compatibility but optimize internals
-    expression: ($) => prec.dynamic(-1, $._expression),
-    
-    // Optimized expression hierarchy
+    // Flattened expression hierarchy
     _expression: ($) => choice(
-      // Most common expressions first
-      $._simple_expression,
-      $.assignment_operation,
-      $.binary_operation,
-      $.call,
-      $.method_call,
-      $.property_access,
-      $.index_access,
-      
-      // Less common
-      $.conditional_operation,
-      $.unary_operation,
-      $.slice,
-      $.list,
-      $.map,
-      $.lambda,
-      $.range_comprehension,
-      $.range,
-      $.try_expression,
-      $.pass_expression,
-      $.flyweight,
-      $.function_expression,
-      
-      // Control flow expressions
-      $.break_expression,
-      $.continue_expression,
-      $.return_expression,
-      
-      // Parentheses
-      seq("(", $.expression, ")"),
-    ),
-
-    // Inline simple expressions for speed
-    _simple_expression: ($) => choice(
-      $._literal,
+      // Literals (no wrapper needed)
       $.identifier,
-      $.system_property,
-      alias("$", "range_end"),
-    ),
-
-    // Group literals together
-    _literal: ($) => choice(
       $.integer,
       $.float,
       $.string,
       $.boolean,
       $.error_code,
       $.object_id,
+      $.system_property,
       $.symbol,
+      alias("$", "range_end"),  // Range end marker
+      
+      // Operations
+      $.assignment_operation,
+      $.conditional_operation,
+      $.binary_operation,
+      $.unary_operation,
+      
+      // Control flow expressions
+      $.break_expression,
+      $.continue_expression,
+      $.return_expression,
+      
+      // Access patterns
+      $.property_access,
+      $.method_call,
+      $.index_access,
+      $.slice,
+      $.call,
+      
+      // Compound expressions
+      $.list,
+      $.map,
+      $.flyweight,
+      $.lambda,
+      $.function_expression,
+      $.range_comprehension,
+      $.range,
+      $.try_expression,
+      $.pass_expression,
+      
+      // Parentheses (creates expression wrapper)
+      seq("(", $._expression, ")"),
     ),
 
     assignment_operation: ($) => prec.right(1, seq(
@@ -311,15 +297,15 @@ module.exports = grammar({
         $.slice
       )),
       "=",
-      field("right", $.expression)
+      field("right", $._expression)
     )),
 
     conditional_operation: ($) => prec.right(2, seq(
-      field("condition", $.expression),
+      field("condition", $._expression),
       "?",
-      field("consequence", $.expression),
+      field("consequence", $._expression),
       "|",
-      field("alternative", $.expression)
+      field("alternative", $._expression)
     )),
 
     // Table-driven binary operations
@@ -327,9 +313,9 @@ module.exports = grammar({
       ...BINARY_OPERATORS.flatMap(([precedence, associativity, ops]) =>
         ops.map(op => {
           const rule = seq(
-            field("left", $.expression),
+            field("left", $._expression),
             field("operator", op === 'in' ? keyword('in') : op),
-            field("right", $.expression)
+            field("right", $._expression)
           );
           return associativity === 'left' 
             ? prec.left(precedence, rule)
@@ -340,71 +326,71 @@ module.exports = grammar({
 
     unary_operation: ($) => prec.left(10, seq(
       field("operator", choice("!", "-")),
-      field("operand", $.expression)
+      field("operand", $._expression)
     )),
 
     property_access: ($) => prec.left(11, seq(
-      field("object", $.expression),
+      field("object", $._expression),
       ".",
       field("property", choice(
         $.identifier,
-        seq("(", $.expression, ")")
+        seq("(", $._expression, ")")
       ))
     )),
 
     method_call: ($) => prec.left(11, seq(
-      field("object", $.expression),
+      field("object", $._expression),
       ":",
       field("method", choice(
         $.identifier,
-        seq("(", $.expression, ")")
+        seq("(", $._expression, ")")
       )),
       "(",
       field("arguments", optional(commaSep(choice(
-        $.expression,
+        $._expression,
         $.splat_argument
       )))),
       ")"
     )),
 
     index_access: ($) => prec.left(11, seq(
-      field("object", $.expression),
+      field("object", $._expression),
       "[",
-      field("index", $.expression),
+      field("index", $._expression),
       "]"
     )),
 
     slice: ($) => prec.left(11, seq(
-      field("object", $.expression),
+      field("object", $._expression),
       "[",
-      field("start", $.expression),
+      field("start", $._expression),
       "..",
-      field("end", $.expression),
+      field("end", $._expression),
       "]"
     )),
 
     call: ($) => prec(12, seq(
       field("function", choice(
         $.identifier,
-        seq("(", $.expression, ")")
+        seq("(", $._expression, ")")
       )),
       "(",
       field("arguments", optional(commaSep(choice(
-        $.expression,
+        $._expression,
         $.splat_argument
       )))),
       ")"
     )),
 
-    splat_argument: ($) => seq("@", field("expression", $.expression)),
+    splat_argument: ($) => seq("@", field("expression", $._expression)),
 
     range_comprehension: ($) => seq(
       "{",
-      field("expression", $.expression),
+      field("expression", $._expression),
       keyword("for"),
       field("variable", $.identifier),
       keyword("in"),
-      field("iterable", choice($.range, $.expression)),
+      field("iterable", choice($.range, $._expression)),
       "}"
     ),
 
@@ -412,7 +398,7 @@ module.exports = grammar({
       keyword("pass"),
       "(",
       field("arguments", optional(commaSep(choice(
-        $.expression,
+        $._expression,
         $.splat_argument
       )))),
       ")"
@@ -421,17 +407,18 @@ module.exports = grammar({
     binding_pattern: ($) => seq(
       "{",
       commaSep(choice(
-        field("name", $.identifier),
+        field("name", $.identifier), // Direct identifier for simple bindings
         $.binding_optional,
         $.binding_rest
       )),
       "}"
     ),
 
+
     binding_optional: ($) => seq(
       "?",
       field("name", $.identifier),
-      optional(seq("=", field("default", $.expression)))
+      optional(seq("=", field("default", $._expression)))
     ),
 
     binding_rest: ($) => seq("@", field("name", $.identifier)),
@@ -439,13 +426,13 @@ module.exports = grammar({
     list: ($) => prec(2, seq(
       "{",
       field("elements", commaSep(choice(
-        $.expression,
+        $._expression,
         $.scatter_element
       ))),
       "}"
     )),
 
-    scatter_element: ($) => seq("@", field("expression", $.expression)),
+    scatter_element: ($) => seq("@", field("expression", $._expression)),
 
     map: ($) => seq(
       "[",
@@ -454,14 +441,14 @@ module.exports = grammar({
     ),
 
     map_entry: ($) => seq(
-      field("key", $.expression),
+      field("key", $._expression),
       "->",
-      field("value", $.expression)
+      field("value", $._expression)
     ),
 
     flyweight: ($) => prec(15, seq(
       "<",
-      field("parent", $.expression),
+      field("parent", $._expression),
       optional(seq(",", field("properties", $.map))),
       optional(seq(",", field("values", $.list))),
       ">"
@@ -473,11 +460,11 @@ module.exports = grammar({
       field("parameters", optional($.lambda_parameters)),
       "}",
       "=>",
-      field("body", $.expression)
+      field("body", $._expression)
     )),
 
     lambda_parameters: ($) => commaSep1(choice(
-      $.identifier,
+      $.identifier, // Direct identifier for simple parameters
       $.binding_optional,
       $.binding_rest
     )),
@@ -488,7 +475,7 @@ module.exports = grammar({
       "(",
       field("parameters", optional($.lambda_parameters)),
       ")",
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("endfn")
     ),
 
@@ -499,13 +486,13 @@ module.exports = grammar({
       "(",
       field("parameters", optional($.lambda_parameters)),
       ")",
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("endfn")
     ),
 
-    // Optimized literals with simpler regex
-    identifier: ($) => /[A-Za-z_]\w*/,
-    integer: ($) => /[+-]?\d+/,
+    // Literals
+    identifier: ($) => token(/[A-Za-z_][A-Za-z0-9_]*/),
+    integer: ($) => token(/[+-]?[0-9]+/),
     float: ($) => token(choice(
       // Scientific notation without decimal point
       /[+-]?\d+[eE][+-]?\d+/,
@@ -514,11 +501,11 @@ module.exports = grammar({
       // Leading decimal point
       /[+-]?\.\d+(?:[eE][+-]?\d+)?/
     )),
-    string: ($) => /"[^"\\]*(?:\\.[^"\\]*)*"|'[^'\\]*(?:\\.[^'\\]*)*'/,
+    string: ($) => /\"[^\"\\]*(?:\\.[^\"\\]*)*\"|'[^'\\]*(?:\\.[^'\\]*)*'/,
     boolean: ($) => choice(keyword("true"), keyword("false")),
     symbol: ($) => seq("'", field("name", $.identifier)),
     object_id: ($) => seq("#", choice(
-      field("number", seq(optional("-"), /\d+/)),
+      field("number", seq(optional("-"), $.integer)),
       field("name", $.identifier)
     )),
     system_property: ($) => seq("$", field("name", $.identifier)),
@@ -554,7 +541,7 @@ module.exports = grammar({
     object_property: ($) => prec.left(seq(
       field("name", $.identifier),
       ":",
-      field("value", $.expression)
+      field("value", $._expression)
     )),
 
     property_definition: ($) => seq(
@@ -566,14 +553,14 @@ module.exports = grammar({
         ")"
       )),
       "=",
-      field("value", $.expression),
+      field("value", $._expression),
       ";"
     ),
 
     property_attribute: ($) => seq(
       field("name", $.identifier),
       ":",
-      field("value", $.expression)
+      field("value", $._expression)
     ),
 
     verb_definition: ($) => seq(
@@ -585,14 +572,14 @@ module.exports = grammar({
       field("indirect_object", $.identifier),
       ")",
       repeat($.verb_attribute),
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("endverb", 1)
     ),
 
     verb_attribute: ($) => prec(1, seq(
       field("name", $.identifier),
       ":",
-      field("value", $.expression)
+      field("value", $._expression)
     )),
   }
 });
