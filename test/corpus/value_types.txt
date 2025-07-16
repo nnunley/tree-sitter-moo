@@ -17,17 +17,50 @@ Atomic Values - Numbers
 ---
 
 (program
-  (INTEGER)
-  (INTEGER)
-  (FLOAT)
-  (FLOAT)
-  (FLOAT)
-  (FLOAT)
-  (FLOAT)
-  (FLOAT)
-  (FLOAT)
-  (FLOAT)
-  (FLOAT))
+  (statement
+    (expression_statement
+      (expression
+        (integer))))
+  (statement
+    (expression_statement
+      (expression
+        (integer))))
+  (statement
+    (expression_statement
+      (expression
+        (float))))
+  (statement
+    (expression_statement
+      (expression
+        (float))))
+  (statement
+    (expression_statement
+      (expression
+        (float))))
+  (statement
+    (expression_statement
+      (expression
+        (float))))
+  (statement
+    (expression_statement
+      (expression
+        (float))))
+  (statement
+    (expression_statement
+      (expression
+        (float))))
+  (statement
+    (expression_statement
+      (expression
+        (float))))
+  (statement
+    (expression_statement
+      (expression
+        (float))))
+  (statement
+    (expression_statement
+      (expression
+        (float)))))
 
 ===================
 Atomic Values - Strings and Identifiers
@@ -43,12 +76,30 @@ _underscore123;
 ---
 
 (program
-  (STRING)
-  (STRING)
-  (STRING)
-  (STRING)
-  (identifier)
-  (identifier))
+  (statement
+    (expression_statement
+      (expression
+        (string))))
+  (statement
+    (expression_statement
+      (expression
+        (string))))
+  (statement
+    (expression_statement
+      (expression
+        (string))))
+  (statement
+    (expression_statement
+      (expression
+        (string))))
+  (statement
+    (expression_statement
+      (expression
+        (identifier))))
+  (statement
+    (expression_statement
+      (expression
+        (identifier)))))
 
 ===================
 Object and System IDs
@@ -65,13 +116,37 @@ $;
 ---
 
 (program
-  (objid (INTEGER))
-  (objid (INTEGER))
-  (sysprop (identifier))
-  (symbol (identifier))
-  (boolean)
-  (boolean)
-  (range_end))
+  (statement
+    (expression_statement
+      (expression
+        (object_id
+          (integer)))))
+  (statement
+    (expression_statement
+      (expression
+        (object_id
+          (integer)))))
+  (statement
+    (expression_statement
+      (expression
+        (system_property
+          (identifier)))))
+  (statement
+    (expression_statement
+      (expression
+        (symbol
+          (identifier)))))
+  (statement
+    (expression_statement
+      (expression
+        (identifier))))
+  (statement
+    (expression_statement
+      (expression
+        (identifier))))
+  (statement
+    (expression_statement
+      (expression))))
 
 ===================
 Lists
@@ -85,19 +160,41 @@ Lists
 ---
 
 (program
-  (list)
-  (list
-    (INTEGER)
-    (INTEGER)
-    (INTEGER))
-  (list
-    (STRING)
-    (STRING)
-    (STRING))
-  (list
-    (INTEGER)
-    (STRING)
-    (objid (INTEGER))))
+  (statement
+    (expression_statement
+      (expression
+        (list))))
+  (statement
+    (expression_statement
+      (expression
+        (list
+          (expression
+            (integer))
+          (expression
+            (integer))
+          (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      (expression
+        (list
+          (expression
+            (string))
+          (expression
+            (string))
+          (expression
+            (string))))))
+  (statement
+    (expression_statement
+      (expression
+        (list
+          (expression
+            (integer))
+          (expression
+            (string))
+          (expression
+            (object_id
+              (integer))))))))
 
 ===================
 Maps
@@ -110,15 +207,30 @@ Maps
 ---
 
 (program
-  (map)
-  (map
-    (pair
-      (INTEGER)
-      (STRING)))
-  (map
-    (pair
-      (STRING)
-      (STRING))
-    (pair
-      (STRING)
-      (INTEGER))))
+  (statement
+    (expression_statement
+      (expression
+        (map))))
+  (statement
+    (expression_statement
+      (expression
+        (map
+          (map_entry
+            (expression
+              (integer))
+            (expression
+              (string)))))))
+  (statement
+    (expression_statement
+      (expression
+        (map
+          (map_entry
+            (expression
+              (string))
+            (expression
+              (string)))
+          (map_entry
+            (expression
+              (string))
+            (expression
+              (integer))))))))

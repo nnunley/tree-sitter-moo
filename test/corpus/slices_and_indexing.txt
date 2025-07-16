@@ -10,22 +10,45 @@ obj.prop[x + 1];
 ---
 
 (program
-  (index_access
-    object: (identifier)
-    index: (INTEGER))
-  (index_access
-    object: (identifier)
-    index: (INTEGER))
-  (index_access
-    object: (identifier)
-    index: (identifier))
-  (index_access
-    object: (property_access
-      object: (identifier)
-      property: (identifier))
-    index: (binary_expr
-      left: (identifier)
-      right: (INTEGER))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (identifier))
+          index: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (identifier))
+          index: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (identifier))
+          index: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (property_access
+              object: (expression
+                (identifier))
+              property: (identifier)))
+          index: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (integer)))))))))
 
 ===================
 Basic slices
@@ -38,18 +61,36 @@ data[i..j];
 ---
 
 (program
-  (slice
-    object: (identifier)
-    from: (INTEGER)
-    to: (INTEGER))
-  (slice
-    object: (identifier)
-    from: (INTEGER)
-    to: (INTEGER))
-  (slice
-    object: (identifier)
-    from: (identifier)
-    to: (identifier)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (integer))
+          end: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (integer))
+          end: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (identifier))
+          end: (expression
+            (identifier)))))))
 
 ===================
 Slices with $ (length marker)
@@ -65,34 +106,66 @@ items[1..$-1];
 ---
 
 (program
-  (slice
-    object: (identifier)
-    from: (INTEGER)
-    to: (range_end))
-  (slice
-    object: (identifier)
-    from: (range_end)
-    to: (range_end))
-  (slice
-    object: (identifier)
-    from: (range_end)
-    to: (INTEGER))
-  (slice
-    object: (identifier)
-    from: (INTEGER)
-    to: (range_end))
-  (slice
-    object: (identifier)
-    from: (binary_expr
-      left: (range_end)
-      right: (INTEGER))
-    to: (range_end))
-  (slice
-    object: (identifier)
-    from: (INTEGER)
-    to: (binary_expr
-      left: (range_end)
-      right: (INTEGER))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (integer))
+          end: (expression)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression)
+          end: (expression)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression)
+          end: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (integer))
+          end: (expression)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (binary_operation
+              left: (expression)
+              right: (expression
+                (integer))))
+          end: (expression)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (integer))
+          end: (expression
+            (binary_operation
+              left: (expression)
+              right: (expression
+                (integer)))))))))
 
 ===================
 Special $ indexing
@@ -105,15 +178,27 @@ str[$];
 ---
 
 (program
-  (index_access
-    object: (identifier)
-    index: (range_end))
-  (index_access
-    object: (identifier)
-    index: (range_end))
-  (index_access
-    object: (identifier)
-    index: (range_end)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (identifier))
+          index: (expression)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (identifier))
+          index: (expression)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (identifier))
+          index: (expression))))))
 
 ===================
 Complex slice expressions
@@ -127,38 +212,66 @@ nested[a[0]..b[$]];
 ---
 
 (program
-  (slice
-    object: (identifier)
-    from: (binary_expr
-      left: (identifier)
-      right: (INTEGER))
-    to: (binary_expr
-      left: (identifier)
-      right: (INTEGER)))
-  (slice
-    object: (identifier)
-    from: (INTEGER)
-    to: (call
-      function: (identifier)
-      arguments: (arglist
-        arguments: (argument
-          value: (identifier)))))
-  (slice
-    object: (identifier)
-    from: (call
-      function: (identifier)
-      arguments: (arglist))
-    to: (call
-      function: (identifier)
-      arguments: (arglist)))
-  (slice
-    object: (identifier)
-    from: (index_access
-      object: (identifier)
-      index: (INTEGER))
-    to: (index_access
-      object: (identifier)
-      index: (range_end))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (integer))))
+          end: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (integer))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (integer))
+          end: (expression
+            (call
+              function: (identifier)
+              arguments: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (call
+              function: (identifier)))
+          end: (expression
+            (call
+              function: (identifier)))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (index_access
+              object: (expression
+                (identifier))
+              index: (expression
+                (integer))))
+          end: (expression
+            (index_access
+              object: (expression
+                (identifier))
+              index: (expression))))))))
 
 ===================
 Nested indexing and slicing
@@ -172,32 +285,65 @@ complex[a..b][c][d..$];
 ---
 
 (program
-  (index_access
-    object: (index_access
-      object: (identifier)
-      index: (identifier))
-    index: (identifier))
-  (index_access
-    object: (slice
-      object: (identifier)
-      from: (INTEGER)
-      to: (INTEGER))
-    index: (INTEGER))
-  (slice
-    object: (index_access
-      object: (identifier)
-      index: (identifier))
-    from: (identifier)
-    to: (identifier))
-  (slice
-    object: (index_access
-      object: (slice
-        object: (identifier)
-        from: (identifier)
-        to: (identifier))
-      index: (identifier))
-    from: (identifier)
-    to: (range_end)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (index_access
+              object: (expression
+                (identifier))
+              index: (expression
+                (identifier))))
+          index: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (slice
+              object: (expression
+                (identifier))
+              start: (expression
+                (integer))
+              end: (expression
+                (integer))))
+          index: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (index_access
+              object: (expression
+                (identifier))
+              index: (expression
+                (identifier))))
+          start: (expression
+            (identifier))
+          end: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (index_access
+              object: (expression
+                (slice
+                  object: (expression
+                    (identifier))
+                  start: (expression
+                    (identifier))
+                  end: (expression
+                    (identifier))))
+              index: (expression
+                (identifier))))
+          start: (expression
+            (identifier))
+          end: (expression))))))
 
 ===================
 $ in nested contexts
@@ -216,28 +362,53 @@ data[arr[$-1]][1..$];
 
 (program
   (comment)
-  (index_access
-    object: (STRING)
-    index: (index_access
-      object: (list
-        elements: (INTEGER)
-        elements: (INTEGER)
-        elements: (INTEGER))
-      index: (range_end)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (string))
+          index: (expression
+            (index_access
+              object: (expression
+                (list
+                  elements: (expression
+                    (integer))
+                  elements: (expression
+                    (integer))
+                  elements: (expression
+                    (integer))))
+              index: (expression)))))))
   (comment)
-  (index_access
-    object: (identifier)
-    index: (index_access
-      object: (identifier)
-      index: (range_end)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (identifier))
+          index: (expression
+            (index_access
+              object: (expression
+                (identifier))
+              index: (expression)))))))
   (comment)
-  (slice
-    object: (index_access
-      object: (identifier)
-      index: (index_access
-        object: (identifier)
-        index: (binary_expr
-          left: (range_end)
-          right: (INTEGER))))
-    from: (INTEGER)
-    to: (range_end)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (index_access
+              object: (expression
+                (identifier))
+              index: (expression
+                (index_access
+                  object: (expression
+                    (identifier))
+                  index: (expression
+                    (binary_operation
+                      left: (expression)
+                      right: (expression
+                        (integer))))))))
+          start: (expression
+            (integer))
+          end: (expression))))))

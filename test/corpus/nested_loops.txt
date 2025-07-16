@@ -13,26 +13,48 @@ return result;
 ---
 
 (program
-  (assignment_expr
-    left: (identifier)
-    right: (list))
-  (for
-    variable: (identifier)
-    iterable: (for_iterable
-      start: (INTEGER)
-      end: (INTEGER))
-    body: (for
+  (statement
+    (expression_statement
+      expression: (expression
+        (assignment_operation
+          left: (identifier)
+          right: (expression
+            (list))))))
+  (statement
+    (for_statement
       variable: (identifier)
-      iterable: (for_iterable
-        start: (INTEGER)
-        end: (INTEGER))
-      body: (assignment_expr
-        left: (identifier)
-        right: (list
-          elements: (scatter_element
-            expression: (identifier))
-          elements: (binary_expr
-            left: (identifier)
-            right: (identifier))))))
-  (return
-    value: (identifier)))
+      iterable: (range
+        start: (expression
+          (integer))
+        end: (expression
+          (integer)))
+      body: (statement
+        (for_statement
+          variable: (identifier)
+          iterable: (range
+            start: (expression
+              (integer))
+            end: (expression
+              (integer)))
+          body: (statement
+            (expression_statement
+              expression: (expression
+                (assignment_operation
+                  left: (identifier)
+                  right: (expression
+                    (list
+                      elements: (scatter_element
+                        expression: (expression
+                          (identifier)))
+                      elements: (expression
+                        (binary_operation
+                          left: (expression
+                            (identifier))
+                          right: (expression
+                            (identifier))))))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (return_expression
+          value: (expression
+            (identifier)))))))

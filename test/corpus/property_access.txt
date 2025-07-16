@@ -12,22 +12,45 @@ $version;
 ---
 
 (program
-  (property_access
-    object: (property_access
-      object: (identifier)
-      property: (identifier))
-    property: (identifier))
-  (property_access
-    object: (identifier)
-    property: (identifier))
-  (property_access
-    object: (identifier)
-    property: (identifier))
-  (property_access
-    object: (objid
-      number: (INTEGER))
-    property: (identifier))
-  (sysprop
-    name: (identifier))
-  (symbol
-    name: (identifier)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (property_access
+          object: (expression
+            (property_access
+              object: (expression
+                (identifier))
+              property: (identifier)))
+          property: (identifier)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (property_access
+          object: (expression
+            (identifier))
+          property: (identifier)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (property_access
+          object: (expression
+            (identifier))
+          property: (identifier)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (property_access
+          object: (expression
+            (object_id
+              number: (integer)))
+          property: (identifier)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (system_property
+          name: (identifier)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (symbol
+          name: (identifier))))))

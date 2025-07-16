@@ -1,0 +1,95 @@
+================================================================================
+Parenthesized expressions
+================================================================================
+
+(x);
+(a + b) * c;
+a + (b * c);
+((x));
+(((y)));
+(a + b) * (c + d);
+((a + b) * c) / d;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (expression
+          (identifier)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (expression
+          (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (expression
+          (expression
+            (expression
+              (identifier)))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier)))))
+                right: (expression
+                  (identifier)))))
+          right: (expression
+            (identifier)))))))

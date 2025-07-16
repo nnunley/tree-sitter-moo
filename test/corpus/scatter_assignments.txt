@@ -7,19 +7,16 @@ Basic scatter assignment
 ---
 
 (program
-  (assignment_expr
-    left: (scatter_pattern
-      parameters: (parameter_list
-        (parameter
-          (scatter_target
-            name: (identifier)))
-        (parameter
-          (scatter_target
-            name: (identifier)))
-        (parameter
-          (scatter_target
-            name: (identifier)))))
-    right: (identifier)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (assignment_operation
+          left: (binding_pattern
+            name: (identifier)
+            name: (identifier)
+            name: (identifier))
+          right: (expression
+            (identifier)))))))
 
 ===================
 Scatter assignment in let statement
@@ -30,19 +27,16 @@ let {first, second, @rest} = my_list;
 ---
 
 (program
-  (local_assignment
-    target: (scatter_pattern
-      parameters: (parameter_list
-        (parameter
-          (scatter_target
+  (statement
+    (assignment_statement
+      (let_statement
+        target: (binding_pattern
+          name: (identifier)
+          name: (identifier)
+          (binding_rest
             name: (identifier)))
-        (parameter
-          (scatter_target
-            name: (identifier)))
-        (parameter
-          (scatter_rest
-            name: (identifier)))))
-    value: (identifier)))
+        expression: (expression
+          (identifier))))))
 
 ===================
 Scatter assignment in const statement
@@ -53,20 +47,19 @@ const {x, ?y = 10, @remaining} = data;
 ---
 
 (program
-  (const_assignment
-    target: (scatter_pattern
-      parameters: (parameter_list
-        (parameter
-          (scatter_target
-            name: (identifier)))
-        (parameter
-          (scatter_optional
+  (statement
+    (assignment_statement
+      (const_statement
+        target: (binding_pattern
+          name: (identifier)
+          (binding_optional
             name: (identifier)
-            default: (INTEGER)))
-        (parameter
-          (scatter_rest
-            name: (identifier)))))
-    value: (identifier)))
+            default: (expression
+              (integer)))
+          (binding_rest
+            name: (identifier)))
+        expression: (expression
+          (identifier))))))
 
 ===================
 Lambda with scatter parameters
@@ -77,22 +70,23 @@ let handler = {?code = E_NONE, @args} => handle(code, args);
 ---
 
 (program
-  (local_assignment
-    target: (identifier)
-    value: (lambda_expr
-      params: (lambda_params
-        (parameter_list
-          (parameter
-            (scatter_optional
-              name: (identifier)
-              default: (identifier)))
-          (parameter
-            (scatter_rest
-              name: (identifier)))))
-      body: (call
-        function: (identifier)
-        arguments: (arglist
-          arguments: (argument
-            value: (identifier))
-          arguments: (argument
-            value: (identifier)))))))
+  (statement
+    (assignment_statement
+      (let_statement
+        target: (identifier)
+        expression: (expression
+          (lambda
+            parameters: (lambda_parameters
+              (binding_optional
+                name: (identifier)
+                default: (expression
+                  (identifier)))
+              (binding_rest
+                name: (identifier)))
+            body: (expression
+              (call
+                function: (identifier)
+                arguments: (expression
+                  (identifier))
+                arguments: (expression
+                  (identifier))))))))))

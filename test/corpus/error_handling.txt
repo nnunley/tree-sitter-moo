@@ -11,14 +11,21 @@ endtry
 ---
 
 (program
-  (try
-    body: (call
-      function: (identifier)
-      arguments: (arglist))
-    except: (except
-      codes: (ERR)
-      body: (return
-        value: (INTEGER)))))
+  (statement
+    (try_statement
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)))))
+      handlers: (except_clause
+        codes: (error_code)
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (return_expression
+                value: (expression
+                  (integer))))))))))
 
 ===================
 Try-except with lowercase errors
@@ -33,14 +40,21 @@ endtry
 ---
 
 (program
-  (try
-    body: (call
-      function: (identifier)
-      arguments: (arglist))
-    except: (except
-      codes: (ERR)
-      body: (return
-        value: (INTEGER)))))
+  (statement
+    (try_statement
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)))))
+      handlers: (except_clause
+        codes: (error_code)
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (return_expression
+                value: (expression
+                  (integer))))))))))
 
 ===================
 Try-except with mixed case errors
@@ -55,20 +69,25 @@ endtry
 ---
 
 (program
-  (try
-    body: (call
-      function: (identifier)
-      arguments: (arglist))
-    except: (except
-      variable: (identifier)
-      codes: (ERR)
-      codes: (ERR)
-      codes: (ERR)
-      body: (call
-        function: (identifier)
-        arguments: (arglist
-          arguments: (argument
-            value: (STRING)))))))
+  (statement
+    (try_statement
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)))))
+      handlers: (except_clause
+        variable: (identifier)
+        codes: (error_code)
+        codes: (error_code)
+        codes: (error_code)
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (call
+                function: (identifier)
+                arguments: (expression
+                  (string))))))))))
 
 ===================
 Try-except with any
@@ -83,13 +102,20 @@ endtry
 ---
 
 (program
-  (try
-    body: (call
-      function: (identifier)
-      arguments: (arglist))
-    except: (except
-      body: (return
-        value: (STRING)))))
+  (statement
+    (try_statement
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)))))
+      handlers: (except_clause
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (return_expression
+                value: (expression
+                  (string))))))))))
 
 ===================
 Try-except with lowercase ANY
@@ -104,13 +130,20 @@ endtry
 ---
 
 (program
-  (try
-    body: (call
-      function: (identifier)
-      arguments: (arglist))
-    except: (except
-      body: (return
-        value: (boolean)))))
+  (statement
+    (try_statement
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)))))
+      handlers: (except_clause
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (return_expression
+                value: (expression
+                  (identifier))))))))))
 
 ===================
 Try-except with label
@@ -125,21 +158,28 @@ endtry
 ---
 
 (program
-  (try
-    body: (call
-      function: (identifier)
-      arguments: (arglist))
-    except: (except
-      variable: (identifier)
-      codes: (ERR)
-      codes: (ERR)
-      body: (call
-        function: (identifier)
-        arguments: (arglist
-          arguments: (argument
-            value: (binary_expr
-              left: (STRING)
-              right: (identifier))))))))
+  (statement
+    (try_statement
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)))))
+      handlers: (except_clause
+        variable: (identifier)
+        codes: (error_code)
+        codes: (error_code)
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (call
+                function: (identifier)
+                arguments: (expression
+                  (binary_operation
+                    left: (expression
+                      (string))
+                    right: (expression
+                      (identifier))))))))))))
 
 ===================
 Try-except with multiple handlers
@@ -156,20 +196,27 @@ endtry
 ---
 
 (program
-  (try
-    body: (call
-      function: (identifier)
-      arguments: (arglist))
-    except: (except
-      codes: (ERR)
-      body: (call
-        function: (identifier)
-        arguments: (arglist)))
-    except: (except
-      codes: (ERR)
-      body: (call
-        function: (identifier)
-        arguments: (arglist)))))
+  (statement
+    (try_statement
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)))))
+      handlers: (except_clause
+        codes: (error_code)
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (call
+                function: (identifier))))))
+      handlers: (except_clause
+        codes: (error_code)
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (call
+                function: (identifier)))))))))
 
 ===================
 Try-except with finally
@@ -186,18 +233,26 @@ endtry
 ---
 
 (program
-  (try
-    body: (call
-      function: (identifier)
-      arguments: (arglist))
-    except: (except
-      codes: (ERR)
-      body: (call
-        function: (identifier)
-        arguments: (arglist)))
-    body: (call
-      function: (identifier)
-      arguments: (arglist))))
+  (statement
+    (try_statement
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)))))
+      handlers: (except_clause
+        codes: (error_code)
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (call
+                function: (identifier))))))
+      finally: (finally_clause
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (call
+                function: (identifier)))))))))
 
 ===================
 Try expression simple
@@ -208,12 +263,18 @@ Try expression simple
 ---
 
 (program
-  (try_expr
-    expression: (property_access
-      object: (identifier)
-      property: (identifier))
-    codes: (ERR)
-    fallback: (STRING)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (try_expression
+          expression: (expression
+            (property_access
+              object: (expression
+                (identifier))
+              property: (identifier)))
+          codes: (error_code)
+          fallback: (expression
+            (string)))))))
 
 ===================
 Try expression with lowercase error
@@ -224,12 +285,18 @@ Try expression with lowercase error
 ---
 
 (program
-  (try_expr
-    expression: (property_access
-      object: (identifier)
-      property: (identifier))
-    codes: (ERR)
-    fallback: (INTEGER)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (try_expression
+          expression: (expression
+            (property_access
+              object: (expression
+                (identifier))
+              property: (identifier)))
+          codes: (error_code)
+          fallback: (expression
+            (integer)))))))
 
 ===================
 Try expression with error list
@@ -240,14 +307,19 @@ Try expression with error list
 ---
 
 (program
-  (try_expr
-    expression: (method_call
-      object: (identifier)
-      method: (identifier)
-      arguments: (arglist))
-    codes: (ERR)
-    codes: (ERR)
-    fallback: (INTEGER)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (try_expression
+          expression: (expression
+            (method_call
+              object: (expression
+                (identifier))
+              method: (identifier)))
+          codes: (error_code)
+          codes: (error_code)
+          fallback: (expression
+            (integer)))))))
 
 ===================
 Try expression with mixed case errors
@@ -258,15 +330,20 @@ Try expression with mixed case errors
 ---
 
 (program
-  (try_expr
-    expression: (method_call
-      object: (identifier)
-      method: (identifier)
-      arguments: (arglist))
-    codes: (ERR)
-    codes: (ERR)
-    codes: (ERR)
-    fallback: (boolean)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (try_expression
+          expression: (expression
+            (method_call
+              object: (expression
+                (identifier))
+              method: (identifier)))
+          codes: (error_code)
+          codes: (error_code)
+          codes: (error_code)
+          fallback: (expression
+            (identifier)))))))
 
 ===================
 Try expression without handler
@@ -277,7 +354,10 @@ Try expression without handler
 ---
 
 (program
-  (try_expr
-    expression: (call
-      function: (identifier)
-      arguments: (arglist))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (try_expression
+          expression: (expression
+            (call
+              function: (identifier))))))))

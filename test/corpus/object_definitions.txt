@@ -13,17 +13,23 @@ endobject
 (program
   (object_definition
     name: (identifier)
-    (object_property
-      name: (identifier)
-      value: (STRING))
-    (object_property
-      name: (identifier)
-      value: (objid
-        number: (INTEGER)))
-    (object_property
-      name: (identifier)
-      value: (objid
-        number: (INTEGER)))))
+    (object_member
+      (object_property
+        name: (identifier)
+        value: (expression
+          (string))))
+    (object_member
+      (object_property
+        name: (identifier)
+        value: (expression
+          (object_id
+            number: (integer)))))
+    (object_member
+      (object_property
+        name: (identifier)
+        value: (expression
+          (object_id
+            number: (integer)))))))
 
 ===================
 Object with properties
@@ -39,24 +45,34 @@ endobject
 (program
   (object_definition
     name: (identifier)
-    (property_definition
-      name: (identifier)
-      (property_attrs
+    (object_member
+      (property_definition
         name: (identifier)
-        value: (objid
-          number: (INTEGER))
+        attributes: (property_attribute
+          name: (identifier)
+          value: (expression
+            (object_id
+              number: (integer))))
+        attributes: (property_attribute
+          name: (identifier)
+          value: (expression
+            (string)))
+        value: (expression
+          (string))))
+    (object_member
+      (property_definition
         name: (identifier)
-        value: (STRING))
-      value: (STRING))
-    (property_definition
-      name: (identifier)
-      (property_attrs
-        name: (identifier)
-        value: (objid
-          number: (INTEGER))
-        name: (identifier)
-        value: (STRING))
-      value: (INTEGER))))
+        attributes: (property_attribute
+          name: (identifier)
+          value: (expression
+            (object_id
+              number: (integer))))
+        attributes: (property_attribute
+          name: (identifier)
+          value: (expression
+            (string)))
+        value: (expression
+          (integer))))))
 
 ===================
 Object with verb
@@ -73,18 +89,24 @@ endobject
 (program
   (object_definition
     name: (identifier)
-    (verb_definition
-      name: (identifier)
-      (verb_args
-        dobj: (identifier)
-        prep: (identifier)
-        iobj: (identifier))
-      (verb_attr
+    (object_member
+      (verb_definition
         name: (identifier)
-        value: (objid
-          number: (INTEGER)))
-      (verb_attr
-        name: (identifier)
-        value: (STRING))
-      (return
-        value: (INTEGER)))))
+        direct_object: (identifier)
+        preposition: (identifier)
+        indirect_object: (identifier)
+        (verb_attribute
+          name: (identifier)
+          value: (expression
+            (object_id
+              number: (integer))))
+        (verb_attribute
+          name: (identifier)
+          value: (expression
+            (string)))
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (return_expression
+                value: (expression
+                  (integer))))))))))

@@ -1,17 +1,17 @@
 ; Literals
-(INTEGER) @number
-(FLOAT) @number.float
-(STRING) @string
+(integer) @number
+(float) @number.float
+(string) @string
 (boolean) @boolean
 
 ; Identifiers
 (identifier) @variable
 
 ; Object references
-(objid) @constant.object
+(object_id) @constant.object
 
 ; Error codes
-(ERR) @constant.error
+(error_code) @constant.error
 
 ; Operators
 [
@@ -106,10 +106,10 @@
  "in" @keyword.control) @keyword.comprehension
 
 ; Scatter assignment
-(scatter_pattern) @pattern.scatter
-(scatter_target (identifier) @variable.parameter)
-(scatter_optional (identifier) @variable.parameter)
-(scatter_rest (identifier) @variable.parameter)
+(binding_pattern) @pattern.binding
+(binding_target (identifier) @variable.parameter)
+(binding_optional (identifier) @variable.parameter)
+(binding_rest (identifier) @variable.parameter)
 
 ; Property access
 (property_access
@@ -124,14 +124,14 @@
   function: (identifier) @function)
 
 ; System properties
-(sysprop 
+(system_property 
   "$"
   (identifier) @variable.system)
 
 ; Binary expression operators (with fields)
-(binary_expr
+(binary_operation
   operator: _ @operator)
 
 ; Unary expression operators (with fields)  
-(unary_expr
+(unary_operation
   operator: _ @operator)

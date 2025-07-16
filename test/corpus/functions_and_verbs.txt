@@ -9,27 +9,37 @@ calculate(x + y, z * 2);
 ---
 
 (program
-  (call
-    function: (identifier)
-    arguments: (arglist
-      arguments: (argument
-        value: (identifier))
-      arguments: (argument
-        value: (identifier))))
-  (call
-    function: (identifier)
-    arguments: (arglist))
-  (call
-    function: (identifier)
-    arguments: (arglist
-      arguments: (argument
-        value: (binary_expr
-          left: (identifier)
-          right: (identifier)))
-      arguments: (argument
-        value: (binary_expr
-          left: (identifier)
-          right: (INTEGER))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (call
+          function: (identifier)
+          arguments: (expression
+            (identifier))
+          arguments: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (call
+          function: (identifier)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (call
+          function: (identifier)
+          arguments: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          arguments: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (integer)))))))))
 
 ===================
 Verbs
@@ -44,34 +54,50 @@ pass(@args);
 ---
 
 (program
-  (method_call
-    object: (sysprop
-      name: (identifier))
-    method: (identifier)
-    arguments: (arglist
-      arguments: (argument
-        value: (identifier))
-      arguments: (argument
-        value: (identifier))))
-  (method_call
-    object: (identifier)
-    method: (identifier)
-    arguments: (arglist))
-  (method_call
-    object: (identifier)
-    method: (identifier)
-    arguments: (arglist
-      arguments: (argument
-        value: (STRING))))
-  (method_call
-    object: (objid
-      number: (INTEGER))
-    method: (identifier)
-    arguments: (arglist
-      arguments: (argument
-        value: (identifier))
-      arguments: (argument
-        value: (identifier))))
-  (pass
-    arguments: (argument
-      splat: (identifier))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (method_call
+          object: (expression
+            (system_property
+              name: (identifier)))
+          method: (identifier)
+          arguments: (expression
+            (identifier))
+          arguments: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (method_call
+          object: (expression
+            (identifier))
+          method: (identifier)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (method_call
+          object: (expression
+            (identifier))
+          method: (identifier)
+          arguments: (expression
+            (string))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (method_call
+          object: (expression
+            (object_id
+              number: (integer)))
+          method: (identifier)
+          arguments: (expression
+            (identifier))
+          arguments: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (pass_expression
+          arguments: (splat_argument
+            expression: (expression
+              (identifier))))))))

@@ -9,18 +9,30 @@ Basic Flyweights
 ---
 
 (program
-  (flyweight
-    parent: (objid
-      number: (INTEGER)))
-  (flyweight
-    parent: (objid
-      number: (INTEGER))
-    properties: (map))
-  (flyweight
-    parent: (objid
-      number: (INTEGER))
-    properties: (map)
-    values: (list)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (flyweight
+          parent: (expression
+            (object_id
+              number: (integer)))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (flyweight
+          parent: (expression
+            (object_id
+              number: (integer)))
+          properties: (map)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (flyweight
+          parent: (expression
+            (object_id
+              number: (integer)))
+          properties: (map)
+          values: (list))))))
 
 ===================
 Complex Flyweights
@@ -33,41 +45,70 @@ Complex Flyweights
 ---
 
 (program
-  (flyweight
-    parent: (objid
-      number: (INTEGER))
-    properties: (map
-      entries: (pair
-        key: (identifier)
-        value: (STRING)))
-    values: (list
-      elements: (INTEGER)
-      elements: (INTEGER)))
-  (flyweight
-    parent: (objid
-      number: (INTEGER))
-    properties: (map
-      entries: (pair
-        key: (identifier)
-        value: (STRING))
-      entries: (pair
-        key: (identifier)
-        value: (boolean)))
-    values: (list
-      elements: (STRING)
-      elements: (STRING)))
-  (flyweight
-    parent: (objid
-      number: (INTEGER))
-    properties: (map
-      entries: (pair
-        key: (identifier)
-        value: (INTEGER))
-      entries: (pair
-        key: (identifier)
-        value: (FLOAT)))
-    values: (list
-      elements: (boolean)
-      elements: (boolean)
-      elements: (objid
-        number: (INTEGER)))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (flyweight
+          parent: (expression
+            (object_id
+              number: (integer)))
+          properties: (map
+            entries: (map_entry
+              key: (expression
+                (identifier))
+              value: (expression
+                (string))))
+          values: (list
+            elements: (expression
+              (integer))
+            elements: (expression
+              (integer)))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (flyweight
+          parent: (expression
+            (object_id
+              number: (integer)))
+          properties: (map
+            entries: (map_entry
+              key: (expression
+                (identifier))
+              value: (expression
+                (string)))
+            entries: (map_entry
+              key: (expression
+                (identifier))
+              value: (expression
+                (identifier))))
+          values: (list
+            elements: (expression
+              (string))
+            elements: (expression
+              (string)))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (flyweight
+          parent: (expression
+            (object_id
+              number: (integer)))
+          properties: (map
+            entries: (map_entry
+              key: (expression
+                (identifier))
+              value: (expression
+                (integer)))
+            entries: (map_entry
+              key: (expression
+                (identifier))
+              value: (expression
+                (float))))
+          values: (list
+            elements: (expression
+              (identifier))
+            elements: (expression
+              (identifier))
+            elements: (expression
+              (object_id
+                number: (integer)))))))))

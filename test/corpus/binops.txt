@@ -105,722 +105,1695 @@ one + two + three + four + five + six + seven + eight + nine + ten;
 ---
 
 (program
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (unary_expr
-      operand: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (unary_expr
-      operand: (identifier)))
-  (binary_expr
-    left: (unary_expr
-      operand: (identifier))
-    right: (unary_expr
-      operand: (identifier)))
-  (binary_expr
-    left: (identifier)
-    right: (unary_expr
-      operand: (identifier)))
-  (binary_expr
-    left: (unary_expr
-      operand: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (binary_expr
-    left: (FLOAT)
-    right: (FLOAT))
-  (binary_expr
-    left: (FLOAT)
-    right: (FLOAT))
-  (binary_expr
-    left: (FLOAT)
-    right: (FLOAT))
-  (binary_expr
-    left: (FLOAT)
-    right: (FLOAT))
-  (binary_expr
-    left: (FLOAT)
-    right: (FLOAT))
-  (binary_expr
-    left: (FLOAT)
-    right: (FLOAT))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (INTEGER))
-      right: (identifier))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (INTEGER))
-      right: (identifier))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (INTEGER))
-      right: (identifier))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (INTEGER))
-      right: (identifier))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (INTEGER))
-      right: (identifier))
-    right: (INTEGER))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER)))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (unary_expr
-    operand: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (unary_expr
-    operand: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (unary_expr
-    operand: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (unary_expr
-    operand: (unary_expr
-      operand: (identifier)))
-  (binary_expr
-    left: (INTEGER)
-    right: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER)))
-  (binary_expr
-    left: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER))
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER)))
-  (binary_expr
-    left: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER))
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER))
-    right: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER)))
-  (binary_expr
-    left: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER))
-    right: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER)))
-  (binary_expr
-    left: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER))
-    right: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER)))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (identifier)))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier))))
-  (binary_expr
-    left: (binary_expr
-      left: (FLOAT)
-      right: (binary_expr
-        left: (FLOAT)
-        right: (FLOAT)))
-    right: (binary_expr
-      left: (FLOAT)
-      right: (FLOAT)))
-  (binary_expr
-    left: (binary_expr
-      left: (FLOAT)
-      right: (FLOAT))
-    right: (binary_expr
-      left: (FLOAT)
-      right: (FLOAT)))
-  (binary_expr
-    left: (FLOAT)
-    right: (binary_expr
-      left: (FLOAT)
-      right: (FLOAT)))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (binary_expr
-        left: (binary_expr
-          left: (identifier)
-          right: (identifier))
-        right: (identifier)))
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (identifier)
-          right: (identifier))
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (INTEGER)
-          right: (INTEGER))
-        right: (INTEGER))
-      right: (INTEGER))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (INTEGER)
-          right: (INTEGER))
-        right: (INTEGER))
-      right: (INTEGER))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (INTEGER)
-          right: (INTEGER))
-        right: (INTEGER))
-      right: (INTEGER))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (INTEGER)
-        right: (INTEGER))
-      right: (INTEGER))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (INTEGER)
-        right: (INTEGER))
-      right: (INTEGER))
-    right: (INTEGER))
-  (binary_expr
-    left: (INTEGER)
-    right: (binary_expr
-      left: (INTEGER)
-      right: (binary_expr
-        left: (INTEGER)
-        right: (INTEGER))))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (identifier)
-          right: (identifier))
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (identifier)
-          right: (identifier))
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (binary_expr
-        left: (identifier)
-        right: (binary_expr
-          left: (identifier)
-          right: (identifier)))))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (identifier)
-          right: (identifier))
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier))))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (identifier)
-          right: (identifier))
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (binary_expr
-        left: (identifier)
-        right: (binary_expr
-          left: (identifier)
-          right: (identifier)))))
-  (binary_expr
-    left: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER))
-    right: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (INTEGER)
-          right: (INTEGER))
-        right: (INTEGER))
-      right: (binary_expr
-        left: (INTEGER)
-        right: (INTEGER))))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (binary_expr
-      left: (identifier)
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier))))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (binary_expr
-            left: (binary_expr
-              left: (binary_expr
-                left: (binary_expr
-                  left: (binary_expr
-                    left: (identifier)
-                    right: (identifier))
-                  right: (identifier))
-                right: (identifier))
-              right: (identifier))
-            right: (identifier))
-          right: (identifier))
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (binary_expr
-            left: (binary_expr
-              left: (binary_expr
-                left: (binary_expr
-                  left: (binary_expr
-                    left: (identifier)
-                    right: (identifier))
-                  right: (identifier))
-                right: (identifier))
-              right: (identifier))
-            right: (identifier))
-          right: (identifier))
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (binary_expr
-            left: (binary_expr
-              left: (binary_expr
-                left: (binary_expr
-                  left: (binary_expr
-                    left: (identifier)
-                    right: (identifier))
-                  right: (identifier))
-                right: (identifier))
-              right: (identifier))
-            right: (identifier))
-          right: (identifier))
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (binary_expr
-            left: (binary_expr
-              left: (binary_expr
-                left: (binary_expr
-                  left: (binary_expr
-                    left: (identifier)
-                    right: (identifier))
-                  right: (identifier))
-                right: (identifier))
-              right: (identifier))
-            right: (identifier))
-          right: (identifier))
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (binary_expr
-            left: (binary_expr
-              left: (binary_expr
-                left: (binary_expr
-                  left: (binary_expr
-                    left: (identifier)
-                    right: (identifier))
-                  right: (identifier))
-                right: (identifier))
-              right: (identifier))
-            right: (identifier))
-          right: (identifier))
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (binary_expr
-        left: (identifier)
-        right: (binary_expr
-          left: (identifier)
-          right: (binary_expr
-            left: (identifier)
-            right: (binary_expr
-              left: (identifier)
-              right: (binary_expr
-                left: (identifier)
-                right: (binary_expr
-                  left: (identifier)
-                  right: (binary_expr
-                    left: (identifier)
-                    right: (identifier))))))))))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (binary_expr
-          left: (identifier)
-          right: (identifier)))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (binary_expr
-      left: (identifier)
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier))))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier))))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier))))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier))))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (binary_expr
-            left: (binary_expr
-              left: (binary_expr
-                left: (binary_expr
-                  left: (binary_expr
-                    left: (identifier)
-                    right: (identifier))
-                  right: (identifier))
-                right: (identifier))
-              right: (identifier))
-            right: (identifier))
-          right: (identifier))
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (unary_expr
-        operand: (identifier))
-      right: (identifier))
-    right: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (identifier)
-          right: (identifier))
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier))))
-  (binary_expr
-    left: (binary_expr
-      left: (unary_expr
-        operand: (binary_expr
-          left: (identifier)
-          right: (identifier)))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier))))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (binary_expr
-          left: (identifier)
-          right: (identifier))
-        right: (identifier))
-      right: (binary_expr
-        left: (binary_expr
-          left: (identifier)
-          right: (identifier))
-        right: (identifier)))
-    right: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (identifier))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (unary_operation
+              operand: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (unary_operation
+              operand: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (unary_operation
+              operand: (expression
+                (identifier))))
+          right: (expression
+            (unary_operation
+              operand: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (unary_operation
+              operand: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (unary_operation
+              operand: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (float))
+          right: (expression
+            (float))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (float))
+          right: (expression
+            (float))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (float))
+          right: (expression
+            (float))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (float))
+          right: (expression
+            (float))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (float))
+          right: (expression
+            (float))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (float))
+          right: (expression
+            (float))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (integer))
+              right: (expression
+                (integer))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (unary_operation
+          operand: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (unary_operation
+          operand: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (unary_operation
+          operand: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (unary_operation
+          operand: (expression
+            (expression
+              (unary_operation
+                operand: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (integer))
+              right: (expression
+                (integer))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (integer))
+              right: (expression
+                (integer))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (integer))
+              right: (expression
+                (integer))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (integer))
+              right: (expression
+                (integer))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (integer))
+              right: (expression
+                (integer))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (integer))
+              right: (expression
+                (integer))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (integer))
+                right: (expression
+                  (integer)))))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (integer))
+                right: (expression
+                  (integer)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (integer))
+                right: (expression
+                  (integer)))))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (integer))
+                right: (expression
+                  (integer)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (integer))
+                right: (expression
+                  (integer)))))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (integer))
+                right: (expression
+                  (integer)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier)))))
+                right: (expression
+                  (identifier)))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier)))))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (float))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (float))
+                  right: (expression
+                    (float))))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (float))
+              right: (expression
+                (float))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (float))
+                right: (expression
+                  (float)))))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (float))
+                right: (expression
+                  (float)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (float))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (float))
+              right: (expression
+                (float))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))
+              right: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (expression
+                        (binary_operation
+                          left: (expression
+                            (identifier))
+                          right: (expression
+                            (identifier)))))
+                    right: (expression
+                      (identifier)))))
+              right: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (integer))
+                      right: (expression
+                        (integer))))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (integer))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (integer))
+                      right: (expression
+                        (integer))))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (integer))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (integer))
+                      right: (expression
+                        (integer))))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (integer))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (integer))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (integer))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (integer))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (integer))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (integer))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (integer))
+                  right: (expression
+                    (integer))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (expression
+                          (binary_operation
+                            left: (expression
+                              (identifier))
+                            right: (expression
+                              (identifier)))))
+                      right: (expression
+                        (identifier)))))
+                right: (expression
+                  (identifier)))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (expression
+                          (binary_operation
+                            left: (expression
+                              (identifier))
+                            right: (expression
+                              (identifier)))))))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (integer))
+              right: (expression
+                (integer))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (integer))
+                      right: (expression
+                        (integer))))
+                  right: (expression
+                    (integer))))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (integer))
+                  right: (expression
+                    (integer))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (binary_operation
+                          left: (expression
+                            (binary_operation
+                              left: (expression
+                                (binary_operation
+                                  left: (expression
+                                    (binary_operation
+                                      left: (expression
+                                        (binary_operation
+                                          left: (expression
+                                            (identifier))
+                                          right: (expression
+                                            (identifier))))
+                                      right: (expression
+                                        (identifier))))
+                                  right: (expression
+                                    (identifier))))
+                              right: (expression
+                                (identifier))))
+                          right: (expression
+                            (identifier))))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (binary_operation
+                          left: (expression
+                            (binary_operation
+                              left: (expression
+                                (binary_operation
+                                  left: (expression
+                                    (binary_operation
+                                      left: (expression
+                                        (binary_operation
+                                          left: (expression
+                                            (identifier))
+                                          right: (expression
+                                            (identifier))))
+                                      right: (expression
+                                        (identifier))))
+                                  right: (expression
+                                    (identifier))))
+                              right: (expression
+                                (identifier))))
+                          right: (expression
+                            (identifier))))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (binary_operation
+                          left: (expression
+                            (binary_operation
+                              left: (expression
+                                (binary_operation
+                                  left: (expression
+                                    (binary_operation
+                                      left: (expression
+                                        (binary_operation
+                                          left: (expression
+                                            (identifier))
+                                          right: (expression
+                                            (identifier))))
+                                      right: (expression
+                                        (identifier))))
+                                  right: (expression
+                                    (identifier))))
+                              right: (expression
+                                (identifier))))
+                          right: (expression
+                            (identifier))))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (binary_operation
+                          left: (expression
+                            (binary_operation
+                              left: (expression
+                                (binary_operation
+                                  left: (expression
+                                    (binary_operation
+                                      left: (expression
+                                        (binary_operation
+                                          left: (expression
+                                            (identifier))
+                                          right: (expression
+                                            (identifier))))
+                                      right: (expression
+                                        (identifier))))
+                                  right: (expression
+                                    (identifier))))
+                              right: (expression
+                                (identifier))))
+                          right: (expression
+                            (identifier))))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (binary_operation
+                          left: (expression
+                            (binary_operation
+                              left: (expression
+                                (binary_operation
+                                  left: (expression
+                                    (binary_operation
+                                      left: (expression
+                                        (binary_operation
+                                          left: (expression
+                                            (identifier))
+                                          right: (expression
+                                            (identifier))))
+                                      right: (expression
+                                        (identifier))))
+                                  right: (expression
+                                    (identifier))))
+                              right: (expression
+                                (identifier))))
+                          right: (expression
+                            (identifier))))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (binary_operation
+                          left: (expression
+                            (identifier))
+                          right: (expression
+                            (binary_operation
+                              left: (expression
+                                (identifier))
+                              right: (expression
+                                (binary_operation
+                                  left: (expression
+                                    (identifier))
+                                  right: (expression
+                                    (binary_operation
+                                      left: (expression
+                                        (identifier))
+                                      right: (expression
+                                        (binary_operation
+                                          left: (expression
+                                            (identifier))
+                                          right: (expression
+                                            (identifier))))))))))))))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))
+              right: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))
+              right: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))
+              right: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))
+              right: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier)))))
+                right: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))))))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier)))))
+                right: (expression
+                  (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (binary_operation
+                          left: (expression
+                            (binary_operation
+                              left: (expression
+                                (binary_operation
+                                  left: (expression
+                                    (binary_operation
+                                      left: (expression
+                                        (binary_operation
+                                          left: (expression
+                                            (identifier))
+                                          right: (expression
+                                            (identifier))))
+                                      right: (expression
+                                        (identifier))))
+                                  right: (expression
+                                    (identifier))))
+                              right: (expression
+                                (identifier))))
+                          right: (expression
+                            (identifier))))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (unary_operation
+                  operand: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (binary_operation
+                      left: (expression
+                        (identifier))
+                      right: (expression
+                        (identifier))))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (unary_operation
+                  operand: (expression
+                    (expression
+                      (binary_operation
+                        left: (expression
+                          (identifier))
+                        right: (expression
+                          (identifier)))))))
+              right: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))
+              right: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier)))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (binary_operation
+                        left: (expression
+                          (identifier))
+                        right: (expression
+                          (identifier))))
+                    right: (expression
+                      (identifier)))))
+              right: (expression
+                (expression
+                  (binary_operation
+                    left: (expression
+                      (binary_operation
+                        left: (expression
+                          (identifier))
+                        right: (expression
+                          (identifier))))
+                    right: (expression
+                      (identifier)))))))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier))))
+                right: (expression
+                  (identifier))))))))))
 
 ===================
 Binary operators - Logical
@@ -834,22 +1807,47 @@ p || q && r;
 ---
 
 (program
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))
+          right: (expression
+            (identifier)))))))
 
 ===================
 Binary operators - Comparison
@@ -866,27 +1864,62 @@ element in list;
 ---
 
 (program
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier)))))))
 
 ===================
 Binary operators - Bitwise
@@ -901,21 +1934,46 @@ q >> 3;
 ---
 
 (program
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (identifier))
-  (binary_expr
-    left: (identifier)
-    right: (INTEGER))
-  (binary_expr
-    left: (identifier)
-    right: (INTEGER)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (integer)))))))
 
 ===================
 Complex precedence
@@ -931,54 +1989,114 @@ x + y < z * w && a != b;
 ---
 
 (program
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (identifier)))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier)))))))))
 
 ===================
 Mixed expressions with literals
@@ -994,31 +2112,66 @@ flag && true || false;
 ---
 
 (program
-  (binary_expr
-    left: (identifier)
-    right: (INTEGER))
-  (binary_expr
-    left: (STRING)
-    right: (STRING))
-  (binary_expr
-    left: (FLOAT)
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (INTEGER))
-    right: (INTEGER))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (boolean))
-    right: (boolean))
-  (binary_expr
-    left: (property_access
-      object: (objid
-        number: (INTEGER))
-      property: (identifier))
-    right: (INTEGER)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (string))
+          right: (expression
+            (string))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (float))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (integer))))
+          right: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (property_access
+              object: (expression
+                (object_id
+                  number: (integer)))
+              property: (identifier)))
+          right: (expression
+            (integer)))))))
 
 ===================
 Nested and complex expressions
@@ -1034,72 +2187,133 @@ a + b[1..5][0] * c;
 ---
 
 (program
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (binary_expr
-    left: (index_access
-      object: (identifier)
-      index: (identifier))
-    right: (binary_expr
-      left: (index_access
-        object: (identifier)
-        index: (identifier))
-      right: (index_access
-        object: (identifier)
-        index: (identifier))))
-  (binary_expr
-    left: (property_access
-      object: (identifier)
-      property: (identifier))
-    right: (binary_expr
-      left: (property_access
-        object: (identifier)
-        property: (identifier))
-      right: (property_access
-        object: (identifier)
-        property: (identifier))))
-  (binary_expr
-    left: (call
-      function: (identifier)
-      arguments: (arglist
-        arguments: (argument
-          value: (identifier))))
-    right: (binary_expr
-      left: (call
-        function: (identifier)
-        arguments: (arglist
-          arguments: (argument
-            value: (identifier))))
-      right: (call
-        function: (identifier)
-        arguments: (arglist
-          arguments: (argument
-            value: (identifier))))))
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (index_access
-        object: (slice
-          object: (identifier)
-          from: (INTEGER)
-          to: (INTEGER))
-        index: (INTEGER))
-      right: (identifier)))
-  (binary_expr
-    left: (index_access
-      object: (list
-        elements: (INTEGER)
-        elements: (INTEGER)
-        elements: (INTEGER))
-      index: (binary_expr
-        left: (range_end)
-        right: (INTEGER)))
-    right: (INTEGER)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))
+          right: (expression
+            (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (index_access
+              object: (expression
+                (identifier))
+              index: (expression
+                (identifier))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (index_access
+                  object: (expression
+                    (identifier))
+                  index: (expression
+                    (identifier))))
+              right: (expression
+                (index_access
+                  object: (expression
+                    (identifier))
+                  index: (expression
+                    (identifier))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (property_access
+              object: (expression
+                (identifier))
+              property: (identifier)))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (property_access
+                  object: (expression
+                    (identifier))
+                  property: (identifier)))
+              right: (expression
+                (property_access
+                  object: (expression
+                    (identifier))
+                  property: (identifier)))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (call
+              function: (identifier)
+              arguments: (expression
+                (identifier))))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (call
+                  function: (identifier)
+                  arguments: (expression
+                    (identifier))))
+              right: (expression
+                (call
+                  function: (identifier)
+                  arguments: (expression
+                    (identifier))))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (index_access
+                  object: (expression
+                    (slice
+                      object: (expression
+                        (identifier))
+                      start: (expression
+                        (integer))
+                      end: (expression
+                        (integer))))
+                  index: (expression
+                    (integer))))
+              right: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (index_access
+              object: (expression
+                (list
+                  elements: (expression
+                    (integer))
+                  elements: (expression
+                    (integer))
+                  elements: (expression
+                    (integer))))
+              index: (expression
+                (binary_operation
+                  left: (expression)
+                  right: (expression
+                    (integer))))))
+          right: (expression
+            (integer)))))))
 
 ===================
 Right associative exponentiation
@@ -1113,28 +2327,58 @@ a * b ^ c * d;
 ---
 
 (program
-  (binary_expr
-    left: (identifier)
-    right: (binary_expr
-      left: (identifier)
-      right: (identifier)))
-  (binary_expr
-    left: (INTEGER)
-    right: (binary_expr
-      left: (INTEGER)
-      right: (INTEGER)))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (binary_expr
-        left: (identifier)
-        right: (identifier)))
-    right: (identifier)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (integer))
+          right: (expression
+            (binary_operation
+              left: (expression
+                (integer))
+              right: (expression
+                (integer))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))))
+          right: (expression
+            (identifier)))))))
 
 ===================
 String and list operations
@@ -1148,32 +2392,64 @@ str[1..$] + "suffix";
 ---
 
 (program
-  (binary_expr
-    left: (STRING)
-    right: (STRING))
-  (binary_expr
-    left: (list
-      elements: (INTEGER)
-      elements: (INTEGER))
-    right: (list
-      elements: (INTEGER)
-      elements: (INTEGER)))
-  (binary_expr
-    left: (slice
-      object: (identifier)
-      from: (INTEGER)
-      to: (range_end))
-    right: (STRING))
-  (binary_expr
-    left: (binary_expr
-      left: (STRING)
-      right: (slice
-        object: (identifier)
-        from: (INTEGER)
-        to: (binary_expr
-          left: (range_end)
-          right: (INTEGER))))
-    right: (STRING)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (string))
+          right: (expression
+            (string))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (list
+              elements: (expression
+                (integer))
+              elements: (expression
+                (integer))))
+          right: (expression
+            (list
+              elements: (expression
+                (integer))
+              elements: (expression
+                (integer))))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (slice
+              object: (expression
+                (identifier))
+              start: (expression
+                (integer))
+              end: (expression)))
+          right: (expression
+            (string))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (string))
+              right: (expression
+                (slice
+                  object: (expression
+                    (identifier))
+                  start: (expression
+                    (integer))
+                  end: (expression
+                    (binary_operation
+                      left: (expression)
+                      right: (expression
+                        (integer))))))))
+          right: (expression
+            (string)))))))
 
 ===================
 Chained comparisons
@@ -1186,20 +2462,43 @@ i == j != k == l;
 ---
 
 (program
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (identifier)
-      right: (identifier))
-    right: (identifier))
-  (binary_expr
-    left: (binary_expr
-      left: (binary_expr
-        left: (identifier)
-        right: (identifier))
-      right: (identifier))
-    right: (identifier)))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (binary_operation
+          left: (expression
+            (binary_operation
+              left: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (identifier))))
+              right: (expression
+                (identifier))))
+          right: (expression
+            (identifier)))))))

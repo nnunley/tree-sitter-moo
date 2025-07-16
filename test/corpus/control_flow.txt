@@ -9,15 +9,25 @@ endwhile
 ---
 
 (program
-  (while
-    condition: (binary_expr
-      left: (identifier)
-      right: (INTEGER))
-    body: (assignment_expr
-      left: (identifier)
-      right: (binary_expr
-        left: (identifier)
-        right: (INTEGER)))))
+  (statement
+    (while_statement
+      condition: (expression
+        (binary_operation
+          left: (expression
+            (identifier))
+          right: (expression
+            (integer))))
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (assignment_operation
+              left: (identifier)
+              right: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (integer)))))))))))
 
 ===================
 Labeled while loop
@@ -30,11 +40,16 @@ endwhile
 ---
 
 (program
-  (while
-    label: (identifier)
-    condition: (identifier)
-    body: (break
-      label: (identifier))))
+  (statement
+    (while_statement
+      label: (identifier)
+      condition: (expression
+        (identifier))
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (break_expression
+              label: (identifier))))))))
 
 ===================
 For range loop
@@ -47,16 +62,21 @@ endfor
 ---
 
 (program
-  (for
-    variable: (identifier)
-    iterable: (for_iterable
-      start: (INTEGER)
-      end: (INTEGER))
-    body: (call
-      function: (identifier)
-      arguments: (arglist
-        arguments: (argument
-          value: (identifier))))))
+  (statement
+    (for_statement
+      variable: (identifier)
+      iterable: (range
+        start: (expression
+          (integer))
+        end: (expression
+          (integer)))
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)
+              arguments: (expression
+                (identifier)))))))))
 
 ===================
 For in loop
@@ -69,15 +89,19 @@ endfor
 ---
 
 (program
-  (for
-    variable: (identifier)
-    iterable: (for_iterable
-      expression: (identifier))
-    body: (call
-      function: (identifier)
-      arguments: (arglist
-        arguments: (argument
-          value: (identifier))))))
+  (statement
+    (for_statement
+      variable: (identifier)
+      iterable: (expression
+        (expression
+          (identifier)))
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)
+              arguments: (expression
+                (identifier)))))))))
 
 ===================
 Fork statement
@@ -90,11 +114,15 @@ endfork
 ---
 
 (program
-  (fork
-    expression: (INTEGER)
-    body: (call
-      function: (identifier)
-      arguments: (arglist))))
+  (statement
+    (fork_statement
+      expression: (expression
+        (integer))
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier))))))))
 
 ===================
 Labeled fork
@@ -107,12 +135,16 @@ endfork
 ---
 
 (program
-  (fork
-    label: (identifier)
-    expression: (identifier)
-    body: (call
-      function: (identifier)
-      arguments: (arglist))))
+  (statement
+    (fork_statement
+      label: (identifier)
+      expression: (expression
+        (identifier))
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier))))))))
 
 ===================
 Begin end block
@@ -126,13 +158,18 @@ end
 ---
 
 (program
-  (block
-    body: (call
-      function: (identifier)
-      arguments: (arglist))
-    body: (call
-      function: (identifier)
-      arguments: (arglist))))
+  (statement
+    (block_statement
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)))))
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier))))))))
 
 ===================
 Break statement
@@ -144,9 +181,15 @@ break loop_label;
 ---
 
 (program
-  (break)
-  (break
-    (identifier)))
+  (statement
+    (expression_statement
+      (expression
+        (break_expression))))
+  (statement
+    (expression_statement
+      (expression
+        (break_expression
+          (identifier))))))
 
 ===================
 Continue statement
@@ -158,9 +201,15 @@ continue loop_label;
 ---
 
 (program
-  (continue)
-  (continue
-    (identifier)))
+  (statement
+    (expression_statement
+      (expression
+        (continue_expression))))
+  (statement
+    (expression_statement
+      (expression
+        (continue_expression
+          (identifier))))))
 
 ===================
 Return with expression
@@ -173,10 +222,23 @@ return x + y;
 ---
 
 (program
-  (return)
-  (return
-    value: (INTEGER))
-  (return
-    value: (binary_expr
-      left: (identifier)
-      right: (identifier))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (return_expression))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (return_expression
+          value: (expression
+            (integer))))))
+  (statement
+    (expression_statement
+      expression: (expression
+        (return_expression
+          value: (expression
+            (binary_operation
+              left: (expression
+                (identifier))
+              right: (expression
+                (identifier)))))))))
