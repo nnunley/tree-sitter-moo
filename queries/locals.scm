@@ -200,13 +200,13 @@
 
 ; Object and property references don't create definitions
 (property_access
-  object: (identifier) @reference)
+  object: (expression (identifier) @reference))
 
 (method_call
-  object: (identifier) @reference)
+  object: (expression (identifier) @reference))
 
 (index_access
-  object: (identifier) @reference)
+  object: (expression (identifier) @reference))
 
 (slice
-  object: (identifier) @reference)
+  object: (expression (identifier) @reference))

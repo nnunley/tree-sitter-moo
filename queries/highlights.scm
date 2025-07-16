@@ -107,9 +107,9 @@
 
 ; Scatter assignment
 (binding_pattern) @pattern.binding
-(binding_target (identifier) @variable.parameter)
-(binding_optional (identifier) @variable.parameter)
-(binding_rest (identifier) @variable.parameter)
+(binding_pattern name: (identifier) @variable.parameter)
+(binding_optional name: (identifier) @variable.parameter)
+(binding_rest name: (identifier) @variable.parameter)
 
 ; Property access
 (property_access
