@@ -119,6 +119,36 @@ See the `examples/` directory for various MOO code samples demonstrating differe
 The `queries/` directory contains:
 
 - `highlights.scm` - Syntax highlighting queries
+- `locals.scm` - Scope and variable binding queries for enhanced highlighting
+- `injections.scm` - Language injection queries for embedded SQL, regex, and other languages
+
+## Documentation
+
+Comprehensive documentation for the CST structure and API usage is available in the `docs/` directory:
+
+- **[Complete Documentation Index](docs/README.md)** - Main documentation hub with navigation
+- **[CST Reference](docs/CST_REFERENCE.md)** - Complete CST hierarchy and named fields
+- **[Named Fields Guide](docs/NAMED_FIELDS.md)** - Programmatic access patterns and API examples
+- **[Production Rules](docs/PRODUCTION_REFERENCE.md)** - Quick reference for all grammar rules
+- **[CST Examples](docs/CST_EXAMPLES.md)** - Real parse tree examples for all language constructs
+
+### Key Features
+
+**Modern Binding System**: Unified parameter structure across assignments, lambdas, and functions:
+```moo
+let {a, ?b = 10, @rest} = data;           // Destructuring assignment
+let handler = {a, ?b = 10, @rest} => ...;  // Lambda parameters  
+fn process(a, ?b = 10, @rest) ... endfn    // Function parameters
+```
+
+**Flattened CST Structure**: Direct access to parameters without nested wrappers:
+```javascript
+// Easy programmatic access
+const parameters = bindingNode.childrenForFieldName('parameters');
+parameters.forEach(param => console.log(param.childForFieldName('name').text));
+```
+
+**Comprehensive Named Fields**: All 35+ named fields documented with examples and API patterns.
 
 ## Contributing
 
