@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/ndn/development/tree-sitter-moo/moo.dylib'
+relocations:     []
+...
