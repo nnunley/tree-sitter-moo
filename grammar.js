@@ -30,10 +30,11 @@ module.exports = grammar({
 
   conflicts: ($) => [
     [$.scatter_target, $._atom],
-    [$._scatter_item, $.lambda_param],
+    [$.parameter, $.scatter_element],
     [$.scatter_element, $.scatter_rest],
     [$.scatter_rest, $._atom],
     [$.list, $.lambda_expr],
+    [$.scatter_pattern, $.lambda_params],
   ],
 
   rules: {
@@ -325,16 +326,17 @@ module.exports = grammar({
 
     scatter_pattern: ($) => seq(
       "{",
-      field("elements", $.scatter),
+      field("parameters", $.parameter_list),
       "}"
     ),
 
-    scatter: ($) => field("items", seq(
-      $._scatter_item,
-      repeat(seq(",", $._scatter_item))
-    )),
+    // Unified parameter list for both scatter patterns and lambda/function params
+    parameter_list: ($) => seq(
+      $.parameter,
+      repeat(seq(",", $.parameter))
+    ),
 
-    _scatter_item: ($) => choice(
+    parameter: ($) => choice(
       $.scatter_optional,
       $.scatter_target,
       $.scatter_rest
@@ -353,7 +355,7 @@ module.exports = grammar({
 
     list: ($) => prec(2, seq(
       "{",
-      field("elements", optional(intersperse($._list_element, ","))),
+      field("elements", commaSep($._list_element)),
       "}"
     )),
 
@@ -366,7 +368,7 @@ module.exports = grammar({
 
     map: ($) => seq(
       "[",
-      field("entries", optional(intersperse($.pair, ","))),
+      field("entries", commaSep($.pair)),
       "]"
     ),
 
@@ -542,16 +544,7 @@ module.exports = grammar({
       field("body", $._expr)
     )),
 
-    lambda_params: ($) => seq(
-      $.lambda_param,
-      repeat(seq(",", $.lambda_param))
-    ),
-
-    lambda_param: ($) => choice(
-      $.scatter_target,
-      $.scatter_optional,
-      $.scatter_rest
-    ),
+    lambda_params: ($) => $.parameter_list,
 
     // Function expressions: fn(params) statements endfn
     fn_expr: ($) => seq(
@@ -592,8 +585,9 @@ function caseInsensitive (keyword) {
     .join('')
   )
 }
-function intersperse(rule, separator) {
-  return seq(rule, repeat(seq(separator, rule)));
+// Helper function for comma-separated lists with at least one element
+function commaSep1(rule) {
+  return seq(rule, repeat(seq(",", rule)));
 }
 
 // Helper to create an aliased case-insensitive keyword
@@ -603,10 +597,7 @@ function keyword(word, precedence = null) {
   return alias(token_pattern, word);
 }
 
-function commaSep1(rule) {
-  return intersperse(rule, ",");
-}
-
+// Helper function for optional comma-separated lists
 function commaSep(rule) {
   return optional(commaSep1(rule));
 }

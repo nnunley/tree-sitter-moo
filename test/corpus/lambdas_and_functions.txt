@@ -12,12 +12,13 @@ let double = {n} => n * 2;
     target: (identifier)
     value: (lambda_expr
       params: (lambda_params
-        (lambda_param
-          (scatter_target
-            name: (identifier)))
-        (lambda_param
-          (scatter_target
-            name: (identifier))))
+        (parameter_list
+          (parameter
+            (scatter_target
+              name: (identifier)))
+          (parameter
+            (scatter_target
+              name: (identifier)))))
       body: (binary_expr
         left: (identifier)
         right: (identifier))))
@@ -25,9 +26,10 @@ let double = {n} => n * 2;
     target: (identifier)
     value: (lambda_expr
       params: (lambda_params
-        (lambda_param
-          (scatter_target
-            name: (identifier))))
+        (parameter_list
+          (parameter
+            (scatter_target
+              name: (identifier)))))
       body: (binary_expr
         left: (identifier)
         right: (INTEGER)))))
@@ -65,9 +67,10 @@ endfn;
     target: (identifier)
     value: (fn_expr
       params: (lambda_params
-        (lambda_param
-          (scatter_target
-            name: (identifier))))
+        (parameter_list
+          (parameter
+            (scatter_target
+              name: (identifier)))))
       body: (if
         condition: (binary_expr
           left: (identifier)
@@ -99,9 +102,10 @@ endfn
   (fn_statement
     name: (identifier)
     params: (lambda_params
-      (lambda_param
-        (scatter_target
-          name: (identifier))))
+      (parameter_list
+        (parameter
+          (scatter_target
+            name: (identifier)))))
     body: (return
       value: (binary_expr
         left: (binary_expr

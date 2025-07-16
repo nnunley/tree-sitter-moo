@@ -9,13 +9,16 @@ Basic scatter assignment
 (program
   (assignment_expr
     left: (scatter_pattern
-      elements: (scatter
-        items: (scatter_target
-          name: (identifier))
-        items: (scatter_target
-          name: (identifier))
-        items: (scatter_target
-          name: (identifier))))
+      parameters: (parameter_list
+        (parameter
+          (scatter_target
+            name: (identifier)))
+        (parameter
+          (scatter_target
+            name: (identifier)))
+        (parameter
+          (scatter_target
+            name: (identifier)))))
     right: (identifier)))
 
 ===================
@@ -29,13 +32,16 @@ let {first, second, @rest} = my_list;
 (program
   (local_assignment
     target: (scatter_pattern
-      elements: (scatter
-        items: (scatter_target
-          name: (identifier))
-        items: (scatter_target
-          name: (identifier))
-        items: (scatter_rest
-          name: (identifier))))
+      parameters: (parameter_list
+        (parameter
+          (scatter_target
+            name: (identifier)))
+        (parameter
+          (scatter_target
+            name: (identifier)))
+        (parameter
+          (scatter_rest
+            name: (identifier)))))
     value: (identifier)))
 
 ===================
@@ -49,14 +55,17 @@ const {x, ?y = 10, @remaining} = data;
 (program
   (const_assignment
     target: (scatter_pattern
-      elements: (scatter
-        items: (scatter_target
-          name: (identifier))
-        items: (scatter_optional
-          name: (identifier)
-          default: (INTEGER))
-        items: (scatter_rest
-          name: (identifier))))
+      parameters: (parameter_list
+        (parameter
+          (scatter_target
+            name: (identifier)))
+        (parameter
+          (scatter_optional
+            name: (identifier)
+            default: (INTEGER)))
+        (parameter
+          (scatter_rest
+            name: (identifier)))))
     value: (identifier)))
 
 ===================
@@ -72,13 +81,14 @@ let handler = {?code = E_NONE, @args} => handle(code, args);
     target: (identifier)
     value: (lambda_expr
       params: (lambda_params
-        (lambda_param
-          (scatter_optional
-            name: (identifier)
-            default: (identifier)))
-        (lambda_param
-          (scatter_rest
-            name: (identifier))))
+        (parameter_list
+          (parameter
+            (scatter_optional
+              name: (identifier)
+              default: (identifier)))
+          (parameter
+            (scatter_rest
+              name: (identifier)))))
       body: (call
         function: (identifier)
         arguments: (arglist

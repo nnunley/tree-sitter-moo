@@ -4717,7 +4717,7 @@
     }
   },
   {
-    "type": "lambda_param",
+    "type": "lambda_params",
     "named": true,
     "fields": {},
     "children": {
@@ -4725,30 +4725,7 @@
       "required": true,
       "types": [
         {
-          "type": "scatter_optional",
-          "named": true
-        },
-        {
-          "type": "scatter_rest",
-          "named": true
-        },
-        {
-          "type": "scatter_target",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "lambda_params",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "lambda_param",
+          "type": "parameter_list",
           "named": true
         }
       ]
@@ -5849,6 +5826,44 @@
     }
   },
   {
+    "type": "parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "scatter_optional",
+          "named": true
+        },
+        {
+          "type": "scatter_rest",
+          "named": true
+        },
+        {
+          "type": "scatter_target",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameter_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pass",
     "named": true,
     "fields": {
@@ -6933,34 +6948,6 @@
     }
   },
   {
-    "type": "scatter",
-    "named": true,
-    "fields": {
-      "items": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "scatter_optional",
-            "named": true
-          },
-          {
-            "type": "scatter_rest",
-            "named": true
-          },
-          {
-            "type": "scatter_target",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "scatter_element",
     "named": true,
     "fields": {
@@ -7254,12 +7241,12 @@
     "type": "scatter_pattern",
     "named": true,
     "fields": {
-      "elements": {
+      "parameters": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "scatter",
+            "type": "parameter_list",
             "named": true
           }
         ]
