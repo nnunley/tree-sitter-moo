@@ -58,14 +58,15 @@ module.exports = grammar({
       // Object definition file (objdef format)
       $.object_definition,
       // Traditional MOO program (list of statements)
-      repeat($.statement)
+      repeat($._statement)
     ),
 
-    // Flat statement structure
-    statement: ($) => choice(
+    // Flat statement structure - using hidden rule to avoid wrapper node
+    _statement: ($) => choice(
       // Simple statements (require semicolon)
       $.expression_statement,
       $.assignment_statement,
+      $.empty_statement,
       
       // Block statements (no semicolon)
       $.block_statement,
@@ -76,6 +77,8 @@ module.exports = grammar({
       $.try_statement,
       $.function_statement,
     ),
+
+    empty_statement: ($) => ";",
 
     expression_statement: ($) => seq(
       field("expression", $.expression),
@@ -130,7 +133,7 @@ module.exports = grammar({
 
     block_statement: ($) => seq(
       keyword("begin"),
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("end")
     ),
 
@@ -139,7 +142,7 @@ module.exports = grammar({
       "(",
       field("condition", $.expression),
       ")",
-      field("then_body", repeat($.statement)),
+      field("then_body", repeat($._statement)),
       field("elseif_clauses", repeat($.elseif_clause)),
       field("else_clause", optional($.else_clause)),
       keyword("endif")
@@ -150,23 +153,20 @@ module.exports = grammar({
       "(",
       field("condition", $.expression),
       ")",
-      field("body", repeat($.statement))
+      field("body", repeat($._statement))
     ),
 
     else_clause: ($) => seq(
       keyword("else"),
-      field("body", repeat($.statement))
+      field("body", repeat($._statement))
     ),
 
     for_statement: ($) => seq(
       keyword("for"),
       field("variable", $.identifier),
       keyword("in"),
-      field("iterable", choice(
-        $.range,
-        $.expression  // Direct expression instead of wrapper
-      )),
-      field("body", repeat($.statement)),
+      field("iterable", $.expression),
+      field("body", repeat($._statement)),
       keyword("endfor")
     ),
 
@@ -184,7 +184,7 @@ module.exports = grammar({
       "(",
       field("condition", $.expression),
       ")",
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("endwhile")
     ),
 
@@ -194,13 +194,13 @@ module.exports = grammar({
       "(",
       field("expression", $.expression),
       ")",
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("endfork")
     ),
 
     try_statement: ($) => seq(
       keyword("try"),
-      field("body", repeat1($.statement)),
+      field("body", repeat1($._statement)),
       field("handlers", repeat($.except_clause)),
       field("finally", optional($.finally_clause)),
       keyword("endtry")
@@ -215,15 +215,15 @@ module.exports = grammar({
         commaSep1($.error_code)
       )),
       ")",
-      field("body", repeat($.statement))
+      field("body", repeat($._statement))
     ),
 
     finally_clause: ($) => seq(
       keyword("finally"),
-      field("body", repeat($.statement))
+      field("body", repeat($._statement))
     ),
 
-    try_expression: ($) => seq(
+    try_expr: ($) => seq(
       "`",
       field("expression", $.expression),
       "!",
@@ -274,7 +274,8 @@ module.exports = grammar({
       $.lambda,
       $.function_expression,
       $.range_comprehension,
-      $.try_expression,
+      $.range,
+      $.try_expr,
       $.pass_expression,
       
       // Parentheses (just for precedence, no node)
@@ -282,7 +283,13 @@ module.exports = grammar({
     ),
 
     assignment_operation: ($) => prec.right(1, seq(
-      field("left", choice($.identifier, $.binding_pattern)),
+      field("left", choice(
+        $.identifier,
+        $.binding_pattern,
+        $.property_access,
+        $.index_access,
+        $.slice
+      )),
       "=",
       field("right", $.expression)
     )),
@@ -377,10 +384,7 @@ module.exports = grammar({
       keyword("for"),
       field("variable", $.identifier),
       keyword("in"),
-      field("iterable", choice(
-        $.range,
-        $.expression
-      )),
+      field("iterable", $.expression),
       "}"
     ),
 
@@ -465,7 +469,7 @@ module.exports = grammar({
       "(",
       field("parameters", optional($.lambda_parameters)),
       ")",
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("endfn")
     ),
 
@@ -476,7 +480,7 @@ module.exports = grammar({
       "(",
       field("parameters", optional($.lambda_parameters)),
       ")",
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("endfn")
     ),
 
@@ -562,7 +566,7 @@ module.exports = grammar({
       field("indirect_object", $.identifier),
       ")",
       repeat($.verb_attribute),
-      field("body", repeat($.statement)),
+      field("body", repeat($._statement)),
       keyword("endverb", 1)
     ),
 
