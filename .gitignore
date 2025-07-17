@@ -23,6 +23,7 @@ dist/
 *.so
 *.so.*
 *.dylib
+*.dylib.dSYM/
 *.dll
 *.pc
 *.exp
@@ -40,6 +41,8 @@ zig-out/
 *.wasm
 *.obj
 *.o
+grammar_backup.js
+grammar_optimized.js
 
 # Archives
 *.tar.gz

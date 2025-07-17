@@ -41,8 +41,7 @@ $version;
       expression: (expression
         (property_access
           object: (expression
-            (object_id
-              number: (integer)))
+            (object_id))
           property: (identifier)))))
   (statement
     (expression_statement

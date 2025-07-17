@@ -87,8 +87,7 @@ pass(@args);
       expression: (expression
         (method_call
           object: (expression
-            (object_id
-              number: (integer)))
+            (object_id))
           method: (identifier)
           arguments: (expression
             (identifier))

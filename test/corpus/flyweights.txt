@@ -14,23 +14,20 @@ Basic Flyweights
       expression: (expression
         (flyweight
           parent: (expression
-            (object_id
-              number: (integer)))))))
+            (object_id))))))
   (statement
     (expression_statement
       expression: (expression
         (flyweight
           parent: (expression
-            (object_id
-              number: (integer)))
+            (object_id))
           properties: (map)))))
   (statement
     (expression_statement
       expression: (expression
         (flyweight
           parent: (expression
-            (object_id
-              number: (integer)))
+            (object_id))
           properties: (map)
           values: (list))))))
 
@@ -50,8 +47,7 @@ Complex Flyweights
       expression: (expression
         (flyweight
           parent: (expression
-            (object_id
-              number: (integer)))
+            (object_id))
           properties: (map
             entries: (map_entry
               key: (expression
@@ -68,8 +64,7 @@ Complex Flyweights
       expression: (expression
         (flyweight
           parent: (expression
-            (object_id
-              number: (integer)))
+            (object_id))
           properties: (map
             entries: (map_entry
               key: (expression
@@ -91,8 +86,7 @@ Complex Flyweights
       expression: (expression
         (flyweight
           parent: (expression
-            (object_id
-              number: (integer)))
+            (object_id))
           properties: (map
             entries: (map_entry
               key: (expression
@@ -110,5 +104,4 @@ Complex Flyweights
             elements: (expression
               (identifier))
             elements: (expression
-              (object_id
-                number: (integer)))))))))
+              (object_id))))))))

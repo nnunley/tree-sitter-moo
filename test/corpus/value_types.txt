@@ -119,13 +119,11 @@ $;
   (statement
     (expression_statement
       (expression
-        (object_id
-          (integer)))))
+        (object_id))))
   (statement
     (expression_statement
       (expression
-        (object_id
-          (integer)))))
+        (object_id))))
   (statement
     (expression_statement
       (expression
@@ -193,8 +191,7 @@ Lists
           (expression
             (string))
           (expression
-            (object_id
-              (integer))))))))
+            (object_id)))))))
 
 ===================
 Maps

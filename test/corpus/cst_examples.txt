@@ -1,0 +1,575 @@
+================================================================================
+Variable Assignment
+================================================================================
+
+let x = 42;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (assignment_statement
+      (let_statement
+        target: (identifier)
+        expression: (expression
+          (integer))))))
+
+================================================================================
+Constant Assignment
+================================================================================
+
+const PI = 3.14159;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (assignment_statement
+      (const_statement
+        target: (identifier)
+        expression: (expression
+          (float))))))
+
+================================================================================
+Function Call Assignment
+================================================================================
+
+result = calculate(a, b, c);
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (assignment_operation
+          left: (identifier)
+          right: (expression
+            (call
+              function: (identifier)
+              arguments: (expression
+                (identifier))
+              arguments: (expression
+                (identifier))
+              arguments: (expression
+                (identifier)))))))))
+
+================================================================================
+Binding Pattern Assignment
+================================================================================
+
+let {a, ?b = 10, @rest} = data;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (assignment_statement
+      (let_statement
+        target: (binding_pattern
+          name: (identifier)
+          (binding_optional
+            name: (identifier)
+            default: (expression
+              (integer)))
+          (binding_rest
+            name: (identifier)))
+        expression: (expression
+          (identifier))))))
+
+================================================================================
+Lambda Expression
+================================================================================
+
+let handler = {x, y} => x + y;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (assignment_statement
+      (let_statement
+        target: (identifier)
+        expression: (expression
+          (lambda
+            parameters: (lambda_parameters
+              (identifier)
+              (identifier))
+            body: (expression
+              (binary_operation
+                left: (expression
+                  (identifier))
+                right: (expression
+                  (identifier))))))))))
+
+================================================================================
+If Statement
+================================================================================
+
+if (player.health < 10)
+    player:heal();
+endif
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (if_statement
+      condition: (expression
+        (binary_operation
+          left: (expression
+            (property_access
+              object: (expression
+                (identifier))
+              property: (identifier)))
+          right: (expression
+            (integer))))
+      then_body: (statement
+        (expression_statement
+          expression: (expression
+            (method_call
+              object: (expression
+                (identifier))
+              method: (identifier))))))))
+
+================================================================================
+For Loop with Range
+================================================================================
+
+for i in [1..10]
+    process(i);
+endfor
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (for_statement
+      variable: (identifier)
+      iterable: (range
+        start: (expression
+          (integer))
+        end: (expression
+          (integer)))
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)
+              arguments: (expression
+                (identifier)))))))))
+
+================================================================================
+For Loop with Expression
+================================================================================
+
+for item in items
+    item:process();
+endfor
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (for_statement
+      variable: (identifier)
+      iterable: (expression
+        (identifier))
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (method_call
+              object: (expression
+                (identifier))
+              method: (identifier))))))))
+
+================================================================================
+Try-Except Statement
+================================================================================
+
+try
+    dangerous_operation();
+except err (E_PERM)
+    handle_error(err);
+endtry
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (try_statement
+      body: (statement
+        (expression_statement
+          expression: (expression
+            (call
+              function: (identifier)))))
+      handlers: (except_clause
+        variable: (identifier)
+        codes: (error_code)
+        body: (statement
+          (expression_statement
+            expression: (expression
+              (call
+                function: (identifier)
+                arguments: (expression
+                  (identifier))))))))))
+
+================================================================================
+Try Expression
+================================================================================
+
+value = `risky_operation() ! E_PERM => default_value';
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (assignment_operation
+          left: (identifier)
+          right: (expression
+            (try_expression
+              expression: (expression
+                (call
+                  function: (identifier)))
+              codes: (error_code)
+              fallback: (expression
+                (identifier)))))))))
+
+================================================================================
+List Literal
+================================================================================
+
+numbers = {1, 2, 3, 4, 5};
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (assignment_operation
+          left: (identifier)
+          right: (expression
+            (list
+              elements: (expression
+                (integer))
+              elements: (expression
+                (integer))
+              elements: (expression
+                (integer))
+              elements: (expression
+                (integer))
+              elements: (expression
+                (integer)))))))))
+
+================================================================================
+Map Literal
+================================================================================
+
+config = ["host" -> "localhost", "port" -> 8080];
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (assignment_operation
+          left: (identifier)
+          right: (expression
+            (map
+              entries: (map_entry
+                key: (expression
+                  (string))
+                value: (expression
+                  (string)))
+              entries: (map_entry
+                key: (expression
+                  (string))
+                value: (expression
+                  (integer))))))))))
+
+================================================================================
+List Comprehension
+================================================================================
+
+items = {item * 2 for item in [1..10]};
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (assignment_operation
+          left: (identifier)
+          right: (expression
+            (range_comprehension
+              expression: (expression
+                (binary_operation
+                  left: (expression
+                    (identifier))
+                  right: (expression
+                    (integer))))
+              variable: (identifier)
+              iterable: (range
+                start: (expression
+                  (integer))
+                end: (expression
+                  (integer))))))))))
+
+================================================================================
+Property Access
+================================================================================
+
+player.name
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (property_access
+          object: (expression
+            (identifier))
+          property: (identifier))))))
+
+================================================================================
+Dynamic Property Access
+================================================================================
+
+obj.(prop_name)
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (property_access
+          object: (expression
+            (identifier))
+          property: (expression
+            (identifier)))))))
+
+================================================================================
+Method Call
+================================================================================
+
+player:tell("Hello");
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (method_call
+          object: (expression
+            (identifier))
+          method: (identifier)
+          arguments: (expression
+            (string)))))))
+
+================================================================================
+Index Access
+================================================================================
+
+list[index]
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (index_access
+          object: (expression
+            (identifier))
+          index: (expression
+            (identifier)))))))
+
+================================================================================
+Slice Access
+================================================================================
+
+list[1..5]
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (slice
+          object: (expression
+            (identifier))
+          start: (expression
+            (integer))
+          end: (expression
+            (integer)))))))
+
+================================================================================
+Complex Property Access Chain
+================================================================================
+
+result = obj.property[index]:method(arg);
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (assignment_operation
+          left: (identifier)
+          right: (expression
+            (method_call
+              object: (expression
+                (index_access
+                  object: (expression
+                    (property_access
+                      object: (expression
+                        (identifier))
+                      property: (identifier)))
+                  index: (expression
+                    (identifier))))
+              method: (identifier)
+              arguments: (expression
+                (identifier)))))))))
+
+================================================================================
+Object ID Literal
+================================================================================
+
+#123
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (object_id)))))
+
+================================================================================
+Named Object ID
+================================================================================
+
+#player
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (object_id
+          name: (identifier))))))
+
+================================================================================
+System Property
+================================================================================
+
+$server_version
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (system_property
+          name: (identifier))))))
+
+================================================================================
+Symbol
+================================================================================
+
+'symbol_name
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (symbol
+          name: (identifier))))))
+
+================================================================================
+Flyweight
+================================================================================
+
+<#parent, [prop -> "value"], {"item1", "item2"}>
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (expression_statement
+      expression: (expression
+        (flyweight
+          parent: (expression
+            (object_id
+              name: (identifier)))
+          properties: (map
+            entries: (map_entry
+              key: (expression
+                (identifier))
+              value: (expression
+                (string))))
+          values: (list
+            elements: (expression
+              (string))
+            elements: (expression
+              (string))))))))
+
+================================================================================
+Function Expression
+================================================================================
+
+let max_func = fn(a, b)
+    if (a > b)
+        return a;
+    else
+        return b;
+    endif
+endfn;
+
+--------------------------------------------------------------------------------
+
+(program
+  (statement
+    (assignment_statement
+      (let_statement
+        target: (identifier)
+        expression: (expression
+          (function_expression
+            parameters: (lambda_parameters
+              (identifier)
+              (identifier))
+            body: (statement
+              (if_statement
+                condition: (expression
+                  (binary_operation
+                    left: (expression
+                      (identifier))
+                    right: (expression
+                      (identifier))))
+                then_body: (statement
+                  (expression_statement
+                    expression: (expression
+                      (return_expression
+                        value: (expression
+                          (identifier))))))
+                else_clause: (else_clause
+                  body: (statement
+                    (expression_statement
+                      expression: (expression
+                        (return_expression
+                          value: (expression
+                            (identifier)))))))))))))))

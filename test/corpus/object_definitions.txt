@@ -22,14 +22,12 @@ endobject
       (object_property
         name: (identifier)
         value: (expression
-          (object_id
-            number: (integer)))))
+          (object_id))))
     (object_member
       (object_property
         name: (identifier)
         value: (expression
-          (object_id
-            number: (integer)))))))
+          (object_id))))))
 
 ===================
 Object with properties
@@ -51,8 +49,7 @@ endobject
         attributes: (property_attribute
           name: (identifier)
           value: (expression
-            (object_id
-              number: (integer))))
+            (object_id)))
         attributes: (property_attribute
           name: (identifier)
           value: (expression
@@ -65,8 +62,7 @@ endobject
         attributes: (property_attribute
           name: (identifier)
           value: (expression
-            (object_id
-              number: (integer))))
+            (object_id)))
         attributes: (property_attribute
           name: (identifier)
           value: (expression
@@ -98,8 +94,7 @@ endobject
         (verb_attribute
           name: (identifier)
           value: (expression
-            (object_id
-              number: (integer))))
+            (object_id)))
         (verb_attribute
           name: (identifier)
           value: (expression

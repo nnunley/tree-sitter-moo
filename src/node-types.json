@@ -14,18 +14,6 @@
           {
             "type": "identifier",
             "named": true
-          },
-          {
-            "type": "index_access",
-            "named": true
-          },
-          {
-            "type": "property_access",
-            "named": true
-          },
-          {
-            "type": "slice",
-            "named": true
           }
         ]
       },
@@ -461,11 +449,6 @@
     }
   },
   {
-    "type": "empty_statement",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "error_code",
     "named": true,
     "fields": {}
@@ -608,10 +591,6 @@
         },
         {
           "type": "property_access",
-          "named": true
-        },
-        {
-          "type": "range",
           "named": true
         },
         {
@@ -1286,7 +1265,6 @@
   {
     "type": "program",
     "named": true,
-    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -1490,22 +1468,6 @@
     }
   },
   {
-    "type": "return_statement",
-    "named": true,
-    "fields": {
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "scatter_element",
     "named": true,
     "fields": {
@@ -1590,10 +1552,6 @@
           "named": true
         },
         {
-          "type": "empty_statement",
-          "named": true
-        },
-        {
           "type": "expression_statement",
           "named": true
         },
@@ -1611,10 +1569,6 @@
         },
         {
           "type": "if_statement",
-          "named": true
-        },
-        {
-          "type": "return_statement",
           "named": true
         },
         {
